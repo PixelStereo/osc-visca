@@ -9,6 +9,10 @@ byte ip[] = {
 int serverPort = 10000;
 OSCServer server;
 EthernetClient client;
+uint8_t ViscaMsg[6] = {  
+  0x81, 0x01, 0x04, 0x00, 0x00, 0xFF      };
+uint8_t ViscaLongMsg[9] = {  
+  0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF            };
 void setup()
 {
   /************* Launch ethernet server  ****************/
@@ -62,11 +66,6 @@ void setup()
   server.addCallback("/visca.1/shutter",&ViscaShutter);
   server.addCallback("/visca.1/iris",&ViscaIris);
   server.addCallback("/visca.1/gain",&ViscaGain);
-  /* server.addCallback("/visca.1/zoom/digital/sw",&ViscaDigitalSw);
-   server.addCallback("/visca.1/zoom/mode",&ViscaZoomMode);
-   server.addCallback("/visca.1/focus/auto",&ViscaFocusAuto);
-   server.addCallback("/visca.1/focus/value",&ViscaFocusValue);
-   server.addCallback("/visca.1/focus/near",&ViscaFocusNear); */
 }
 void loop()
 { 
@@ -104,750 +103,413 @@ void ViscaCancel(OSCMessage *_mes) {
 }
 /************* Power ****************/
 void ViscaSw(OSCMessage *_mes) {
-  int Swvalue = _mes->getArgInt32(0);
-  if ( Swvalue == 1 ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write((uint8_t) 0);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
+  int value = _mes->getArgInt32(0);
+  if ( value == 1 ) {
+    ViscaMsg[5] =  0x02;
   } 
-  else { 
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write((uint8_t) 0);
-    Serial.write(0x03);
-    Serial.write(0xFF);
+  else {
+    ViscaMsg[5] =  0x03;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Zoom Stop ****************/
 void ViscaZoomStop(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x07);
-  Serial.write((uint8_t) 0);
-  Serial.write(0xFF); 
+  ViscaMsg[4] =  0x07;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+
 }
 /************* Zoom Standard ****************/
 void ViscaZoomStandard(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x07;
   int strSize=_mes->getArgStringSize(0);
-  char ZoomSdvalue[strSize]; //string memory allocation
-  _mes->getArgString(0,ZoomSdvalue);
-  if (ZoomSdvalue == "tele") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x07);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);  
+  if ( value == "tele" ) {
+    ViscaMsg[5] =  0x02;
   }
-  if (ZoomSdvalue == "wide") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x07);
-    Serial.write(0x03);
-    Serial.write(0xFF); 
+  if ( value == "wide" ) {
+    ViscaMsg[5] =  0x03;
   }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Zoom Variable ****************/
 void ViscaZoomVariable(OSCMessage *_mes) {
-  int strSize=_mes->getArgStringSize(0);
-  char ZoomVbvalue[strSize]; //string memory allocation
-  int ZoomVbvalue2=2 + _mes->getArgInt32(1);
-  _mes->getArgString(0,ZoomVbvalue);
-  if (ZoomVbvalue == "tele") {
-    if (ZoomVbvalue2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x20);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x21);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x22);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x23);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x24);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x25);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x26);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x27);
-      Serial.write(0xFF); 
-    }
-  }
-  if (ZoomVbvalue == "wide") {
-    if (ZoomVbvalue2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x31);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x32);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x33);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x34);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x35);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x36);
-      Serial.write(0xFF); 
-    }
-    if (ZoomVbvalue2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x07);
-      Serial.write(0x37);
-      Serial.write(0xFF); 
-    }
-  }
-}
-/************* Zoom Direct ****************/
-void ViscaZoom(OSCMessage *_mes) {
-  int Zoomvalue = _mes->getArgInt32(0);
-  int zooma = Zoomvalue % 16 ; 
-  int zoomb = Zoomvalue >> 4 % 16  ; 
-  int zoomc = Zoomvalue >> 8 % 16 ; 
-  int zoomd = Zoomvalue >> 12 % 16 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x47);
-  Serial.write((byte)zoomd);
-  Serial.write((byte)zoomc);
-  Serial.write((byte)zoomb);
-  Serial.write((byte)zooma);
-  Serial.write(0xFF); 
-}
-/************* Digital Zoom Switch ****************/
-void ViscaZoomDigitalSw(OSCMessage *_mes) {
-  int value = _mes->getArgInt32(0);
-  if ( value == 1 ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x06);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
-  } 
-  else { 
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x06);
-    Serial.write(0x03);
-    Serial.write(0xFF);
-  } 
-}
-/************* Digital Zoom Switch ****************/
-void ViscaZoomDigitalMode(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x07;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);
-  if ( value == "combine" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x36);
-    Serial.write((uint8_t) 0);
-    Serial.write(0xFF); 
-  } 
-  if ( value == "separate" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x36);
-    Serial.write(0x01);
-    Serial.write(0xFF);
-  } 
-}
-/************* Digital Zoom Stop ****************/
-void ViscaZoomDigitalStop(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x06);
-  Serial.write((uint8_t) 0);
-  Serial.write(0xFF); 
-} 
-/************* Digital Zoom Variable ****************/
-void ViscaZoomDigitalVariable(OSCMessage *_mes) {
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  int value2=_mes->getArgInt32(1);
+  int value2 = _mes->getArgInt32(1);
   _mes->getArgString(0,value);
   if (value == "tele") {
     if (value2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x20);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x20;
     }
     if (value2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x21);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x21;
     }
     if (value2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x22);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x22;
     }
     if (value2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x23);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x23;
     }
     if (value2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x24);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x24;
     }
     if (value2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x25);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x25;
     }
     if (value2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x26);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x25;
     }
     if (value2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x27);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x27;
     }
   }
   if (value == "wide") {
     if (value2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x30);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x30;
     }
     if (value2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x31);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x31;
     }
     if (value2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x32);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x32;
     }
     if (value2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x33);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x33;
     }
     if (value2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x34);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x34;
     }
     if (value2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x35);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x35;
     }
     if (value2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x36);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x35;
     }
     if (value2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x06);
-      Serial.write(0x37);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x37;
     }
   }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
+/************* Zoom Direct ****************/
+void ViscaZoom(OSCMessage *_mes) {
+  int value = _mes->getArgInt32(0);
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* Digital Zoom Switch ****************/
+void ViscaZoomDigitalSw(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x06;
+  int value = _mes->getArgInt32(0);
+  if ( value == 1 ) {
+    ViscaMsg[5] =  0x02;
+  } 
+  else {
+    ViscaMsg[5] =  0x03;
+  } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Digital Zoom Mode ****************/
+void ViscaZoomDigitalMode(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x36;
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);  
+  if ( value == "combine" ) {
+    ViscaMsg[5] =  0x00;
+  }
+  if ( value == "separate" ) {
+    ViscaMsg[5] =  0x01;
+  }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Digital Zoom Stop ****************/
+void ViscaZoomDigitalStop(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x06;
+  ViscaMsg[5] =  0x00;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Digital Zoom Variable ****************/
+void ViscaZoomDigitalVariable(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x07;
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  int value2 = _mes->getArgInt32(1);
+  _mes->getArgString(0,value);
+  if (value == "tele") {
+    if (value2 == 0) {
+      ViscaMsg[5] =  0x20;
+    }
+    if (value2 == 1) {
+      ViscaMsg[5] =  0x21;
+    }
+    if (value2 == 2) {
+      ViscaMsg[5] =  0x22;
+    }
+    if (value2 == 3) {
+      ViscaMsg[5] =  0x23;
+    }
+    if (value2 == 4) {
+      ViscaMsg[5] =  0x24;
+    }
+    if (value2 == 5) {
+      ViscaMsg[5] =  0x25;
+    }
+    if (value2 == 6) {
+      ViscaMsg[5] =  0x25;
+    }
+    if (value2 == 7) {
+      ViscaMsg[5] =  0x27;
+    }
+  }
+  if (value == "wide") {
+    if (value2 == 0) {
+      ViscaMsg[5] =  0x30;
+    }
+    if (value2 == 1) {
+      ViscaMsg[5] =  0x31;
+    }
+    if (value2 == 2) {
+      ViscaMsg[5] =  0x32;
+    }
+    if (value2 == 3) {
+      ViscaMsg[5] =  0x33;
+    }
+    if (value2 == 4) {
+      ViscaMsg[5] =  0x34;
+    }
+    if (value2 == 5) {
+      ViscaMsg[5] =  0x35;
+    }
+    if (value2 == 6) {
+      ViscaMsg[5] =  0x35;
+    }
+    if (value2 == 7) {
+      ViscaMsg[5] =  0x37;
+    }
+  }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+} 
 /************* Digital Zoom Direct ****************/
 void ViscaZoomDigitalDirect(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int zooma = value % 16 ; 
-  int zoomb = value >> 4 % 16  ; 
-  int zoomc = value >> 8 % 16 ; 
-  int zoomd = value >> 12 % 16 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x46);
-  Serial.write((byte)zoomd);
-  Serial.write((byte)zoomc);
-  Serial.write((byte)zoomb);
-  Serial.write((byte)zooma);
-  Serial.write(0xFF); 
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Stop ****************/
 void ViscaFocusStop(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x08);
-  Serial.write((uint8_t) 0);
-  Serial.write(0xFF); 
+  ViscaMsg[4] =  0x08;
+  ViscaMsg[5] =  0x00;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Standard ****************/
 void ViscaFocusStandard(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x08;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if (value == "far") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x08);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
+    ViscaMsg[5] =  0x02;
+
   }
   if (value == "near") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x08);
-    Serial.write(0x03);
-    Serial.write(0xFF); 
+    ViscaMsg[5] =  0x03;
   }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Variable ****************/
 void ViscaFocusVariable(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x08;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
-  int value2=_mes->getArgInt32(1);
+  int value2 = _mes->getArgInt32(1);
   _mes->getArgString(0,value);
   if (value == "far") {
     if (value2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x20);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x20;
     }
     if (value2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x21);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x21;
     }
     if (value2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x22);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x22;
     }
     if (value2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x23);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x23;
     }
     if (value2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x24);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x24;
     }
     if (value2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x25);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x25;
     }
     if (value2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x26);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x25;
     }
     if (value2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x27);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x27;
     }
   }
   if (value == "near") {
     if (value2 == 0) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x30);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x30;
     }
     if (value2 == 1) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x31);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x31;
     }
     if (value2 == 2) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x32);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x32;
     }
     if (value2 == 3) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x33);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x33;
     }
     if (value2 == 4) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x34);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x34;
     }
     if (value2 == 5) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x35);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x35;
     }
     if (value2 == 6) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x36);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x35;
     }
     if (value2 == 7) {
-      Serial.write(0x81);
-      Serial.write(0x01);
-      Serial.write(0x04);
-      Serial.write(0x08);
-      Serial.write(0x37);
-      Serial.write(0xFF); 
+      ViscaMsg[5] =  0x37;
     }
   }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Direct ****************/
 void ViscaFocus(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int Focusa = value % 16 ; 
-  int Focusb = value >> 4 % 16  ; 
-  int Focusc = value >> 8 % 16 ; 
-  int Focusd = value >> 12 % 16 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x48);
-  Serial.write((byte)Focusd);
-  Serial.write((byte)Focusc);
-  Serial.write((byte)Focusb);
-  Serial.write((byte)Focusa);
-  Serial.write(0xFF); 
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Auto ****************/
 void ViscaFocusMode(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x38;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "auto" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x38);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
+   ViscaMsg[4] =  0x02;
   } 
   if ( value == "manual" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x38);
-    Serial.write(0x03);
-    Serial.write(0xFF);
+   ViscaMsg[4] =  0x03;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Trigger ****************/
 void ViscaFocusTrigger(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x18);
-  Serial.write(0x01);
-  Serial.write(0xFF); 
+  ViscaMsg[4] =  0x18;
+  ViscaMsg[4] =  0x01;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Infinity ****************/
 void ViscaFocusInfinity(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x18);
-  Serial.write(0x02);
-  Serial.write(0xFF); 
+  ViscaMsg[4] =  0x18;
+  ViscaMsg[5] =  0x02;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Near Limit ****************/
 void ViscaFocusNearLimit(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int FocusNearLimita = value % 16 ; 
-  int FocusNearLimitb = value >> 4 % 16  ; 
-  int FocusNearLimitc = value >> 8 % 16 ; 
-  int FocusNearLimitd = value >> 12 % 16 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x48);
-  Serial.write((byte)FocusNearLimitd);
-  Serial.write((byte)FocusNearLimitc);
-  Serial.write((byte)FocusNearLimitb);
-  Serial.write((byte)FocusNearLimita);
-  Serial.write(0xFF); 
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Sensitivity ****************/
 void ViscaFocusAFSens(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x58;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "normal" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x58);
-    Serial.write(0x02);
-    Serial.write(0xFF); 
+  ViscaMsg[4] =  0x02;
+
   } 
   if ( value == "low" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x58);
-    Serial.write(0x03);
-    Serial.write(0xFF);
+  ViscaMsg[4] =  0x03;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Auto Mode ****************/
 void ViscaFocusAFMode(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x57;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "normal" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x57);
-    Serial.write((uint8_t) 0);
-    Serial.write(0xFF); 
+  ViscaMsg[4] =  0x00;
   } 
   if ( value == "interval" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x57);
-    Serial.write(0x01);
-    Serial.write(0xFF);
+  ViscaMsg[4] =  0x01;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Zoom Trigger ****************/
 void ViscaFocusAFZoomTrigger(OSCMessage *_mes) {
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x57);
-  Serial.write(0x02);
-  Serial.write(0xFF); 
+  ViscaMsg[4] =  0x57;
+  ViscaMsg[5] =  0x02;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Auto Interval ****************/
 void ViscaFocusAFInterval(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int FocusAFIntervala = value % 16 ; 
-  int FocusAFIntervalb = value >> 4 % 16  ; 
-  int FocusAFIntervalc = value >> 8 % 16 ; 
-  int FocusAFIntervald = value >> 12 % 16 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x27);
-  Serial.write((byte)FocusAFIntervald);
-  Serial.write((byte)FocusAFIntervalc);
-  Serial.write((byte)FocusAFIntervalb);
-  Serial.write((byte)FocusAFIntervala);
-  Serial.write(0xFF); 
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Infra-Red Correction ****************/
 void ViscaIRCorrection(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x11;
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x11);
-    Serial.write(0x01);
-    Serial.write(0xFF); 
+  ViscaMsg[4] =  0x01;
   } 
   else { 
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x11);
-    Serial.write((uint8_t) 0);
-    Serial.write(0xFF);
+  ViscaMsg[4] =  0x00;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Zoom Focus ****************/
 void ViscaZoomFocus(OSCMessage *_mes) {
@@ -876,25 +538,17 @@ void ViscaZoomFocus(OSCMessage *_mes) {
 }
 /************* Init ****************/
 void ViscaInit(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x19;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "lens" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x19);
-    Serial.write(0x01);
-    Serial.write(0xFF); 
+  ViscaMsg[4] =  0x01;
   } 
   if ( value == "camera" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x19);
-    Serial.write(0x03);
-    Serial.write(0xFF); 
+  ViscaMsg[4] =  0x03;
   } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }  
 /************* Red Gain ****************/
 void ViscaRedGain(OSCMessage *_mes) {
@@ -928,136 +582,69 @@ void ViscaBlueGain(OSCMessage *_mes) {
 }
 /************* White Balance ****************/
 void ViscaWB(OSCMessage *_mes) {
+  uint8_t ViscaMsg[6] = {  
+    0x81, 0x01, 0x04, 0x35, 0x00, 0xFF                      };
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);  
+  if ( value == "auto" ) {
+    ViscaMsg[5] =  0x0D;
+  }
+  if ( value == "indoor" ) {
+    ViscaMsg[5] =  0x01;
+  }
+  if ( value == "outdoor" ) {
+    ViscaMsg[5] =  0x02;
+  }
+  if ( value == "one push" ) {
+    ViscaMsg[5] =  0x03;
+  }
+  if ( value == "ATW" ) {
+    ViscaMsg[5] =  0x04;
+  }
+  if ( value == "manual" ) {
+    ViscaMsg[5] =  0x0D;
+  }
+  if ( value == "one push trigger" ) {
+    ViscaMsg[4] =  0x10;
+    ViscaMsg[5] =  0x05;
+  }
+  if ( value == "outdoor auto" ) {
+    ViscaMsg[5] =  0x06;
+  }
+  if ( value == "sodium lamp auto" ) {
+    ViscaMsg[5] =  0x07;
+  }
+  if ( value == "sodium lamp" ) {
+    ViscaMsg[5] =  0x08;
+  }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Exposure Mode ****************/
+void ViscaExposure(OSCMessage *_mes) {
+  uint8_t ViscaMsg[6] = {  
+    0x81, 0x01, 0x04, 0x39, 0x00, 0xFF                      };
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "auto" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write((uint8_t) 0);
-    Serial.write(0xFF); 
-  } 
-  if ( value == "indoor") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x01);
-    Serial.write(0xFF);
-  } 
-  if ( value == "outdoor") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x02);
-    Serial.write(0xFF);
-  } 
-  if ( value == "one push") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x03);
-    Serial.write(0xFF);
-  } 
-  if ( value == "ATW") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x04);
-    Serial.write(0xFF);
-  } 
-  if ( value == "manual") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x05);
-    Serial.write(0xFF);
-  } 
-  if ( value == "one push trigger") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x10);
-    Serial.write(0x05);
-    Serial.write(0xFF);
-  } 
-  if ( value == "outdoor auto") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x06);
-    Serial.write(0xFF);
-  } 
-  if ( value == "sodium lamp auto") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x07);
-    Serial.write(0xFF);
-  } 
-  if ( value == "sodium lamp") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x35);
-    Serial.write(0x08  );
-    Serial.write(0xFF);
-  } 
+    ViscaMsg[5] =  0x00;
+  }
+  if ( value == "manual" ) {
+    ViscaMsg[5] =  0x03;
+  }
+  if ( value == "shutter" ) {
+    ViscaMsg[5] =  0x0A;
+  }
+  if ( value == "iris" ) {
+    ViscaMsg[5] =  0x0B;
+  }
+  if ( value == "bright" ) {
+    ViscaMsg[5] =  0x0D;
+  }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Exposure Mode ****************/
-void ViscaExposure(OSCMessage *_mes) {
-  int strSize=_mes->getArgStringSize(0);
-  char Exposurevalue[strSize]; //string memory allocation
-  _mes->getArgString(0,Exposurevalue);
-  if ( Exposurevalue == "auto" ) {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x39);
-    Serial.write((uint8_t) 0);
-    Serial.write(0xFF); 
-  } 
-  if ( Exposurevalue == "manual") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x39);
-    Serial.write(0x03);
-    Serial.write(0xFF);
-  } 
-  if ( Exposurevalue == "shutter") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x39);
-    Serial.write(0x0A);
-    Serial.write(0xFF);
-  } 
-  if ( Exposurevalue == "iris") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x39);
-    Serial.write(0x0B);
-    Serial.write(0xFF);
-  } 
-  if ( Exposurevalue == "bright") {
-    Serial.write(0x81);
-    Serial.write(0x01);
-    Serial.write(0x04);
-    Serial.write(0x39);
-    Serial.write(0x0D);
-    Serial.write(0xFF);
-  } 
-}
+
 /************* Shutter ****************/
 void ViscaShutter(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
@@ -1730,3 +1317,15 @@ void ViscaFreeze(OSCMessage *_mes) {
     Serial.write(0xFF);
   } 
 }
+
+
+
+
+
+
+
+
+
+
+
+
