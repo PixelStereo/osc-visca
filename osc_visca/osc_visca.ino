@@ -831,13 +831,13 @@ void ViscaFX(OSCMessage *_mes) {
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
   if ( value == "off" ) {
-  ViscaLongMsg[5] =  0x00;
+  ViscaMsg[5] =  0x00;
   } 
   if ( value == "neg art" ) {
-  ViscaLongMsg[5] =  0x02;
+  ViscaMsg[5] =  0x02;
   } 
   if ( value == "BW" ) {
-  ViscaLongMsg[5] =  0x04;
+  ViscaMsg[5] =  0x04;
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
@@ -846,10 +846,10 @@ void ViscaFlip(OSCMessage *_mes) {
   ViscaMsg[4] =  0x66;
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
-  ViscaLongMsg[5] =  0x02;
+  ViscaMsg[5] =  0x02;
   } 
   else { 
-  ViscaLongMsg[5] =  0x03;
+  ViscaMsg[5] =  0x03;
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
@@ -870,10 +870,10 @@ void ViscaStab(OSCMessage *_mes) {
   ViscaMsg[4] =  0x34;
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
-  ViscaLongMsg[5] =  0x02;
+  ViscaMemMsg[5] =  0x02;
   } 
   else { 
-  ViscaLongMsg[5] =  0x03;
+  ViscaMemMsg[5] =  0x03;
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
