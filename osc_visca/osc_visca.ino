@@ -870,10 +870,10 @@ void ViscaStab(OSCMessage *_mes) {
   ViscaMsg[4] =  0x34;
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
-  ViscaMemMsg[5] =  0x02;
+  ViscaMsg[5] =  0x02;
   } 
   else { 
-  ViscaMemMsg[5] =  0x03;
+  ViscaMsg[5] =  0x03;
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }

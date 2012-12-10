@@ -36,8 +36,8 @@
 					"maxclass" : "comment",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 849.0, 17.0, 342.0, 758.0 ],
-					"text" : " /visca/AddressSet\",&ViscaAddressSet);\n /visca/ifclear\",&ViscaIfClear);\n /visca/cancel\",&ViscaCancel);\n /visca.1/sw\",&ViscaSw);\n /visca/zoom/stop\",&ViscaZoomStop);\n /visca/zoom/standart\",&ViscaZoomStandard);\n /visca/zoom/variable\",&ViscaZoomVariable);\n /visca/zoom\",&ViscaZoom);\n /visca/zoom/digital/sw\",&ViscaZoomDigitalSw);\n /visca/zoom/digital/mode\",&ViscaZoomDigitalMode);\n /visca/zoom/digital/stop\",&ViscaZoomDigitalStop);\n /visca/zoom/digital/variable\",&ViscaZoomDigitalVariable);\n /visca/zoom/digital/variable\",&ViscaZoomDigitalDirect);\n /visca/focus/stop\",&ViscaFocusStop);\n /visca/focus/standart\",&ViscaFocusStandard);\n /visca/focus/variable\",&ViscaFocusVariable);\n /visca/focus\",&ViscaFocus);\n /visca/focus/mode\",&ViscaFocusMode);\n /visca/focus/trigger\",&ViscaFocusTrigger);\n /visca/focus/infinity\",&ViscaFocusInfinity);\n /visca/focus/nearlimit\",&ViscaFocusNearLimit);\n /visca/focus/auto/sensitivity\",&ViscaFocusAFSens);\n /visca/focus/auto/mode\",&ViscaFocusAFMode);\n /visca/focus/auto/zoomtrigger\",&ViscaFocusAFZoomTrigger);\n /visca/focus/auto/interval\",&ViscaFocusAFInterval);\n /visca/zoomfocus\",&ViscaZoomFocus);\n /visca/ir/correction\",&ViscaIRCorrection);\n /visca.1/init\",&ViscaInit);\n /visca.1/gain/red\",&ViscaRedGain);\n /visca.1/gain/blue\",&ViscaBlueGain);\n /visca.1/whitebalance\",&ViscaWB);\n /visca.1/mode\",&ViscaExposure);\n /visca.1/slowshutter\",&ViscaSlowShutter);\n /visca.1/shutter\",&ViscaShutter);\n /visca.1/iris\",&ViscaIris);\n /visca.1/gain\",&ViscaGain);\n /visca.1/ir\",&ViscaIR);\n /visca.1/backlight\",&ViscaBackLight);\n /visca.1/reverse\",&ViscaReverse);\n /visca.1/flip\",&ViscaFlip);\n /visca.1/fx\",&ViscaFX);\n /visca.1/freeze\",&ViscaFreeze);\n /visca.1/mode\",&ViscaExposure);\n /visca.1/shutter\",&ViscaShutter);\n /visca.1/iris\",&ViscaIris);\n /visca.1/gain\",&ViscaGain);\n /visca.1/stabilize\",&ViscaStab);\n /visca.1/highsensitivity\",&ViscaHS);\n /visca.1/highresolution\",&ViscaHR);\n /visca.1/gamma\",&ViscaGamma);\n /visca.1/aperture\",&ViscaAperture);\n /visca.1/widedynamic\",&ViscaWD);\n /visca.1/memory/reset\",&ViscaMemReset);\n /visca.1/memory/set\",&ViscaMemSet);\n /visca.1/memory/recall\",&ViscaMemRecall);\n /visca.1/chromasupress\",&ViscaChromaSuppress);"
+					"patching_rect" : [ 786.0, 15.0, 174.0, 758.0 ],
+					"text" : " /visca/AddressSet\n /visca/ifclear\n /visca/cancel\n /visca.1/sw\n /visca/zoom/stop\n /visca/zoom/standart\n /visca/zoom/variable\n /visca/zoom\n /visca/zoom/digital/sw\n /visca/zoom/digital/mode\n /visca/zoom/digital/stop\n /visca/zoom/digital/variable\n /visca/zoom/digital/direct\n /visca/focus/stop\n /visca/focus/standart\n /visca/focus/variable\n /visca/focus\n /visca/focus/mode\n /visca/focus/trigger\n /visca/focus/infinity\n /visca/focus/nearlimit\n /visca/focus/auto/sensitivity\n /visca/focus/auto/mode\n /visca/focus/auto/zoomtrigger\n /visca/focus/auto/interval\n /visca/zoomfocus\n /visca/ir/correction\n /visca.1/init\n /visca.1/gain/red\n /visca.1/gain/blue\n /visca.1/whitebalance\n /visca.1/mode\n /visca.1/slowshutter\n /visca.1/shutter\n /visca.1/iris\n /visca.1/gain\n /visca.1/ir\n /visca.1/backlight\n /visca.1/reverse\n /visca.1/flip\n /visca.1/fx\n /visca.1/freeze\n /visca.1/mode\n /visca.1/shutter\n /visca.1/iris\n /visca.1/gain\n /visca.1/stabilize\n /visca.1/highsensitivity\n /visca.1/highresolution\n /visca.1/gamma\n /visca.1/aperture\n /visca.1/widedynamic\n /visca.1/memory/reset\n /visca.1/memory/set\n /visca.1/memory/recall\n /visca.1/chromasupress"
 				}
 
 			}
@@ -51,7 +51,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 72.0, 78.0, 107.0, 18.0 ],
-					"presentation_rect" : [ 69.0, 73.0, 0.0, 0.0 ],
 					"text" : "/visca/cancel"
 				}
 
@@ -66,7 +65,6 @@
 					"numoutlets" : 1,
 					"outlettype" : [ "" ],
 					"patching_rect" : [ 57.0, 52.0, 107.0, 18.0 ],
-					"presentation_rect" : [ 60.0, 57.0, 0.0, 0.0 ],
 					"text" : "/visca/IfClear"
 				}
 
