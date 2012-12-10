@@ -87,6 +87,7 @@ void loop()
 }
 /************* ViscaAddressSet ****************/
 void ViscaAddressSet(OSCMessage *_mes) {
+  Serial.print("mes couilles");
   Serial.write(0x88);
   Serial.write(0x30);
   Serial.write(0x01);
@@ -116,6 +117,7 @@ void ViscaCancel(OSCMessage *_mes) {
 void ViscaSw(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
+    ViscaMsg[4] =  0x00;
     ViscaMsg[5] =  0x02;
   } 
   else {
