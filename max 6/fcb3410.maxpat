@@ -7,7 +7,7 @@
 			"revision" : 8
 		}
 ,
-		"rect" : [ 231.0, 70.0, 502.0, 675.0 ],
+		"rect" : [ 341.0, 78.0, 502.0, 675.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -27,6 +27,33 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 292.5, 380.0, 107.0, 20.0 ],
+					"text" : "print ########"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-10",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 292.5, 341.0, 107.0, 20.0 ],
+					"text" : "udpreceive 12000"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
@@ -144,6 +171,15 @@
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-10", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-6", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -199,21 +235,21 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "fcb3410.standalone.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rprepend.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "fcb3410.edit.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1

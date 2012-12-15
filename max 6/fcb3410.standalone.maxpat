@@ -30,6 +30,20 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 612.0, 5.0, 108.0, 20.0 ],
+					"text" : "r /serial"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
 					"id" : "obj-68",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -42,7 +56,7 @@
 							"revision" : 8
 						}
 ,
-						"rect" : [ 25.0, 69.0, 728.0, 338.0 ],
+						"rect" : [ 374.0, 70.0, 728.0, 338.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -78,7 +92,7 @@
 											"revision" : 8
 										}
 ,
-										"rect" : [ 0.0, 0.0, 640.0, 480.0 ],
+										"rect" : [ 25.0, 69.0, 158.0, 435.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -120,8 +134,8 @@
 													"numinlets" : 2,
 													"numoutlets" : 1,
 													"outlettype" : [ "int" ],
-													"patching_rect" : [ 63.5, 255.0, 32.5, 20.0 ],
-													"text" : "> 3"
+													"patching_rect" : [ 63.5, 255.0, 36.0, 20.0 ],
+													"text" : ">= 3"
 												}
 
 											}
@@ -1576,8 +1590,8 @@
 					"numinlets" : 2,
 					"numoutlets" : 1,
 					"outlettype" : [ "int" ],
-					"patching_rect" : [ 39.557434, 480.832825, 32.5, 20.0 ],
-					"text" : "> 3"
+					"patching_rect" : [ 39.557434, 480.832825, 36.0, 20.0 ],
+					"text" : ">= 3"
 				}
 
 			}
@@ -1617,9 +1631,9 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 2,
-					"outlettype" : [ "int", "int" ],
+					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 26.057434, 325.832825, 81.0, 20.0 ],
-					"text" : "t i i"
+					"text" : "t l l"
 				}
 
 			}
@@ -1704,6 +1718,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-22", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-21", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-4", 0 ]
 				}
 
 			}
