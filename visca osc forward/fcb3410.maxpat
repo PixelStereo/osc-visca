@@ -28,6 +28,33 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-3",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 310.0, 141.0, 100.0, 20.0 ],
+					"text" : "print TOVISCA"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-4",
+					"maxclass" : "newobj",
+					"numinlets" : 0,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 310.0, 98.0, 100.0, 20.0 ],
+					"text" : "r /visca"
+				}
+
+			}
+, 			{
+				"box" : 				{
 					"args" : [ "/visca.1" ],
 					"bgcolor" : [ 0.80611, 0.80611, 0.80611, 1.0 ],
 					"bgmode" : 2,
@@ -55,7 +82,16 @@
 
 			}
  ],
-		"lines" : [  ],
+		"lines" : [ 			{
+				"patchline" : 				{
+					"destination" : [ "obj-3", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-4", 0 ]
+				}
+
+			}
+ ],
 		"dependency_cache" : [ 			{
 				"name" : "fcb3410.standalone.maxpat",
 				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",

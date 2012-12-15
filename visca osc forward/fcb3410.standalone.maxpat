@@ -30,99 +30,6 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-169",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patcher" : 					{
-						"fileversion" : 1,
-						"appversion" : 						{
-							"major" : 6,
-							"minor" : 0,
-							"revision" : 8
-						}
-,
-						"rect" : [ 25.0, 69.0, 357.0, 625.0 ],
-						"bglocked" : 0,
-						"openinpresentation" : 0,
-						"default_fontsize" : 12.0,
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"gridonopen" : 0,
-						"gridsize" : [ 15.0, 15.0 ],
-						"gridsnaponopen" : 0,
-						"statusbarvisible" : 2,
-						"toolbarvisible" : 1,
-						"boxanimatetime" : 200,
-						"imprint" : 0,
-						"enablehscroll" : 1,
-						"enablevscroll" : 1,
-						"devicewidth" : 0.0,
-						"description" : "",
-						"digest" : "",
-						"tags" : "",
-						"boxes" : [ 							{
-								"box" : 								{
-									"fontname" : "Arial",
-									"fontsize" : 9.0,
-									"id" : "obj-14",
-									"linecount" : 48,
-									"maxclass" : "message",
-									"numinlets" : 2,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 100.0, 267.0, 488.0 ],
-									"text" : ";\n#1/setaddress bang;\r#1/sw 1;\n#1/zoom/mode separate;\n#1/zoom/stop bang;\n#1/zoom/variable/tele 0;\n#1/zoom/variable/wide 0;\n#1/zoom/standart wide;\n#1/zoom 0;\n#1/zoom/digital/sw 0;\n#1/zoom/digital/stop bang;\n#1/zoom/digital/variable/tele 0;\n#1/zoom/digital/variable/wide 0;\n#1/digital/zoom 0;\n#1/focus/auto 0;\n#1/focus/stop bang;\n#1/focus/variable/far 0;\n#1/focus/variable/near 0;\n#1/focus/standart near;\n#1/focus/nearlimit 0;\n#1/focus 0;\n#1/focus/auto/trigger bang;\n#1/focus/infinity bang;\n#1/focus/auto/sensitivity 0;\n#1/whitebalance auto;\n#1/whitebalance/trig bang;\n#1/mode manual;\n#1/shutter 6;\n#1/gain 1;\n#1/iris 11;\n#1/slowshutter/sw 0;\n#1/compensation/sw 0;\n#1/compensation/level 0;\n#1/auto/response 0;\n#1/wd 1;\n#1/aperture 0;\n#1/hr 1;\n#1/nr 0;\n#1/gamma 0;\n#1/hs 1;\n#1/reverse 0;\n#1/freeze 0;\n#1/fx 0;\n#1/flip 0;\n#1/ir 0;\n#1/stabilizer 1;\n#1/chromasupress 0;\n#1/ir/correction 0;\n"
-								}
-
-							}
-, 							{
-								"box" : 								{
-									"comment" : "",
-									"id" : "obj-168",
-									"maxclass" : "inlet",
-									"numinlets" : 0,
-									"numoutlets" : 1,
-									"outlettype" : [ "" ],
-									"patching_rect" : [ 50.0, 40.0, 25.0, 25.0 ]
-								}
-
-							}
- ],
-						"lines" : [ 							{
-								"patchline" : 								{
-									"destination" : [ "obj-14", 0 ],
-									"disabled" : 0,
-									"hidden" : 0,
-									"source" : [ "obj-168", 0 ]
-								}
-
-							}
- ]
-					}
-,
-					"patching_rect" : [ 26.057434, 188.757996, 36.0, 20.0 ],
-					"saved_object_attributes" : 					{
-						"default_fontface" : 0,
-						"default_fontname" : "Arial",
-						"default_fontsize" : 12.0,
-						"description" : "",
-						"digest" : "",
-						"fontface" : 0,
-						"fontname" : "Arial",
-						"fontsize" : 12.0,
-						"globalpatchername" : "",
-						"tags" : ""
-					}
-,
-					"text" : "p init"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 12.0,
 					"id" : "obj-68",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
@@ -543,8 +450,8 @@
 									"maxclass" : "newobj",
 									"numinlets" : 1,
 									"numoutlets" : 0,
-									"patching_rect" : [ 50.0, 281.0, 113.5, 20.0 ],
-									"text" : "print VISCA"
+									"patching_rect" : [ 50.0, 281.0, 93.0, 20.0 ],
+									"text" : "print ARDUINO"
 								}
 
 							}
@@ -720,7 +627,7 @@
  ]
 					}
 ,
-					"patching_rect" : [ 483.0, 69.0, 65.0, 20.0 ],
+					"patching_rect" : [ 483.0, 63.0, 65.0, 20.0 ],
 					"saved_object_attributes" : 					{
 						"default_fontface" : 0,
 						"default_fontname" : "Arial",
@@ -742,12 +649,92 @@
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
-					"id" : "obj-54",
+					"id" : "obj-169",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 553.5, 69.0, 79.0, 20.0 ],
-					"text" : "print Arduino"
+					"patcher" : 					{
+						"fileversion" : 1,
+						"appversion" : 						{
+							"major" : 6,
+							"minor" : 0,
+							"revision" : 8
+						}
+,
+						"rect" : [ 25.0, 69.0, 357.0, 625.0 ],
+						"bglocked" : 0,
+						"openinpresentation" : 0,
+						"default_fontsize" : 12.0,
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"gridonopen" : 0,
+						"gridsize" : [ 15.0, 15.0 ],
+						"gridsnaponopen" : 0,
+						"statusbarvisible" : 2,
+						"toolbarvisible" : 1,
+						"boxanimatetime" : 200,
+						"imprint" : 0,
+						"enablehscroll" : 1,
+						"enablevscroll" : 1,
+						"devicewidth" : 0.0,
+						"description" : "",
+						"digest" : "",
+						"tags" : "",
+						"boxes" : [ 							{
+								"box" : 								{
+									"fontname" : "Arial",
+									"fontsize" : 9.0,
+									"id" : "obj-14",
+									"linecount" : 48,
+									"maxclass" : "message",
+									"numinlets" : 2,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.0, 100.0, 267.0, 488.0 ],
+									"text" : ";\n#1/setaddress bang;\r#1/sw 1;\n#1/zoom/mode separate;\n#1/zoom/stop bang;\n#1/zoom/variable/tele 0;\n#1/zoom/variable/wide 0;\n#1/zoom/standart wide;\n#1/zoom 0;\n#1/zoom/digital/sw 0;\n#1/zoom/digital/stop bang;\n#1/zoom/digital/variable/tele 0;\n#1/zoom/digital/variable/wide 0;\n#1/digital/zoom 0;\n#1/focus/mode 0;\n#1/focus/stop bang;\n#1/focus/variable/far 0;\n#1/focus/variable/near 0;\n#1/focus/standart near;\n#1/focus/nearlimit 0;\n#1/focus 0;\n#1/focus/auto/trigger bang;\n#1/focus/infinity bang;\n#1/focus/auto/sensitivity 0;\n#1/whitebalance auto;\n#1/whitebalance/trig bang;\n#1/mode manual;\n#1/shutter 6;\n#1/gain 1;\n#1/iris 11;\n#1/slowshutter 0;\n#1/compensation/sw 0;\n#1/compensation/level 0;\n#1/auto/response 0;\n#1/wd 1;\n#1/aperture 0;\n#1/hr 1;\n#1/nr 0;\n#1/gamma 0;\n#1/hs 1;\n#1/reverse 0;\n#1/freeze 0;\n#1/fx 0;\n#1/flip 0;\n#1/ir 0;\n#1/stabilizer 1;\n#1/chromasupress 0;\n#1/ir/correction 0;\n"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"comment" : "",
+									"id" : "obj-168",
+									"maxclass" : "inlet",
+									"numinlets" : 0,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 50.0, 40.0, 25.0, 25.0 ]
+								}
+
+							}
+ ],
+						"lines" : [ 							{
+								"patchline" : 								{
+									"destination" : [ "obj-14", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-168", 0 ]
+								}
+
+							}
+ ]
+					}
+,
+					"patching_rect" : [ 26.057434, 188.757996, 36.0, 20.0 ],
+					"saved_object_attributes" : 					{
+						"default_fontface" : 0,
+						"default_fontname" : "Arial",
+						"default_fontsize" : 12.0,
+						"description" : "",
+						"digest" : "",
+						"fontface" : 0,
+						"fontname" : "Arial",
+						"fontsize" : 12.0,
+						"globalpatchername" : "",
+						"tags" : ""
+					}
+,
+					"text" : "p init"
 				}
 
 			}
@@ -817,8 +804,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 519.0, 202.0802, 232.0, 17.0 ],
-					"text" : "rprepend #1/mem/reset"
+					"patching_rect" : [ 519.0, 202.0802, 257.0, 17.0 ],
+					"text" : "rprepend #1/memory/reset"
 				}
 
 			}
@@ -888,7 +875,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 826.284607, 208.586548, 231.0, 17.0 ],
-					"text" : "rprepend #1/focus/auto"
+					"text" : "rprepend #1/focus/mode"
 				}
 
 			}
@@ -1042,7 +1029,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 519.0, 433.264404, 249.0, 17.0 ],
-					"text" : "rprepend #1/slowshutter/sw"
+					"text" : "rprepend #1/slowshutter"
 				}
 
 			}
@@ -1322,7 +1309,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 519.0, 163.603333, 234.0, 17.0 ],
-					"text" : "rprepend #1/mem/recall"
+					"text" : "rprepend #1/memory/recall"
 				}
 
 			}
@@ -1335,8 +1322,8 @@
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 519.0, 181.419128, 224.0, 17.0 ],
-					"text" : "rprepend #1/mem/set"
+					"patching_rect" : [ 519.0, 181.419128, 249.0, 17.0 ],
+					"text" : "rprepend #1/memory/set"
 				}
 
 			}
@@ -1704,15 +1691,6 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-54", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-21", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
 					"destination" : [ "obj-68", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -1838,14 +1816,6 @@
 					"source" : [ "obj-9", 0 ]
 				}
 
-			}
- ],
-		"dependency_cache" : [ 			{
-				"name" : "rprepend.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca",
-				"patcherrelativepath" : "",
-				"type" : "JSON",
-				"implicit" : 1
 			}
  ]
 	}
