@@ -28,6 +28,7 @@
 		"tags" : "",
 		"boxes" : [ 			{
 				"box" : 				{
+					"args" : [ "/visca.1" ],
 					"bgcolor" : [ 0.80611, 0.80611, 0.80611, 1.0 ],
 					"bgmode" : 2,
 					"id" : "obj-2",
@@ -44,27 +45,28 @@
 					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"id" : "obj-1",
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 293.0, 21.0, 88.0, 20.0 ],
-					"text" : "fcb3410.model"
+					"patching_rect" : [ 293.0, 21.0, 134.0, 33.0 ],
+					"text" : "fcb3410.standalone /visca.1"
 				}
 
 			}
  ],
 		"lines" : [  ],
 		"dependency_cache" : [ 			{
-				"name" : "fcb3410.model.maxpat",
+				"name" : "fcb3410.standalone.maxpat",
 				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "thru.maxpat",
-				"bootpath" : "/Applications/Max6/patches/m4l-patches/Pluggo for Live resources/patches",
-				"patcherrelativepath" : "../../../../../../Applications/Max6/patches/m4l-patches/Pluggo for Live resources/patches",
+				"name" : "rprepend.maxpat",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc forward",
+				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}

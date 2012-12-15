@@ -13,6 +13,8 @@ uint8_t ViscaMsg[6] = {
   0x81, 0x01, 0x04, 0x00, 0x00, 0xFF      };
 uint8_t ViscaLongMsg[9] = {  
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF            };
+uint8_t ViscaMemMsg[7] = {  
+  0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF            };
 void setup()
 {
   /************* Launch ethernet server  ****************/
@@ -21,29 +23,37 @@ void setup()
   /************* Launch Serial Communication for visca commands ****************/
   Serial.begin(9600);
   /************* Add some osc messages ****************/
-  server.addCallback("/visca/zoom/standart",&ViscaZoomStandard);
-  server.addCallback("/visca/zoom/digital/sw",&ViscaZoomDigitalSw);
-  server.addCallback("/visca/zoom/digital/mode",&ViscaZoomDigitalMode);
-  server.addCallback("/visca/zoom/digital/stop",&ViscaZoomDigitalStop);
-  server.addCallback("/visca/zoom/digital/variable",&ViscaZoomDigitalVariable);
-  server.addCallback("/visca/zoom/digital/variable",&ViscaZoomDigitalDirect);
-  server.addCallback("/visca/focus/stop",&ViscaFocusStop);
-  server.addCallback("/visca/focus/standart",&ViscaFocusStandard);
-  server.addCallback("/visca/focus/variable",&ViscaFocusVariable);
-  server.addCallback("/visca/focus",&ViscaFocus);
-  server.addCallback("/visca/focus/mode",&ViscaFocusMode);
-  server.addCallback("/visca/focus/trigger",&ViscaFocusTrigger);
-  server.addCallback("/visca/focus/infinity",&ViscaFocusInfinity);
-  server.addCallback("/visca/focus/nearlimit",&ViscaFocusNearLimit);
-  server.addCallback("/visca/focus/auto/sensitivity",&ViscaFocusAFSens);
-  server.addCallback("/visca/focus/auto/mode",&ViscaFocusAFMode);
-  server.addCallback("/visca/focus/auto/zoomtrigger",&ViscaFocusAFZoomTrigger);
-  server.addCallback("/visca/focus/auto/interval",&ViscaFocusAFInterval);
-  server.addCallback("/visca/zoomfocus",&ViscaZoomFocus);
+  server.addCallback("/visca/AddressSet",&ViscaAddressSet);
+  server.addCallback("/visca/ifclear",&ViscaIfClear);
+  server.addCallback("/visca/cancel",&ViscaCancel);
+  server.addCallback("/visca.1/sw",&ViscaSw);
+  server.addCallback("/visca.1/zoom/stop",&ViscaZoomStop);
+  server.addCallback("/visca.1/zoom/standart",&ViscaZoomStandard);
+  server.addCallback("/visca.1/zoom/variable",&ViscaZoomVariable);
+  server.addCallback("/visca.1/zoom",&ViscaZoom);
+  server.addCallback("/visca.1/zoom/digital/sw",&ViscaZoomDigitalSw);
+/*   server.addCallback("/visca.1/zoom/digital/mode",&ViscaZoomDigitalMode);
+  server.addCallback("/visca.1/zoom/digital/stop",&ViscaZoomDigitalStop);
+  server.addCallback("/visca.1/zoom/digital/variable",&ViscaZoomDigitalVariable);
+  server.addCallback("/visca.1/zoom/digital",&ViscaZoomDigitalDirect); */
+  server.addCallback("/visca.1/focus/stop",&ViscaFocusStop);
+  server.addCallback("/visca.1/focus/standart",&ViscaFocusStandard);
+  server.addCallback("/visca.1/focus/variable",&ViscaFocusVariable);
+  server.addCallback("/visca.1/focus",&ViscaFocus);
+  server.addCallback("/visca.1/focus/mode",&ViscaFocusMode);
+  server.addCallback("/visca.1/focus/trigger",&ViscaFocusTrigger);
+  server.addCallback("/visca.1/focus/infinity",&ViscaFocusInfinity);
+  server.addCallback("/visca.1/focus/nearlimit",&ViscaFocusNearLimit);
+  server.addCallback("/visca.1/focus/auto/sensitivity",&ViscaFocusAFSens);
+  server.addCallback("/visca.1/focus/auto/mode",&ViscaFocusAFMode);
+  server.addCallback("/visca.1/focus/auto/zoomtrigger",&ViscaFocusAFZoomTrigger);
+  server.addCallback("/visca.1/focus/auto/interval",&ViscaFocusAFInterval);
+  server.addCallback("/visca.1/zoomfocus",&ViscaZoomFocus);
   server.addCallback("/visca/ir/correction",&ViscaIRCorrection);
   server.addCallback("/visca.1/init",&ViscaInit);
-  server.addCallback("/visca.1/gain/red",&ViscaRedGain);
-  server.addCallback("/visca.1/gain/blue",&ViscaBlueGain);
+/*   server.addCallback("/visca.1/gain/red",&ViscaRedGain);
+  server.addCallback("/visca.1/gain/blue",&ViscaBlueGain); */
+  server.addCallback("/visca.1/whitebalance",&ViscaWB);
   server.addCallback("/visca.1/mode",&ViscaExposure);
   server.addCallback("/visca.1/slowshutter",&ViscaSlowShutter);
   server.addCallback("/visca.1/shutter",&ViscaShutter);
@@ -55,10 +65,6 @@ void setup()
   server.addCallback("/visca.1/flip",&ViscaFlip);
   server.addCallback("/visca.1/fx",&ViscaFX);
   server.addCallback("/visca.1/freeze",&ViscaFreeze);
-  server.addCallback("/visca.1/mode",&ViscaExposure);
-  server.addCallback("/visca.1/shutter",&ViscaShutter);
-  server.addCallback("/visca.1/iris",&ViscaIris);
-  server.addCallback("/visca.1/gain",&ViscaGain);
   server.addCallback("/visca.1/stabilize",&ViscaStab);
   server.addCallback("/visca.1/highsensitivity",&ViscaHS);
   server.addCallback("/visca.1/highresolution",&ViscaHR);
@@ -77,6 +83,50 @@ void loop()
   {
   }
 }
+/************* ViscaAddressSet ****************/
+void ViscaAddressSet(OSCMessage *_mes) {
+  Serial.write(0x88);
+  Serial.write(0x30);
+  Serial.write(0x01);
+  Serial.write(0xFF); 
+}
+/************* IfClear ****************/
+void ViscaIfClear(OSCMessage *_mes) {
+  Serial.write(0x88);
+  Serial.write(0x01);
+  Serial.write((uint8_t) 0);
+  Serial.write(0x01);
+  Serial.write(0xFF); 
+}
+/************* Cancel ****************/
+void ViscaCancel(OSCMessage *_mes) {
+  /* Buffer 1 */
+  Serial.write(0x81);
+  Serial.write(0x21);
+  Serial.write(0xFF); 
+  /* Buffer 2 */
+  delay(200);
+  Serial.write(0x81);
+  Serial.write(0x22);
+  Serial.write(0xFF); 
+}
+/************* Power ****************/
+void ViscaSw(OSCMessage *_mes) {
+  int value = _mes->getArgInt32(0);
+  if ( value == 1 ) {
+    ViscaMsg[4] =  0x02;
+  } 
+  else {
+    ViscaMsg[4] =  0x03;
+  } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Zoom Stop ****************/
+void ViscaZoomStop(OSCMessage *_mes) {
+  ViscaMsg[3] =  0x07;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+
+}
 /************* Zoom Standard ****************/
 void ViscaZoomStandard(OSCMessage *_mes) {
   ViscaMsg[4] =  0x07;
@@ -90,6 +140,81 @@ void ViscaZoomStandard(OSCMessage *_mes) {
     ViscaMsg[5] =  0x03;
   }
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Zoom Variable ****************/
+void ViscaZoomVariable(OSCMessage *_mes) {
+  ViscaMsg[4] =  0x07;
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  int value2 = _mes->getArgInt32(1);
+  _mes->getArgString(0,value);
+  if (value == "tele") {
+    if (value2 == 0) {
+      ViscaMsg[5] =  0x20;
+    }
+    if (value2 == 1) {
+      ViscaMsg[5] =  0x21;
+    }
+    if (value2 == 2) {
+      ViscaMsg[5] =  0x22;
+    }
+    if (value2 == 3) {
+      ViscaMsg[5] =  0x23;
+    }
+    if (value2 == 4) {
+      ViscaMsg[5] =  0x24;
+    }
+    if (value2 == 5) {
+      ViscaMsg[5] =  0x25;
+    }
+    if (value2 == 6) {
+      ViscaMsg[5] =  0x25;
+    }
+    if (value2 == 7) {
+      ViscaMsg[5] =  0x27;
+    }
+  }
+  if (value == "wide") {
+    if (value2 == 0) {
+      ViscaMsg[5] =  0x30;
+    }
+    if (value2 == 1) {
+      ViscaMsg[5] =  0x31;
+    }
+    if (value2 == 2) {
+      ViscaMsg[5] =  0x32;
+    }
+    if (value2 == 3) {
+      ViscaMsg[5] =  0x33;
+    }
+    if (value2 == 4) {
+      ViscaMsg[5] =  0x34;
+    }
+    if (value2 == 5) {
+      ViscaMsg[5] =  0x35;
+    }
+    if (value2 == 6) {
+      ViscaMsg[5] =  0x35;
+    }
+    if (value2 == 7) {
+      ViscaMsg[5] =  0x37;
+    }
+  }
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Zoom Direct ****************/
+void ViscaZoom(OSCMessage *_mes) {
+  int value = _mes->getArgInt32(0);
+  int valuea = value % 16 ; 
+  int valueb = value >> 4 % 16  ; 
+  int valuec = value >> 8 % 16 ; 
+  int valued = value >> 12 % 16 ; 
+  ViscaLongMsg[4] =  0x47;
+  ViscaLongMsg[5] =  valued;
+  ViscaLongMsg[6] =  valuec;
+  ViscaLongMsg[7] =  valueb;
+  ViscaLongMsg[8] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Digital Zoom Switch ****************/
 void ViscaZoomDigitalSw(OSCMessage *_mes) {
@@ -395,7 +520,7 @@ void ViscaIRCorrection(OSCMessage *_mes) {
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Zoom Focus ****************/
+/************* Zoom Focus ****************/
 void ViscaZoomFocus(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   int value2 = _mes->getArgInt32(1);
@@ -434,7 +559,45 @@ void ViscaInit(OSCMessage *_mes) {
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }  
-
+/************* White Balance ****************/
+void ViscaWB(OSCMessage *_mes) {
+    ViscaMsg[4] =  0x35;
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);  
+  if ( value == "auto" ) {
+    ViscaMsg[5] =  0x0D;
+  }
+  if ( value == "indoor" ) {
+    ViscaMsg[5] =  0x01;
+  }
+  if ( value == "outdoor" ) {
+    ViscaMsg[5] =  0x02;
+  }
+  if ( value == "one push" ) {
+    ViscaMsg[5] =  0x03;
+  }
+  if ( value == "ATW" ) {
+    ViscaMsg[5] =  0x04;
+  }
+  if ( value == "manual" ) {
+    ViscaMsg[5] =  0x0D;
+  }
+  if ( value == "one push trigger" ) {
+    ViscaMsg[4] =  0x10;
+    ViscaMsg[5] =  0x05;
+  }
+  if ( value == "outdoor auto" ) {
+    ViscaMsg[5] =  0x06;
+  }
+  if ( value == "sodium lamp auto" ) {
+    ViscaMsg[5] =  0x07;
+  }
+  if ( value == "sodium lamp" ) {
+    ViscaMsg[5] =  0x08;
+  }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
 /************* Red Gain ****************/
 void ViscaRedGain(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
@@ -705,10 +868,10 @@ void ViscaStab(OSCMessage *_mes) {
   ViscaMsg[4] =  0x34;
   int value = _mes->getArgInt32(0);
   if ( value == 1 ) {
-  ViscaMsg[5] =  0x02;
+  ViscaMemMsg[5] =  0x02;
   } 
   else { 
-  ViscaMsg[5] =  0x03;
+  ViscaMemMsg[5] =  0x03;
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
