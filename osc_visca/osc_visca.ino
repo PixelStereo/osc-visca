@@ -156,65 +156,21 @@ void ViscaZoomStandard(OSCMessage *_mes) {
   }
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Zoom Variable Tele ****************/
 void ViscaZoomVariableTele(OSCMessage *_mes) {
   ViscaMsg[3] =  0x07;
-  int value2 = _mes->getArgInt32(0);
-    if (value2 == 0) {
-      ViscaMsg[4] =  0x20;
-    }
-    if (value2 == 1) {
-      ViscaMsg[4] =  0x21;
-    }
-    if (value2 == 2) {
-      ViscaMsg[4] =  0x22;
-    }
-    if (value2 == 3) {
-      ViscaMsg[4] =  0x23;
-    }
-    if (value2 == 4) {
-      ViscaMsg[4] =  0x24;
-    }
-    if (value2 == 5) {
-      ViscaMsg[4] =  0x25;
-    }
-    if (value2 == 6) {
-      ViscaMsg[4] =  0x26;
-    }
-    if (value2 == 7) {
-      ViscaMsg[4] =  0x27;
-    }
+  int value = _mes->getArgInt32(0);
+  if (value >= 0 && value <= 7) {
+    ViscaMsg[4] =  0x20 | value;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
-/************* Zoom Variable Wide ****************/
+}
 void ViscaZoomVariableWide(OSCMessage *_mes) {
   ViscaMsg[3] =  0x07;
-  int value2 = _mes->getArgInt32(0);
-    if (value2 == 0) {
-      ViscaMsg[4] =  0x30;
-    }
-    if (value2 == 1) {
-      ViscaMsg[4] =  0x31;
-    }
-    if (value2 == 2) {
-      ViscaMsg[4] =  0x32;
-    }
-    if (value2 == 3) {
-      ViscaMsg[4] =  0x33;
-    }
-    if (value2 == 4) {
-      ViscaMsg[4] =  0x34;
-    }
-    if (value2 == 5) {
-      ViscaMsg[4] =  0x35;
-    }
-    if (value2 == 6) {
-      ViscaMsg[4] =  0x36;
-    }
-    if (value2 == 7) {
-      ViscaMsg[4] =  0x37;
-    }
+  int value = _mes->getArgInt32(0);
+  if (value >= 0 && value <= 7) {
+    ViscaMsg[4] =  0x30 | value;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
 }
 /************* Zoom Direct ****************/
 void ViscaZoom(OSCMessage *_mes) {
@@ -257,62 +213,20 @@ void ViscaFocusStandard(OSCMessage *_mes) {
 /************* Focus Variable Near ****************/
 void ViscaFocusVariableNear(OSCMessage *_mes) {
   ViscaMsg[3] =  0x08;
-  int value2 = _mes->getArgInt32(0);
-    if (value2 == 0) {
-      ViscaMsg[4] =  0x20;
-    }
-    if (value2 == 1) {
-      ViscaMsg[4] =  0x21;
-    }
-    if (value2 == 2) {
-      ViscaMsg[4] =  0x22;
-    }
-    if (value2 == 3) {
-      ViscaMsg[4] =  0x23;
-    }
-    if (value2 == 4) {
-      ViscaMsg[4] =  0x24;
-    }
-    if (value2 == 5) {
-      ViscaMsg[4] =  0x25;
-    }
-    if (value2 == 6) {
-      ViscaMsg[4] =  0x26;
-    }
-    if (value2 == 7) {
-      ViscaMsg[4] =  0x27;
-    }
+  int value = _mes->getArgInt32(0);
+  if (value >= 0 && value <= 7) {
+    ViscaMsg[4] =  0x20 | value;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
 }
 /************* Focus Variable Far ****************/
 void ViscaFocusVariableFar(OSCMessage *_mes) {
   ViscaMsg[3] =  0x08;
-  int value2 = _mes->getArgInt32(0);
-    if (value2 == 0) {
-      ViscaMsg[4] =  0x30;
-    }
-    if (value2 == 1) {
-      ViscaMsg[4] =  0x31;
-    }
-    if (value2 == 2) {
-      ViscaMsg[4] =  0x32;
-    }
-    if (value2 == 3) {
-      ViscaMsg[4] =  0x33;
-    }
-    if (value2 == 4) {
-      ViscaMsg[4] =  0x34;
-    }
-    if (value2 == 5) {
-      ViscaMsg[4] =  0x35;
-    }
-    if (value2 == 6) {
-      ViscaMsg[4] =  0x36;
-    }
-    if (value2 == 7) {
-      ViscaMsg[4] =  0x37;
-    }
+  int value = _mes->getArgInt32(0);
+  if (value >= 0 && value <= 7) {
+    ViscaMsg[4] =  0x30 | value;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
 }
 /************* Focus Direct ****************/
 void ViscaFocus(OSCMessage *_mes) {

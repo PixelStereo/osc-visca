@@ -235,21 +235,21 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "fcb3410.standalone.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/max 6",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rprepend.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/max 6",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "fcb3410.edit.maxpat",
-				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/visca osc",
+				"bootpath" : "/Users/renaudrubiano/Documents/GITs/osc-visca/max 6",
 				"patcherrelativepath" : "",
 				"type" : "JSON",
 				"implicit" : 1
