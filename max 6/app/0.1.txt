@@ -1,0 +1,1 @@
+open thispatcherinclude "work:/Users/renaudrubiano/Documents/GITs/osc-visca/max 6/fcb3410.edit.maxpat"include "work:/Users/renaudrubiano/Documents/GITs/osc-visca/max 6/fcb3410.standalone.maxpat"include "work:/Users/renaudrubiano/Documents/GITs/osc-visca/max 6/rprepend.maxpat"include work:/Applications/Max6/examples/max-tricks/send-receive-tricks/lib/var.maxpat
