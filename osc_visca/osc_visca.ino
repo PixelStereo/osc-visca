@@ -238,7 +238,7 @@ void ViscaFocus(OSCMessage *_mes) {
   int valueb = valuebZ % 16  ; 
   int valuec = valuecZ % 16 ; 
   int valued = valuedZ % 16 ; 
-  ViscaLongMsg[3] =  0x47;
+  ViscaLongMsg[3] =  0x48;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
   ViscaLongMsg[6] =  valueb;
@@ -281,7 +281,7 @@ void ViscaFocusNearLimit(OSCMessage *_mes) {
   int valueb = valuebZ % 16  ; 
   int valuec = valuecZ % 16 ; 
   int valued = valuedZ % 16 ; 
-  ViscaLongMsg[3] =  0x47;
+  ViscaLongMsg[3] =  0x28;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
   ViscaLongMsg[6] =  valueb;
