@@ -13,8 +13,8 @@ OSCMessage global_mes;
 int destPort = 12000;
 OSCServer server;
 OSCClient client;
-byte destIp[]  = { 
-  10, 0, 0, 4 };
+byte sourceIp[]  = { 
+  10, 0, 0, 2 };
 uint8_t ViscaMsg[6] = {  
   0x81, 0x01, 0x04, 0x00, 0x00, 0xFF      };
 uint8_t ViscaLongMsg[9] = {  
@@ -90,7 +90,7 @@ void loop()
     // read the incoming byte:
     incomingByte = Serial.read();
   /************* // Send Serial messages to OSC ****************/
-    global_mes.setAddress(destIp,destPort);
+    global_mes.setAddress(sourceIp,destPort);
     global_mes.beginMessage("/visca/from");
     global_mes.addArgInt32(incomingByte);
     client.send(&global_mes);
