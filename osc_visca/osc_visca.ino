@@ -175,13 +175,13 @@ void ViscaZoomVariableWide(OSCMessage *_mes) {
 /************* Zoom Direct ****************/
 void ViscaZoom(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valuecZ = value >> 8; 
   int valuedZ = value >> 12; 
-  int valueb = valuebZ % 16  ; 
-  int valuec = valuecZ % 16 ; 
-  int valued = valuedZ % 16 ; 
+  int valueb = valuebZ & 15  ; 
+  int valuec = valuecZ & 15 ; 
+  int valued = valuedZ & 15 ; 
   ViscaLongMsg[3] =  0x47;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -231,13 +231,13 @@ void ViscaFocusVariableFar(OSCMessage *_mes) {
 /************* Focus Direct ****************/
 void ViscaFocus(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valuecZ = value >> 8; 
   int valuedZ = value >> 12; 
-  int valueb = valuebZ % 16  ; 
-  int valuec = valuecZ % 16 ; 
-  int valued = valuedZ % 16 ; 
+  int valueb = valuebZ & 15  ; 
+  int valuec = valuecZ & 15 ; 
+  int valued = valuedZ & 15 ; 
   ViscaLongMsg[3] =  0x48;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -274,13 +274,13 @@ void ViscaFocusInfinity(OSCMessage *_mes) {
 /************* Focus Near Limit ****************/
 void ViscaFocusNearLimit(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valuecZ = value >> 8; 
   int valuedZ = value >> 12; 
-  int valueb = valuebZ % 16  ; 
-  int valuec = valuecZ % 16 ; 
-  int valued = valuedZ % 16 ; 
+  int valueb = valuebZ & 15  ; 
+  int valuec = valuecZ & 15 ; 
+  int valued = valuedZ & 15 ; 
   ViscaLongMsg[3] =  0x28;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -339,14 +339,14 @@ void ViscaIRCorrection(OSCMessage *_mes) {
 void ViscaZoomFocus(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   int value2 = _mes->getArgInt32(1);
-  int ZFZooma = value % 16 ; 
-  int ZFZoomb = value >> 4 % 16  ; 
-  int ZFZoomc = value >> 8 % 16 ; 
-  int ZFZoomd = value >> 12 % 16 ; 
-  int ZFFocusa = value % 16 ; 
-  int ZFFocusb = value >> 4 % 16  ; 
-  int ZFFocusc = value >> 8 % 16 ; 
-  int ZFFocusd = value >> 12 % 16 ; 
+  int ZFZooma = value & 15 ; 
+  int ZFZoomb = value >> 4 & 15  ; 
+  int ZFZoomc = value >> 8 & 15 ; 
+  int ZFZoomd = value >> 12 & 15 ; 
+  int ZFFocusa = value & 15 ; 
+  int ZFFocusb = value >> 4 & 15  ; 
+  int ZFFocusc = value >> 8 & 15 ; 
+  int ZFFocusd = value >> 12 & 15 ; 
   Serial.write(0x81);
   Serial.write(0x01);
   Serial.write(0x04);
@@ -453,9 +453,9 @@ void ViscaSlowShutter(OSCMessage *_mes) {
 /************* Shutter ****************/
 void ViscaShutter(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x4A;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -466,9 +466,9 @@ void ViscaShutter(OSCMessage *_mes) {
 /************* Auto Response ****************/
 void ViscaAutoResponse(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x5D;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -479,9 +479,9 @@ void ViscaAutoResponse(OSCMessage *_mes) {
 /************* IRIS ****************/
 void ViscaIris (OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x4B;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -492,9 +492,9 @@ void ViscaIris (OSCMessage *_mes) {
 /************* Gain ****************/
 void ViscaGain(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x4C;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -517,9 +517,9 @@ void ViscaExpComp(OSCMessage *_mes) {
 /************* Exposition Compensation ****************/
 void ViscaExpCompDirect(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x4E;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -554,9 +554,9 @@ void ViscaWD(OSCMessage *_mes) {
 /************* Aperture ****************/
 void ViscaAperture(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
-  int valuea = value % 16; 
+  int valuea = value & 15; 
   int valuebZ = value >> 4; 
-  int valueb = valuebZ % 16  ; 
+  int valueb = valuebZ & 15  ; 
   ViscaLongMsg[3] =  0x42;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
