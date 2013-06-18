@@ -1,0 +1,68 @@
+{
+	"setaddress" : "88 30 01 FF",
+	"ifclear" : "88 01 00 01 FF",
+	"power" : 
+	{
+		"off"	 : "8x 01 04 00 03 FF",
+		"on"	 : "8x 01 04 00 02 FF"
+	}
+	,
+	"zoom" : 
+	{
+		"stop" : "8x 01 04 07 00 FF",
+		"standart" : {
+			"tele" : "8x 01 04 07 02 FF",
+			"wide" : "8x 01 04 07 03 FF"	
+		}
+		,
+		"variable" : {
+			"tele" : "8x 01 04 07 2p FF",
+			"wide" : "8x 01 04 07 3p FF"
+		}
+		,
+		"direct" : "V4 8x 01 04 47 0p 0q 0r 0s FF",
+		"digital" : {
+				"off" : "8x 01 04 06 03 FF",
+				"on" : "8x 01 04 06 02 FF"
+			}
+	}
+	,
+	"focus" :
+	{
+		"stop" : "8x 01 04 08 00 FF",
+		"standart" : {
+			"far" : "8x 01 04 08 02 FF",
+			"near" : "8x 01 04 08 03 FF"	
+		}
+		,
+		"variable" : {
+			"far" : "8x 01 04 08 2p FF",
+			"near" : "8x 01 04 08 3p FF"
+		}
+		,
+		"direct" : "V4 8x 01 04 48 0p 0q 0r 0s FF",
+		"mode" : 
+			{
+				"auto" : "8x 01 04 38 02 FF",
+				"manual" : "8x 01 04 38 03 FF"
+			}
+		,
+		"sensitivity" : 
+			{
+				"normal" : "8x 01 04 58 02 FF",
+				"low" : "8x 01 04 58 03 FF"
+			}
+		,
+		"onepushtrigger" : "8x 01 04 18 01 FF",
+		"infinity" : "8x 01 04 18 02 FF",
+		"nearlimit" : "V4 8x 01 04 28 0p 0q 0r 0s FF"
+	}
+	,
+	"shutter" : "V2 8x 01 04 4A 00 00 0p 0q FF",
+	"gain" : "V2 8x 01 04 4C 00 00 0p 0q FF",
+	"iris" : "V2 8x 01 04 4B 00 00 0p 0q FF",
+	"AE" : 
+	{
+	"manual" : "8x 01 04 39 03 FF"	
+	}
+}
