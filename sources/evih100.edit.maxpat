@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 7
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 181.0, 44.0, 1499.0, 761.0 ],
@@ -28,6 +29,34 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 12.0,
+					"id" : "obj-53",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 904.0, 167.5, 110.0, 20.0 ],
+					"text" : "prepend setsymbol"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 9.0,
+					"id" : "obj-52",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 429.0, 707.5, 95.0, 17.0 ],
+					"text" : "prepend setsymbol"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 9.0,
@@ -198,9 +227,10 @@
 					"id" : "obj-180",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1366.0, 493.5, 119.0, 20.0 ],
-					"text" : "s /visca.1/tilt/speed"
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 1366.0, 493.5, 124.0, 20.0 ],
+					"text" : "var /visca.1/tilt/speed"
 				}
 
 			}
@@ -211,9 +241,10 @@
 					"id" : "obj-181",
 					"maxclass" : "newobj",
 					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1247.0, 493.5, 119.0, 20.0 ],
-					"text" : "s /visca.1/pan/speed"
+					"numoutlets" : 2,
+					"outlettype" : [ "", "" ],
+					"patching_rect" : [ 1247.0, 493.5, 132.0, 20.0 ],
+					"text" : "var /visca.1/pan/speed"
 				}
 
 			}
@@ -1408,7 +1439,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 855.5, 141.0, 126.0, 17.0 ],
-					"text" : "var #1/compensation/sw"
+					"text" : "var #1/compensation"
 				}
 
 			}
@@ -1426,8 +1457,8 @@
 					"patching_rect" : [ 855.5, 113.0, 119.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 8.0, 183.0, 119.0, 20.0 ],
-					"text" : "compensation off",
-					"texton" : "compensation on"
+					"text" : "off",
+					"texton" : "on"
 				}
 
 			}
@@ -1524,7 +1555,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 630.0, 327.0, 91.0, 17.0 ],
+					"patching_rect" : [ 630.0, 327.0, 93.0, 17.0 ],
 					"text" : "var #1/iris/value"
 				}
 
@@ -1538,7 +1569,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 593.5, 158.0, 79.0, 17.0 ],
+					"patching_rect" : [ 593.5, 158.0, 99.0, 17.0 ],
 					"text" : "var #1/gain/value"
 				}
 
@@ -1552,7 +1583,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 554.0, 250.0, 90.0, 17.0 ],
+					"patching_rect" : [ 554.0, 250.0, 108.0, 17.0 ],
 					"text" : "var #1/shutter/value"
 				}
 
@@ -1607,8 +1638,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 301.5, 669.0, 141.0, 17.0 ],
-					"text" : "var #1/focus/auto/sensitivity"
+					"patching_rect" : [ 342.0, 684.0, 122.0, 17.0 ],
+					"text" : "var #1/focus/sensitivity"
 				}
 
 			}
@@ -1623,10 +1654,10 @@
 					"numoutlets" : 3,
 					"outlettype" : [ "", "", "int" ],
 					"parameter_enable" : 0,
-					"patching_rect" : [ 301.5, 641.0, 100.0, 20.0 ],
+					"patching_rect" : [ 301.5, 628.714294, 100.0, 20.0 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 267.0, 240.0, 100.0, 20.0 ],
-					"text" : "high",
+					"text" : "normal",
 					"texton" : "low"
 				}
 
@@ -2814,6 +2845,24 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-47", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-180", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-46", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-181", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-184", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3199,11 +3248,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-237", 0 ],
+					"destination" : [ "obj-52", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 311.0, 687.0, 288.0, 687.0, 288.0, 636.0, 311.0, 636.0 ],
-					"source" : [ "obj-236", 0 ]
+					"source" : [ "obj-236", 1 ]
 				}
 
 			}
@@ -3212,7 +3260,7 @@
 					"destination" : [ "obj-236", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-237", 0 ]
+					"source" : [ "obj-237", 1 ]
 				}
 
 			}
@@ -3303,11 +3351,10 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-252", 0 ],
+					"destination" : [ "obj-53", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"midpoints" : [ 865.0, 159.0, 842.0, 159.0, 842.0, 108.0, 865.0, 108.0 ],
-					"source" : [ "obj-251", 0 ]
+					"source" : [ "obj-251", 1 ]
 				}
 
 			}
@@ -3316,7 +3363,7 @@
 					"destination" : [ "obj-251", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
-					"source" : [ "obj-252", 0 ]
+					"source" : [ "obj-252", 1 ]
 				}
 
 			}
@@ -3726,6 +3773,26 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-237", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 438.5, 719.0, 288.0, 719.0, 288.0, 618.0, 311.0, 618.0 ],
+					"source" : [ "obj-52", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-252", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"midpoints" : [ 913.5, 159.0, 842.0, 159.0, 842.0, 108.0, 865.0, 108.0 ],
+					"source" : [ "obj-53", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-9", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -3755,8 +3822,8 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "var.maxpat",
-				"bootpath" : "/Applications/Max6/examples/max-tricks/send-receive-tricks/lib",
-				"patcherrelativepath" : "../../../../../../Applications/Max6/examples/max-tricks/send-receive-tricks/lib",
+				"bootpath" : "/Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
+				"patcherrelativepath" : "../../../../../../Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}

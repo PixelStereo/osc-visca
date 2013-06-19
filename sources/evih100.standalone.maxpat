@@ -3,8 +3,9 @@
 		"fileversion" : 1,
 		"appversion" : 		{
 			"major" : 6,
-			"minor" : 0,
-			"revision" : 7
+			"minor" : 1,
+			"revision" : 3,
+			"architecture" : "x86"
 		}
 ,
 		"rect" : [ 527.0, 139.0, 1142.0, 732.0 ],
@@ -162,7 +163,6 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 17.284607, 489.387115, 225.0, 17.0 ],
-					"presentation_rect" : [ 17.284607, 604.988525, 0.0, 0.0 ],
 					"text" : "rprepend #1/right"
 				}
 
@@ -235,11 +235,12 @@
 						"fileversion" : 1,
 						"appversion" : 						{
 							"major" : 6,
-							"minor" : 0,
-							"revision" : 7
+							"minor" : 1,
+							"revision" : 3,
+							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 25.0, 69.0, 316.0, 490.0 ],
+						"rect" : [ 828.0, 219.0, 316.0, 490.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -258,18 +259,19 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"fontname" : "Arial",
 									"fontsize" : 9.0,
 									"id" : "obj-14",
-									"linecount" : 42,
+									"linecount" : 39,
 									"maxclass" : "message",
 									"numinlets" : 2,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 13.0, 43.0, 267.0, 427.0 ],
-									"text" : ";\n#1/setaddress bang;\r#1/sw 1;\n#1/zoom/stop bang;\n#1/zoom/variable/tele 0;\n#1/zoom/variable/wide 0;\n#1/zoom/standart wide;\n#1/zoom 0;\n#1/focus/mode 0;\n#1/focus/stop bang;\n#1/focus/variable/far 0;\n#1/focus/variable/near 0;\n#1/focus/standart near;\n#1/focus/nearlimit 0;\n#1/focus 0;\n#1/focus/auto/trigger bang;\n#1/focus/infinity bang;\n#1/focus/auto/sensitivity 0;\n#1/whitebalance auto;\n#1/whitebalance/trig bang;\n#1/mode manual;\n#1/shutter 6;\n#1/gain 1;\n#1/iris 11;\n#1/slowshutter 0;\n#1/compensation/sw 0;\n#1/compensation/level 0;\n#1/auto/response 0;\n#1/wd 1;\n#1/aperture 0;\n#1/hr 1;\n#1/nr 0;\n#1/gamma 0;\n#1/hs 1;\n#1/reverse 0;\n#1/freeze 0;\n#1/fx 0;\n#1/flip 0;\n#1/ir 0;\n#1/stabilizer 1;\n#1/chromasupress 0;\n#1/ir/correction 0;\n"
+									"patching_rect" : [ 13.0, 43.0, 267.0, 397.0 ],
+									"text" : ";\n#1/setaddress bang;\r#1/power on;\n#1/zoom/variable/tele 0;\n#1/zoom/variable/wide 0;\n#1/zoom/standart wide;\n#1/zoom/direct 0;\n#1/focus/mode 0;\n#1/focus/variable/far 0;\n#1/focus/variable/near 0;\n#1/focus/standart near;\n#1/focus/nearlimit 0;\n#1/focus/direct 0;\n#1/focus/onepushtrigger;\n#1/focus/infinity;\n#1/focus/auto/sensitivity normal;\n#1/WB auto;\n#1/AE manual;\n#1/shutter/value 1/50;\n#1/gain/value +10dB;\n#1/iris/value F11;\n#1/slowshutter off;\n#1/compensation off;\n#1/compensation/level 0;\n#1/auto/response 0;\n#1/wd 1;\n#1/aperture 0;\n#1/hr 1;\n#1/nr 0;\n#1/gamma 0;\n#1/hs 1;\n#1/reverse 0;\n#1/freeze 0;\n#1/fx 0;\n#1/flip 0;\n#1/ir 0;\n#1/stabilizer 1;\n#1/chromasupress 0;\n#1/ir/correction 0;\n"
 								}
 
 							}
@@ -340,7 +342,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 17.284607, 325.176178, 290.0, 17.0 ],
-					"text" : "rprepend #1/focus/auto/sensitivity"
+					"text" : "rprepend #1/focus/sensitivity"
 				}
 
 			}
@@ -536,7 +538,7 @@
 					"numinlets" : 0,
 					"numoutlets" : 0,
 					"patching_rect" : [ 754.284607, 112.039001, 259.0, 17.0 ],
-					"text" : "rprepend #1/compensation/sw"
+					"text" : "rprepend #1/compensation"
 				}
 
 			}
