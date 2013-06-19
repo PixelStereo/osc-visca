@@ -30,6 +30,19 @@
 		"boxes" : [ 			{
 				"box" : 				{
 					"fontname" : "Arial",
+					"fontsize" : 9.0,
+					"id" : "obj-45",
+					"maxclass" : "newobj",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1105.75, 719.285706, 103.0, 17.0 ],
+					"text" : "s /visca"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
 					"fontsize" : 12.0,
 					"frgb" : 0.0,
 					"id" : "obj-48",
@@ -422,7 +435,7 @@
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
 					"patching_rect" : [ 1105.75, 684.0, 181.0, 17.0 ],
-					"text" : "combine /visca.1/ parameter @triggers 1"
+					"text" : "combine #1/ parameter @triggers 1"
 				}
 
 			}
@@ -446,20 +459,6 @@
 					"text" : "home",
 					"textoncolor" : [ 0.0, 0.0, 0.0, 1.0 ],
 					"textoveroncolor" : [ 0.0, 0.0, 0.0, 1.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"color" : [ 0.4, 0.4, 0.8, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 9.0,
-					"id" : "obj-146",
-					"maxclass" : "newobj",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1105.75, 708.285706, 112.0, 17.0 ],
-					"text" : "udpsend localhost 10000"
 				}
 
 			}
@@ -1801,7 +1800,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 885.0, 684.0, 95.0, 17.0 ],
+					"patching_rect" : [ 885.0, 684.0, 101.0, 17.0 ],
 					"text" : "s #1/focus/stop"
 				}
 
@@ -2833,7 +2832,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-146", 0 ],
+					"destination" : [ "obj-45", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-185", 0 ]
