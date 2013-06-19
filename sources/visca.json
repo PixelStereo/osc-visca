@@ -18,7 +18,6 @@
 			"wide" : "8x 01 04 07 3p FF"
 		}
 ,
-		"direct" : "V4 8x 01 04 47 0p 0q 0r 0s FF",
 		"digital" : 		{
 			"off" : "8x 01 04 06 03 FF",
 			"on" : "8x 01 04 06 02 FF"
@@ -38,7 +37,6 @@
 			"near" : "8x 01 04 08 3p FF"
 		}
 ,
-		"direct" : "V4 8x 01 04 48 0p 0q 0r 0s FF",
 		"mode" : 		{
 			"auto" : "8x 01 04 38 02 FF",
 			"manual" : "8x 01 04 38 03 FF"
@@ -50,8 +48,7 @@
 		}
 ,
 		"onepushtrigger" : "8x 01 04 18 01 FF",
-		"infinity" : "8x 01 04 18 02 FF",
-		"nearlimit" : "V4 8x 01 04 28 0p 0q 0r 0s FF"
+		"infinity" : "8x 01 04 18 02 FF"
 	}
 ,
 	"gamma" : "8x 01 04 5B 0p FF",

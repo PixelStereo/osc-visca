@@ -189,16 +189,6 @@ gainValue.selection -= 1;
 gainValue.selection += 1;
 }" trigger_script="x" trigger_type="0" trigger="5" osc_message="/gainValueDec/shutterValueDecScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="LemurMenu" text="AE" x="677" y="19" width="327" height="83" id="31" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
-<PARAM name="selection=" value="0.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/AE/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<SCRIPT name="AEValueScript()" script="decl AE2send, menuValue;
-menuValue = AE.selection;
-if (menuValue==0) AE2send = 'auto';
-else if (menuValue==1) AE2send = 'manual';
-else if (menuValue==2) AE2send = 'shutter';
-else if (menuValue==3) AE2send = 'iris';
-oscout(0,'/visca.1/AE',AE2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/AE/AEValueScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
-</WINDOW>
 <WINDOW class="MultiSlider" text="zoomVariableTele" x="630" y="469" width="348" height="60" id="12" state="1" group="1" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
 <PARAM name="x=" value="0.857143" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/variable/tele" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,7.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -262,6 +252,16 @@ oscout(0,'/visca.1/focus/onepushtrigger','1');
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="LemurMenu" text="AE" x="677" y="19" width="327" height="83" id="31" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
+<PARAM name="selection=" value="0.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/AE/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<SCRIPT name="AEValueScript()" script="decl AE2send, menuValue;
+menuValue = AE.selection;
+if (menuValue==0) AE2send = 'auto';
+else if (menuValue==1) AE2send = 'manual';
+else if (menuValue==2) AE2send = 'shutter';
+else if (menuValue==3) AE2send = 'iris';
+oscout(0,'/visca.1/AE',AE2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/AE/AEValueScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
 </WINDOW>
 </JZML>
