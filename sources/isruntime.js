@@ -1,4 +1,4 @@
-outlets = 0;
+outlets = 1;
 setoutletassist(0,"is runtime?");
 
 function bang()
