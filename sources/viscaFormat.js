@@ -29,6 +29,30 @@ var nl = arrayfromargs(arguments);
 outlet(0,81, 01, 04, 28, nl[2],nl[3],nl[4],nl[5],'ff')
 }
 function zoom() {
-var bla = arrayfromargs(arguments);
-outlet(0,81, 01, 04, 47, bla[2],bla[3],bla[4],bla[5],'ff')
+var zo = arrayfromargs(arguments);
+outlet(0,81, 01, 04, 47, zo[2],zo[3],zo[4],zo[5],'ff')
+}
+function gamma() {
+var ga = arrayfromargs(arguments);
+outlet(0,81, 01, 04, '5B' , ga[2] , 'ff')
+}
+function slowshutter() {
+var slsh = arrayfromargs(arguments);
+outlet(0,81, 01, 04, '5A' , slsh[2] , 'ff')
+}
+function rgain() {
+var rg= arrayfromargs(arguments);
+outlet(0,81, 01, 04, 43 , 00 , 00 , rg[4] , rg[5] , 'ff')
+}
+function bgain() {
+var bg= arrayfromargs(arguments);
+outlet(0,81, 01, 04, 44 , 00 , 00 , rg[4] , rg[5] , 'ff')
+}
+function fx() {
+var ffxx= arrayfromargs(arguments);
+outlet(0,81, 01, 04, 63 , ffxx[2] , 'ff')
+}
+function chromasuppress() {
+var chs= arrayfromargs(arguments);
+outlet(0,81, 01, 04, '5F' , chs[2] , 'ff')
 }
