@@ -14,14 +14,11 @@ The OSC-Visca project is available :
 
 ## Change Log : 
 
-### Version 0.0.1: 
+### Version 0.1: 
 * ……
-    *……*
+    *the first version will be released later in 2013*
 
 # Licence
 ## Credits : 
-* *Written by Renaud Rubiano - 2012*
+* *Written by Renaud Rubiano - 2012-2013*
 * *Produced by didascalie.net*
-
-## Copying
-… to be completed…
