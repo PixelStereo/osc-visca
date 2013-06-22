@@ -1,6 +1,26 @@
 <JZML>
-<PROJECT version="3100" width="1024" height="724" osc_target="-1" midi_target="-1" kbmouse_target="-1"/>
+<PROJECT version="3220" width="1024" height="724" osc_target="-1" midi_target="-1" kbmouse_target="-1"/>
 <WINDOW class="JAZZINTERFACE" text="evi h100S" x="0" y="0" width="1024" height="724" state="1" group="0" font="tahoma,11,0" >
+<WINDOW class="MultiSlider" text="zoomVariableWide2" x="574" y="293" width="450" height="60" id="41" state="1" group="3" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
+<PARAM name="x=" value="0.000000" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/variable/wide" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,7.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide2/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide2/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide2/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="Text" text="wideLabel2" x="715" y="311" width="80" height="35" id="42" state="245" group="3" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="wide">
+<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/wideLabel2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="MultiSlider" text="zoomVariableTele2" x="574" y="225" width="450" height="60" id="43" state="1" group="4" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
+<PARAM name="x=" value="0.857143" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/variable/tele" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,7.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele2/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele2/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele2/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
+<WINDOW class="Text" text="teleLabel2" x="715" y="241" width="80" height="35" id="44" state="245" group="4" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="tele">
+<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/teleLabel2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
+</WINDOW>
 <WINDOW class="CustomButton" text="left" x="114" y="402" width="150" height="150" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="<" label_on="<" outline="1">
 <PARAM name="x=" value="0.000000" send="25" osc_target="0" osc_trigger="1" osc_message="/visca.1/left" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/left/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
@@ -59,17 +79,17 @@
 <PARAM name="x=" value="0.000000" send="25" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/stop" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomstop/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="MultiSlider" text="zoomVariableWide" x="630" y="543" width="348" height="60" id="15" state="1" group="2" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
+<WINDOW class="MultiSlider" text="zoomVariableWide" x="574" y="534" width="443" height="60" id="15" state="1" group="2" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
 <PARAM name="x=" value="0.000000" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/variable/wide" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,7.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableWide/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Text" text="wideLabel" x="771" y="561" width="80" height="35" id="17" state="245" group="2" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="wide">
+<WINDOW class="Text" text="wideLabel" x="715" y="552" width="80" height="35" id="17" state="245" group="2" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="wide">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/wideLabel/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="LemurMenu" text="irisValue" x="319" y="56" width="112" height="40" id="18" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="close,F14,F11,F9.6,F8,F6.8,F5.6,F4.8,F4,F3.4,F2.8,F2.4,F2,F1.6">
+<WINDOW class="LemurMenu" text="irisValue" x="491" y="56" width="112" height="40" id="18" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="close,F14,F11,F9.6,F8,F6.8,F5.6,F4.8,F4,F3.4,F2.8,F2.4,F2,F1.6">
 <PARAM name="selection=" value="13.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/irisValue/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="irisOSCvalue()" script="decl irisValue2send, menuValue;
 menuValue = irisValue.selection;
@@ -89,7 +109,7 @@ else if (menuValue==12) irisValue2send = 'F2';
 else if (menuValue==13) irisValue2send = 'F1.6';
 oscout(0,'/visca.1/iris/value', irisValue2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/irisValue/irisOSCvalue" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="LemurMenu" text="shutterValue" x="92" y="56" width="111" height="40" id="19" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="1/1,1/2,1/3,1/6,1/12,1/25,1/50,1/100,1/120,1/150,1/215,1/300,1/425,1/600,1/1000">
+<WINDOW class="LemurMenu" text="shutterValue" x="264" y="56" width="111" height="40" id="19" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="1/1,1/2,1/3,1/6,1/12,1/25,1/50,1/100,1/120,1/150,1/215,1/300,1/425,1/600,1/1000">
 <PARAM name="selection=" value="6.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/shutterValue/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterOSCvalue()" script="decl shutterValue2send, menuValue;
 menuValue = shutterValue.selection;
@@ -110,7 +130,7 @@ else if (menuValue==13) shutterValue2send = '1/600';
 else if (menuValue==14) shutterValue2send = '1/1000';
 oscout(0,'/visca.1/shutter/value', shutterValue2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/shutterValue/shutterOSCvalue" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="LemurMenu" text="gainValue" x="537" y="56" width="111" height="40" id="20" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="-3dB,0dB,+2dB,+4dB,+6dB,+8dB,+10dB,+12dB,+14dB,+16dB,+18dB,+20dB,+22dB,+24dB,+26dB,+28dB">
+<WINDOW class="LemurMenu" text="gainValue" x="709" y="56" width="111" height="40" id="20" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="-3dB,0dB,+2dB,+4dB,+6dB,+8dB,+10dB,+12dB,+14dB,+16dB,+18dB,+20dB,+22dB,+24dB,+26dB,+28dB">
 <PARAM name="selection=" value="8.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/gainValue/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="irisOSCvalue()" script="decl gainValue2send, menuValue;
 menuValue = gainValue.selection;
@@ -132,7 +152,7 @@ else if (menuValue==14) gainValue2send = '+26dB';
 else if (menuValue==15) gainValue2send = '+28dB';
 oscout(0,'/visca.1/gain/value', gainValue2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/gainValue/irisOSCvalue" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="shutterValueInc" x="0" y="0" width="80" height="60" id="21" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
+<WINDOW class="CustomButton" text="shutterValueInc" x="172" y="0" width="80" height="60" id="21" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
 <PARAM name="x=" value="0.000000" send="25" osc_target="-1" osc_trigger="1" osc_message="/shutterValueInc/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/shutterValueInc/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueIncScript()" script="if (shutterValue.selection>1);
@@ -140,7 +160,7 @@ oscout(0,'/visca.1/gain/value', gainValue2send);" trigger_script="selection" tri
 shutterValue.selection -= 1;
 }" trigger_script="x" trigger_type="0" trigger="6" osc_message="/shutterValueInc/shutterValueIncScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="shutterValueDec" x="0" y="63" width="80" height="60" id="22" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
+<WINDOW class="CustomButton" text="shutterValueDec" x="172" y="63" width="80" height="60" id="22" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="-1" osc_trigger="1" osc_message="/shutterValueDec/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/shutterValueDec/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueDecScript()" script="if (shutterValue.selection<13);
@@ -148,16 +168,16 @@ shutterValue.selection -= 1;
 shutterValue.selection += 1;
 }" trigger_script="x" trigger_type="0" trigger="5" osc_message="/shutterValueDec/shutterValueDecScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="Text" text="shutterLabel" x="65" y="0" width="160" height="48" id="23" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="SHUTTER">
+<WINDOW class="Text" text="shutterLabel" x="237" y="0" width="160" height="48" id="23" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="SHUTTER">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/shutterLabel/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Text" text="gainLabel" x="512" y="0" width="160" height="48" id="24" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="GAIN">
+<WINDOW class="Text" text="gainLabel" x="684" y="0" width="160" height="48" id="24" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="GAIN">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/gainLabel/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Text" text="irisLabel" x="295" y="0" width="160" height="48" id="25" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="IRIS">
+<WINDOW class="Text" text="irisLabel" x="467" y="0" width="160" height="48" id="25" state="245" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="8355711" content="IRIS">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/irisLabel/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="irisValueInc" x="225" y="0" width="80" height="60" id="27" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
+<WINDOW class="CustomButton" text="irisValueInc" x="397" y="0" width="80" height="60" id="27" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
 <PARAM name="x=" value="0.000000" send="25" osc_target="-1" osc_trigger="1" osc_message="/shutterValueInc/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/irisValueInc/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueIncScript()" script="if (irisValue.selection>1);
@@ -165,7 +185,7 @@ shutterValue.selection += 1;
 irisValue.selection -= 1;
 }" trigger_script="x" trigger_type="0" trigger="6" osc_message="/irisValueInc/shutterValueIncScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="irisValueDec" x="225" y="63" width="80" height="60" id="28" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
+<WINDOW class="CustomButton" text="irisValueDec" x="397" y="63" width="80" height="60" id="28" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="-1" osc_trigger="1" osc_message="/irisValueDec/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/irisValueDec/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueDecScript()" script="if (irisValue.selection<13);
@@ -173,7 +193,7 @@ irisValue.selection -= 1;
 irisValue.selection += 1;
 }" trigger_script="x" trigger_type="0" trigger="5" osc_message="/irisValueDec/shutterValueDecScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="gainValueInc" x="442" y="0" width="80" height="60" id="29" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
+<WINDOW class="CustomButton" text="gainValueInc" x="614" y="0" width="80" height="60" id="29" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="-" label_on="-" outline="1">
 <PARAM name="x=" value="0.000000" send="25" osc_target="-1" osc_trigger="1" osc_message="/shutterValueInc/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/gainValueInc/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueIncScript()" script="if (gainValue.selection>1);
@@ -181,7 +201,7 @@ irisValue.selection += 1;
 gainValue.selection -= 1;
 }" trigger_script="x" trigger_type="0" trigger="6" osc_message="/gainValueInc/shutterValueIncScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="gainValueDec" x="442" y="63" width="80" height="60" id="30" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
+<WINDOW class="CustomButton" text="gainValueDec" x="614" y="63" width="80" height="60" id="30" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="+" label_on="+" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="-1" osc_trigger="1" osc_message="/gainValueDec/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/gainValueDec/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="shutterValueDecScript()" script="if (gainValue.selection<13);
@@ -189,14 +209,14 @@ gainValue.selection -= 1;
 gainValue.selection += 1;
 }" trigger_script="x" trigger_type="0" trigger="5" osc_message="/gainValueDec/shutterValueDecScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="MultiSlider" text="zoomVariableTele" x="630" y="469" width="348" height="60" id="12" state="1" group="1" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
+<WINDOW class="MultiSlider" text="zoomVariableTele" x="574" y="464" width="443" height="60" id="12" state="1" group="1" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="1" grid_steps="8" horizontal="1" label="0" multicolor="0" nbr="1" physic="0">
 <PARAM name="x=" value="0.857143" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/zoom/variable/tele" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,7.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomVariableTele/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="Text" text="teleLabel" x="771" y="485" width="80" height="35" id="33" state="245" group="1" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="tele">
+<WINDOW class="Text" text="teleLabel" x="715" y="480" width="80" height="35" id="33" state="245" group="1" font="tahoma,24,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" color="65793" content="tele">
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/teleLabel/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
 <WINDOW class="CustomButton" text="zoomStandartTele" x="574" y="617" width="152" height="85" id="34" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="zoom in" label_on="zoom in" outline="1">
@@ -209,21 +229,21 @@ gainValue.selection += 1;
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/zoomStandartTele2/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="zoomStandart()" script="oscout(0,'/visca.1/zoom/variable/wide', 0);" trigger_script="x" trigger_type="0" trigger="6" osc_message="/zoomStandartTele2/zoomStandart" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="focusStop" x="733" y="343" width="139" height="85" id="36" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus stop" label_on="focus stop" outline="1">
+<WINDOW class="CustomButton" text="focusStop" x="733" y="365" width="139" height="85" id="36" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus stop" label_on="focus stop" outline="1">
 <PARAM name="x=" value="0.000000" send="25" osc_target="0" osc_trigger="1" osc_message="/visca.1/focus/stop" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusStop/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="focusVariableNear0" x="581" y="343" width="152" height="85" id="37" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus near" label_on="focus near" outline="1">
+<WINDOW class="CustomButton" text="focusVariableNear0" x="581" y="365" width="152" height="85" id="37" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus near" label_on="focus near" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/focusVariableNear0/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusVariableNear0/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="zoomStandart()" script="oscout(0,'/visca.1/focus/variable/near', 0);" trigger_script="x" trigger_type="0" trigger="5" osc_message="/focusVariableNear0/zoomStandart" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="focusVariableFar0" x="872" y="343" width="152" height="85" id="38" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus far" label_on="focus far" outline="1">
+<WINDOW class="CustomButton" text="focusVariableFar0" x="872" y="365" width="152" height="85" id="38" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus far" label_on="focus far" outline="1">
 <PARAM name="x=" value="0.000000" send="17" osc_target="0" osc_trigger="1" osc_message="/focusVariableFar0/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusVariableFar0/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="zoomStandart()" script="oscout(0,'/visca.1/focus/variable/far', 0);" trigger_script="x" trigger_type="0" trigger="6" osc_message="/focusVariableFar0/zoomStandart" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="LemurMenu" text="focusMode" x="581" y="252" width="284" height="83" id="39" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
+<WINDOW class="LemurMenu" text="focusMode" x="585" y="132" width="210" height="83" id="39" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
 <PARAM name="selection=" value="0.000000" send="9" osc_target="-1" osc_trigger="1" osc_message="/p@" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="AEValueScript()" script="decl focusMode2send, menuValue;
 menuValue = focusMode.selection;
@@ -231,7 +251,7 @@ if (menuValue==0) focusMode2send = 'auto';
 else if (menuValue==1) focusMode2send = 'manual';
 oscout(0,'/visca.1/focus/mode',focusMode2send);" trigger_script="selection" trigger_type="0" trigger="1" osc_message="/focusMode/AEValueScript" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="CustomButton" text="focusTrigger" x="872" y="252" width="152" height="85" id="40" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus trigger" label_on="focus trigger" outline="1">
+<WINDOW class="CustomButton" text="focusTrigger" x="820" y="132" width="197" height="85" id="40" state="241" group="0" font="tahoma,20,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" behavior="1" bitmap="0,0" capture="1" color="8355711,8328968" label_off="focus trigger" label_on="focus trigger" outline="1">
 <PARAM name="x=" value="1.000000" send="17" osc_target="-1" osc_trigger="1" osc_message="/focusTrigger/x" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusTrigger/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="focusOnepushtrigger()" script="if (focusTrigger.x==1);
@@ -239,21 +259,7 @@ oscout(0,'/visca.1/focus/mode',focusMode2send);" trigger_script="selection" trig
 oscout(0,'/visca.1/focus/onepushtrigger','1');
 }" trigger_script="x" trigger_type="0" trigger="5" osc_message="/focusTrigger/focusOnepushtrigger" midi_message="0x90,0x90,0,0" midi_target="-1" flag="1"/>
 </WINDOW>
-<WINDOW class="MultiSlider" text="focusNearLimit" x="590" y="115" width="399" height="60" id="41" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="0" grid_steps="1" horizontal="1" label="1" multicolor="0" nbr="1" physic="0">
-<PARAM name="x=" value="0.000000" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/focus/nearlimit" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,65536.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/focusNearLimit/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/focusNearLimit/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/focusNearLimit/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusNearLimit/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-</WINDOW>
-<WINDOW class="MultiSlider" text="focusDirect" x="590" y="179" width="399" height="60" id="42" state="1" group="0" font="tahoma,10,0" send="1" osc_target="-2" midi_target="-2" kbmouse_target="-2" bipolar="0" capture="1" color="8355711" gradient="1" grid="0" grid_steps="1" horizontal="1" label="1" multicolor="0" nbr="1" physic="0">
-<PARAM name="x=" value="0.096000" send="29" osc_target="0" osc_trigger="1" osc_message="/visca.1/focus/direct" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,65536.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="tension=0.2" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/tension" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="friction=0.9" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/friction" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="height=0.5" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/height" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-<VARIABLE name="light=0" send="0" osc_target="0" osc_trigger="1" osc_message="/focusDirect/light" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
-</WINDOW>
-<WINDOW class="LemurMenu" text="AE" x="677" y="19" width="327" height="83" id="31" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
+<WINDOW class="LemurMenu" text="AE" x="3" y="13" width="156" height="83" id="31" state="241" group="0" font="tahoma,14,0" send="1" osc_target="-1" midi_target="-2" kbmouse_target="-2" color="8355711" scale="0" content="AUTO,MANUAL,SHUTTER,IRIS">
 <PARAM name="selection=" value="0.000000" send="1" osc_target="-1" osc_trigger="1" osc_message="/AE/selection" midi_target="-1" midi_trigger="1" midi_message="0x90,0x90,0,0" midi_scale="0,16383" osc_scale="0.000000,1.000000" kbmouse_target="-1" kbmouse_trigger="1" kbmouse_message="0,0,0" kbmouse_scale="0,1,0,1"/>
 <SCRIPT name="AEValueScript()" script="decl AE2send, menuValue;
 menuValue = AE.selection;
