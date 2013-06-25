@@ -52,15 +52,11 @@
 	}
 ,
 	"gamma" : "8x 01 04 5B 0p FF",
-	"slowshutter" : {
-
+	"slowshutter" : 	{
 		"auto" : "8x 01 04 5A 02 FF",
-
 		"manual" : "8x 01 04 5A 03 FF"
-
 	}
-
-	,
+,
 	"shutter" : 	{
 		"direct" : "V2 8x 01 04 4A 00 00 0p 0q FF",
 		"value" : 		{
@@ -163,6 +159,11 @@
 	"display" : 	{
 		"off" : "8x 01 7E 01 18 03 FF",
 		"on" : "8x 01 7E 01 18 02 FF"
+	}
+,
+	"IR" : 	{
+		"off" : "8x 01 04 01 03 FF",
+		"on" : "8x 01 04 01 02 FF"
 	}
 ,
 	"chromasupress" : 	{

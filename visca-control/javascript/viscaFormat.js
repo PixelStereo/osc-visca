@@ -56,3 +56,7 @@ function chromasuppress() {
 var chs= arrayfromargs(arguments);
 outlet(0,81, 01, 04, '5F' , chs[2] , 'ff')
 }
+function IR() {
+var irm= arrayfromargs(arguments);
+outlet(0,81, 01, 04, 01 , irm[2] , 'ff')
+}
