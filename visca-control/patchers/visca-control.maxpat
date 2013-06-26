@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 1048.0, 554.0, 400.0, 526.0 ],
+		"rect" : [ 1029.0, 597.0, 400.0, 526.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -1353,7 +1353,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-41",
-					"items" : [ "doucheIR", ",", "2013-06-25 13:20:33", ",", "ss+", ",", "qsd", ",", "qsdqsdqsdqsdff" ],
+					"items" : "<empty>",
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -1540,7 +1540,6 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 199.75, 388.54306, 74.0, 18.0 ],
-									"presentation_rect" : [ 202.0, 391.0, 0.0, 0.0 ],
 									"text" : "8x 1 4 1 3 ff"
 								}
 
@@ -1837,7 +1836,6 @@
 									}
 ,
 									"patching_rect" : [ 167.916687, 276.230865, 114.0, 22.0 ],
-									"presentation_rect" : [ 207.75, 223.230865, 0.0, 0.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -4493,7 +4491,6 @@
 																	"numoutlets" : 1,
 																	"outlettype" : [ "" ],
 																	"patching_rect" : [ 228.0, 105.0, 50.0, 18.0 ],
-																	"presentation_rect" : [ 228.0, 109.0, 0.0, 0.0 ],
 																	"text" : "read"
 																}
 
@@ -6751,7 +6748,7 @@
 																	"outlettype" : [ "" ],
 																	"patching_rect" : [ 226.0, 306.743774, 89.0, 20.0 ],
 																	"saved_object_attributes" : 																	{
-																		"filename" : "viscaFormat.js",
+																		"filename" : "viscaFormat",
 																		"parameter_enable" : 0
 																	}
 ,
