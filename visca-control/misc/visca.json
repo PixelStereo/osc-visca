@@ -47,6 +47,11 @@
 			"low" : "8x 01 04 58 03 FF"
 		}
 ,
+		"correction" : 		{
+			"standart" : "8x 01 04 11 00 FF",
+			"IR" : "8x 01 04 11 01 FF"
+		}
+,
 		"onepushtrigger" : "8x 01 04 18 01 FF",
 		"infinity" : "8x 01 04 18 02 FF"
 	}
@@ -55,6 +60,12 @@
 	"slowshutter" : 	{
 		"auto" : "8x 01 04 5A 02 FF",
 		"manual" : "8x 01 04 5A 03 FF"
+	}
+,
+
+	"WD" : 	{
+		"on" : "8x 01 04 3D 02 FF",
+		"off" : "8x 01 04 3D 03 FF"
 	}
 ,
 	"shutter" : 	{
