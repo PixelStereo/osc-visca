@@ -1353,7 +1353,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-41",
-					"items" : [ "doucheIR", ",", "newDouche" ],
+					"items" : [ "ecran1", ",", "ecran2" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -5848,8 +5848,7 @@
 																					"numinlets" : 1,
 																					"numoutlets" : 1,
 																					"outlettype" : [ "bang" ],
-																					"patching_rect" : [ 292.422577, 10.0, 20.0, 20.0 ],
-																					"presentation_rect" : [ 291.614807, 13.0, 0.0, 0.0 ]
+																					"patching_rect" : [ 292.422577, 10.0, 20.0, 20.0 ]
 																				}
 
 																			}
@@ -5863,7 +5862,6 @@
 																					"numoutlets" : 1,
 																					"outlettype" : [ "" ],
 																					"patching_rect" : [ 846.014709, 86.207855, 32.5, 18.0 ],
-																					"presentation_rect" : [ 846.014709, 86.207855, 0.0, 0.0 ],
 																					"text" : "WD"
 																				}
 
@@ -5878,7 +5876,6 @@
 																					"numoutlets" : 1,
 																					"outlettype" : [ "" ],
 																					"patching_rect" : [ 747.014709, 86.207855, 92.0, 18.0 ],
-																					"presentation_rect" : [ 746.514709, 86.207855, 0.0, 0.0 ],
 																					"text" : "focuscorrection"
 																				}
 
@@ -5890,8 +5887,7 @@
 																					"numinlets" : 1,
 																					"numoutlets" : 1,
 																					"outlettype" : [ "bang" ],
-																					"patching_rect" : [ 675.0, 16.0, 20.0, 20.0 ],
-																					"presentation_rect" : [ 675.0, 16.0, 0.0, 0.0 ]
+																					"patching_rect" : [ 675.0, 16.0, 20.0, 20.0 ]
 																				}
 
 																			}
@@ -5905,7 +5901,6 @@
 																					"numoutlets" : 1,
 																					"outlettype" : [ "" ],
 																					"patching_rect" : [ 711.514709, 86.207855, 32.5, 18.0 ],
-																					"presentation_rect" : [ 711.514709, 86.207855, 0.0, 0.0 ],
 																					"text" : "IR"
 																				}
 
@@ -6869,7 +6864,7 @@
 																	"outlettype" : [ "" ],
 																	"patching_rect" : [ 226.0, 306.743774, 89.0, 20.0 ],
 																	"saved_object_attributes" : 																	{
-																		"filename" : "viscaFormat.js",
+																		"filename" : "viscaFormat",
 																		"parameter_enable" : 0
 																	}
 ,
