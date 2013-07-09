@@ -1,6 +1,6 @@
 	
 /*
-	convert hexa to decimal
+	convert single hexa to decimal
 */
 
 outlets = 1;
