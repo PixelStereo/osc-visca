@@ -2,6 +2,9 @@
 #include <SPI.h>
 #include <ArdOSC.h>
 #include <string.h>
+#include <SoftwareSerial.h>
+SoftwareSerial mySerial(6, 7); // RX, TX
+
 /************* Variables ****************/
 byte mac[] = { 
   0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xED };
@@ -27,7 +30,7 @@ void setup()
   Ethernet.begin(mac, ip);
   server.begin(serverPort);  
   /************* Launch Serial Communication for visca commands ****************/
-  Serial.begin(9600);
+  mySerial.begin(9600);
   /************* Add some osc messages ****************/
   server.addCallback("/visca/AddressSet",&ViscaAddressSet);
   server.addCallback("/visca/ifclear",&ViscaIfClear);
@@ -71,6 +74,16 @@ void setup()
   server.addCallback("/visca.1/aperture",&ViscaAperture);
   server.addCallback("/visca.1/WD",&ViscaWD);
   server.addCallback("/visca.1/chromasupress",&ViscaChromaSuppress);
+  server.addCallback("/visca.1/home",&ViscaHome);  
+  server.addCallback("/visca.1/left",&ViscaLeft);  
+  server.addCallback("/visca.1/upleft",&ViscaUpLeft);  
+  server.addCallback("/visca.1/up",&ViscaUp);  
+  server.addCallback("/visca.1/upright",&ViscaUpRight);  
+  server.addCallback("/visca.1/right",&ViscaRight);  
+  server.addCallback("/visca.1/downright",&ViscaDownRight);  
+  server.addCallback("/visca.1/down",&ViscaDown);  
+  server.addCallback("/visca.1/downleft",&ViscaDownLeft);  
+  server.addCallback("/visca.1/stop",&ViscaStop);  
 }
 void loop()
 { 
@@ -79,9 +92,9 @@ void loop()
   if(result>0) {
   }
   /************* // Check Serial messages for loopback ****************/
-  if (Serial.available() > 0) {
+  if (mySerial.available() > 0) {
     // read the incoming byte:
-    incomingByte = Serial.read();
+    incomingByte = mySerial.read();
   /************* // Send Serial messages to OSC ****************/
     global_mes.setAddress(sourceIp,destPort);
     global_mes.beginMessage("/visca/from");
@@ -92,47 +105,50 @@ void loop()
 }
 /************* ViscaAddressSet ****************/
 void ViscaAddressSet(OSCMessage *_mes) {
-  Serial.write(0x88);
-  Serial.write(0x30);
-  Serial.write(0x01);
-  Serial.write(0xFF); 
+  mySerial.write(0x88);
+  mySerial.write(0x30);
+  mySerial.write(0x01);
+  mySerial.write(0xFF); 
 }
 /************* IfClear ****************/
 void ViscaIfClear(OSCMessage *_mes) {
-  Serial.write(0x88);
-  Serial.write(0x01);
-  Serial.write((uint8_t) 0);
-  Serial.write(0x01);
-  Serial.write(0xFF); 
+  mySerial.write(0x88);
+  mySerial.write(0x01);
+  mySerial.write((uint8_t) 0);
+  mySerial.write(0x01);
+  mySerial.write(0xFF); 
 }
 /************* Cancel ****************/
 void ViscaCancel(OSCMessage *_mes) {
   /* Buffer 1 */
-  Serial.write(0x81);
-  Serial.write(0x21);
-  Serial.write(0xFF); 
+  mySerial.write(0x81);
+  mySerial.write(0x21);
+  mySerial.write(0xFF); 
   /* Buffer 2 */
   delay(200);
-  Serial.write(0x81);
-  Serial.write(0x22);
-  Serial.write(0xFF); 
+  mySerial.write(0x81);
+  mySerial.write(0x22);
+  mySerial.write(0xFF); 
 }
 /************* Power ****************/
 void ViscaSw(OSCMessage *_mes) {
-  int value = _mes->getArgInt32(0);
-  if ( value == 'on' ) {
+  
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);
+  if ( memcmp(value,"on",2) == 0) {
     ViscaMsg[4] =  0x02;
   } 
   else {
     ViscaMsg[4] =  0x03;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Zoom Stop ****************/
 void ViscaZoomStop(OSCMessage *_mes) {
   ViscaMsg[3] =  0x07;
   ViscaMsg[4] = ((uint8_t) 0);
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 
 }
 /************* Zoom Standard ****************/
@@ -147,14 +163,14 @@ void ViscaZoomStandard(OSCMessage *_mes) {
   if ( memcmp(value,"wide",4) == 0) {
     ViscaMsg[4] =  0x03;
   }
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 void ViscaZoomVariableTele(OSCMessage *_mes) {
   ViscaMsg[3] =  0x07;
   int value = _mes->getArgInt32(0);
   if (value >= 0 && value <= 7) {
     ViscaMsg[4] =  0x20 | value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
 void ViscaZoomVariableWide(OSCMessage *_mes) {
@@ -162,7 +178,7 @@ void ViscaZoomVariableWide(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   if (value >= 0 && value <= 7) {
     ViscaMsg[4] =  0x30 | value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
 /************* Zoom Direct ****************/
@@ -180,13 +196,13 @@ void ViscaZoom(OSCMessage *_mes) {
   ViscaLongMsg[5] =  valuec;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Stop ****************/
 void ViscaFocusStop(OSCMessage *_mes) {
   ViscaMsg[3] =  0x08;
   ViscaMsg[4] =  0x00;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Standard ****************/
 void ViscaFocusStandard(OSCMessage *_mes) {
@@ -201,7 +217,7 @@ void ViscaFocusStandard(OSCMessage *_mes) {
   if ( memcmp(value,"near",4) == 0) {
     ViscaMsg[4] =  0x03;
   }
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Variable Near ****************/
 void ViscaFocusVariableNear(OSCMessage *_mes) {
@@ -209,7 +225,7 @@ void ViscaFocusVariableNear(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   if (value >= 0 && value <= 7) {
     ViscaMsg[4] =  0x20 | value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
 /************* Focus Variable Far ****************/
@@ -218,7 +234,7 @@ void ViscaFocusVariableFar(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
   if (value >= 0 && value <= 7) {
     ViscaMsg[4] =  0x30 | value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
 /************* Focus Direct ****************/
@@ -236,7 +252,7 @@ void ViscaFocus(OSCMessage *_mes) {
   ViscaLongMsg[5] =  valuec;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Auto ****************/
 void ViscaFocusMode(OSCMessage *_mes) {
@@ -250,19 +266,19 @@ void ViscaFocusMode(OSCMessage *_mes) {
   if ( memcmp(value,"manual",6) == 0) {
    ViscaMsg[4] =  0x03;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Trigger ****************/
 void ViscaFocusTrigger(OSCMessage *_mes) {
   ViscaMsg[3] =  0x18;
   ViscaMsg[4] =  0x01;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Infinity ****************/
 void ViscaFocusInfinity(OSCMessage *_mes) {
   ViscaMsg[3] =  0x18;
   ViscaMsg[4] =  0x02;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Near Limit ****************/
 void ViscaFocusNearLimit(OSCMessage *_mes) {
@@ -279,7 +295,7 @@ void ViscaFocusNearLimit(OSCMessage *_mes) {
   ViscaLongMsg[5] =  valuec;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Focus Sensitivity ****************/
 void ViscaFocusAFSens(OSCMessage *_mes) {
@@ -294,7 +310,7 @@ void ViscaFocusAFSens(OSCMessage *_mes) {
   if ( memcmp(value,"low",3) == 0) {
   ViscaMsg[4] =  0x03;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Auto Mode ****************/
 void ViscaFocusAFMode(OSCMessage *_mes) {
@@ -308,13 +324,13 @@ void ViscaFocusAFMode(OSCMessage *_mes) {
   if ( memcmp(value,"interval",8) == 0) {
   ViscaMsg[4] =  0x01;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Focus Zoom Trigger ****************/
 void ViscaFocusAFZoomTrigger(OSCMessage *_mes) {
   ViscaMsg[3] =  0x57;
   ViscaMsg[4] =  0x02;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Infra-Red Correction ****************/
 /************* Zoom Focus ****************/
@@ -329,18 +345,18 @@ void ViscaZoomFocus(OSCMessage *_mes) {
   int ZFFocusb = value >> 4 & 15  ; 
   int ZFFocusc = value >> 8 & 15 ; 
   int ZFFocusd = value >> 12 & 15 ; 
-  Serial.write(0x81);
-  Serial.write(0x01);
-  Serial.write(0x04);
-  Serial.write(0x47);
-  Serial.write((byte)ZFZoomd);
-  Serial.write((byte)ZFZoomc);
-  Serial.write((byte)ZFZoomb);
-  Serial.write((byte)ZFZooma);
-  Serial.write((byte)ZFFocusd);
-  Serial.write((byte)ZFFocusc);
-  Serial.write((byte)ZFFocusb);
-  Serial.write((byte)ZFFocusa);
+  mySerial.write(0x81);
+  mySerial.write(0x01);
+  mySerial.write(0x04);
+  mySerial.write(0x47);
+  mySerial.write((byte)ZFZoomd);
+  mySerial.write((byte)ZFZoomc);
+  mySerial.write((byte)ZFZoomb);
+  mySerial.write((byte)ZFZooma);
+  mySerial.write((byte)ZFFocusd);
+  mySerial.write((byte)ZFFocusc);
+  mySerial.write((byte)ZFFocusb);
+  mySerial.write((byte)ZFFocusa);
 }
 /************* Init ****************/
 void ViscaInit(OSCMessage *_mes) {
@@ -354,7 +370,7 @@ void ViscaInit(OSCMessage *_mes) {
   if ( memcmp(value,"camera",6) == 0) {
   ViscaMsg[4] =  0x03;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }  
 /************* White Balance ****************/
 void ViscaWB(OSCMessage *_mes) {
@@ -393,7 +409,7 @@ void ViscaWB(OSCMessage *_mes) {
   if ( memcmp(value,"sodium lamp",11) == 0) {
     ViscaMsg[4] =  0x08;
   }
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* AE Exposure Mode ****************/
 void ViscaExposure(OSCMessage *_mes) {
@@ -416,7 +432,7 @@ void ViscaExposure(OSCMessage *_mes) {
   if ( memcmp(value,"bright",6) == 0) {
     ViscaMsg[4] =  0x0D;
   }
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Slow Shutter ****************/
 void ViscaSlowShutter(OSCMessage *_mes) {
@@ -430,7 +446,7 @@ void ViscaSlowShutter(OSCMessage *_mes) {
   if ( memcmp(value,"manual",6) == 0) {
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Shutter ****************/
 void ViscaShutter(OSCMessage *_mes) {
@@ -443,7 +459,7 @@ void ViscaShutter(OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Auto Response ****************/
 void ViscaAutoResponse(OSCMessage *_mes) {
@@ -456,7 +472,7 @@ void ViscaAutoResponse(OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* IRIS ****************/
 void ViscaIris (OSCMessage *_mes) {
@@ -469,7 +485,7 @@ void ViscaIris (OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Gain ****************/
 void ViscaGain(OSCMessage *_mes) {
@@ -482,7 +498,7 @@ void ViscaGain(OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Exposition Compensation ****************/
 void ViscaExpComp(OSCMessage *_mes) {
@@ -494,7 +510,7 @@ void ViscaExpComp(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Exposition Compensation ****************/
 void ViscaExpCompDirect(OSCMessage *_mes) {
@@ -507,7 +523,7 @@ void ViscaExpCompDirect(OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Backlight ****************/
 void ViscaBackLight(OSCMessage *_mes) {
@@ -519,7 +535,7 @@ void ViscaBackLight(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Wide Dynamic ****************/
 void ViscaWD(OSCMessage *_mes) {
@@ -531,7 +547,7 @@ void ViscaWD(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Aperture ****************/
 void ViscaAperture(OSCMessage *_mes) {
@@ -544,14 +560,14 @@ void ViscaAperture(OSCMessage *_mes) {
   ViscaLongMsg[5] =  0x00;
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 /************* Noise Reduction ****************/
 void ViscaNR(OSCMessage *_mes) {
   ViscaMsg[3] =  0x53;
   int value = _mes->getArgInt32(0);
   ViscaMsg[4] =  value;
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* High Resolution ****************/
 void ViscaHR(OSCMessage *_mes) {
@@ -563,14 +579,14 @@ void ViscaHR(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Gamma ****************/
 void ViscaGamma(OSCMessage *_mes) {
   ViscaMsg[3] =  0x5B;
   int value = _mes->getArgInt32(0);
   ViscaMsg[4] =  value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* High Sensitivity ****************/
 void ViscaHS(OSCMessage *_mes) {
@@ -582,7 +598,7 @@ void ViscaHS(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Horizontal Reverse ****************/
 void ViscaReverse(OSCMessage *_mes) {
@@ -594,7 +610,7 @@ void ViscaReverse(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Freeze ****************/
 void ViscaFreeze(OSCMessage *_mes) {
@@ -606,7 +622,7 @@ void ViscaFreeze(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Image effects ****************/
 void ViscaFX(OSCMessage *_mes) {
@@ -623,7 +639,7 @@ void ViscaFX(OSCMessage *_mes) {
   if ( memcmp(value,"bw",2) == 0) {
   ViscaMsg[4] =  0x04;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Vertical Flip****************/
 void ViscaFlip(OSCMessage *_mes) {
@@ -635,7 +651,7 @@ void ViscaFlip(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Infra-Red ****************/
 void ViscaIR(OSCMessage *_mes) {
@@ -647,7 +663,7 @@ void ViscaIR(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x00;
   } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   ViscaMsg[3] =  0x01;
   if ( value == 1 ) {
   ViscaMsg[4] =  0x02;
@@ -655,7 +671,7 @@ void ViscaIR(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Stabilizer****************/
 void ViscaStab(OSCMessage *_mes) {
@@ -667,7 +683,7 @@ void ViscaStab(OSCMessage *_mes) {
   else { 
   ViscaMsg[4] =  0x03;
   } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Memory Reset ****************/
 void ViscaMemReset(OSCMessage *_mes) {
@@ -675,7 +691,7 @@ uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x3F, 0x00, 0x00, 0xFF      };
   int value = _mes->getArgInt32(0);
   ViscaMemMsg[5] =  value;
-  Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
+  mySerial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
 }
 /************* Memory Set ****************/
 void ViscaMemSet(OSCMessage *_mes) {
@@ -683,7 +699,7 @@ uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x3F, 0x01, 0x00, 0xFF      };
   int value = _mes->getArgInt32(0);
   ViscaMemMsg[5] =  value;
-  Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
+  mySerial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
 }
 /************* Memory Recall  ****************/
 void ViscaMemRecall(OSCMessage *_mes) {
@@ -691,12 +707,33 @@ uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x3F, 0x02, 0x00, 0xFF      };
   int value = _mes->getArgInt32(0);
   ViscaMemMsg[5] =  value;
-  Serial.write (ViscaMemMsg, sizeof(ViscaMemMsg) );
+  mySerial.write (ViscaMemMsg, sizeof(ViscaMemMsg) );
 }
 /************* Chroma Supress  ****************/
 void ViscaChromaSuppress(OSCMessage *_mes) {
   ViscaMsg[3] =  0x5F;
   int value = _mes->getArgInt32(0);
   ViscaMsg[4] =  value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+/************* Home (pan-tilt) ****************/
+void ViscaHomeOSCMessage *_mes) {
+  mySerial.write(0x81);
+  mySerial.write(0x01);
+  mySerial.write(0x06);
+  mySerial.write(0x04);
+  mySerial.write(0xFF); 
+  }
+  /************* Reset (pan-tilt) ****************/
+void ViscaResetOSCMessage *_mes) {
+  mySerial.write(0x81);
+  mySerial.write(0x01);
+  mySerial.write(0x06);
+  mySerial.write(0x05);
+  mySerial.write(0xFF); 
+  }
+void ViscaHomeOSCMessage *_mes) {
+  ViscaMsg[3] =  0x08;
+  ViscaMsg[4] =  0x00;
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
