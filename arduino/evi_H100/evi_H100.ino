@@ -665,13 +665,11 @@ void ViscaIR(OSCMessage *_mes) {
   _mes->getArgString(0,value);
   if ( memcmp(value,"on",2) == 0) {
   ViscaMsg[4] =  0x02;
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
-
   } 
   else { 
   ViscaMsg[4] =  0x03;
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 } 
 /************* Infra-Red Correction ****************/
 void ViscaIRCorrection(OSCMessage *_mes) {
@@ -681,12 +679,12 @@ void ViscaIRCorrection(OSCMessage *_mes) {
   _mes->getArgString(0,value);
   if ( memcmp(value,"on",2) == 0) {
   ViscaMsg[4] =  0x01;
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   } 
   else { 
   ViscaMsg[4] =  0x00;
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+
 }   
 /************* Stabilizer****************/
 void ViscaStab(OSCMessage *_mes) {
