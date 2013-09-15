@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 3,
-			"architecture" : "x64"
+			"revision" : 4,
+			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 81.0, 123.0, 400.0, 526.0 ],
+		"rect" : [ 36.0, 71.0, 400.0, 526.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -29,6 +29,57 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 13.0,
+					"id" : "obj-26",
+					"linecount" : 3,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 276.291626, 88.541412, 93.0, 48.0 ],
+					"presentation" : 1,
+					"presentation_linecount" : 3,
+					"presentation_rect" : [ 278.291626, 88.332825, 93.0, 48.0 ],
+					"text" : "/visca.1/WB sodium lamp auto"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 13.0,
+					"id" : "obj-19",
+					"linecount" : 2,
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 290.291626, 2.832825, 90.0, 34.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.75, 100.0, 115.0, 19.0 ],
+					"text" : "host 192.168.0.17"
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"fontname" : "Arial",
+					"fontsize" : 13.0,
+					"id" : "obj-24",
+					"maxclass" : "message",
+					"numinlets" : 2,
+					"numoutlets" : 1,
+					"outlettype" : [ "" ],
+					"patching_rect" : [ 290.291626, 38.332825, 93.0, 19.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 5.75, 119.0, 93.0, 19.0 ],
+					"text" : "host 127.0.0.1"
+				}
+
+			}
+, 			{
 				"box" : 				{
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
@@ -121,7 +172,7 @@
 					"presentation" : 1,
 					"presentation_linecount" : 2,
 					"presentation_rect" : [ 5.75, 70.0, 134.0, 26.0 ],
-					"text" : "listen OSC on UDP port 14000",
+					"text" : "listen OSC on UDP port 10000",
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ]
 				}
 
@@ -225,8 +276,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
-							"architecture" : "x64"
+							"revision" : 4,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 100.0, 90.0, 185.0, 294.0 ],
@@ -276,8 +327,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 692.0, 265.0, 433.0, 358.0 ],
@@ -1463,7 +1514,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 165.416626, 58.082825, 145.0, 20.0 ],
-					"text" : "udpsend localhost 14000"
+					"text" : "udpsend localhost 10000"
 				}
 
 			}
@@ -1524,8 +1575,8 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 3,
-							"architecture" : "x64"
+							"revision" : 4,
+							"architecture" : "x86"
 						}
 ,
 						"rect" : [ 483.0, 121.0, 445.0, 483.0 ],
@@ -1549,6 +1600,35 @@
 						"tags" : "",
 						"boxes" : [ 							{
 								"box" : 								{
+									"color" : [ 0.4, 0.4, 0.8, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 9.0,
+									"id" : "obj-7",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 0,
+									"patching_rect" : [ 285.916687, 232.217255, 95.0, 17.0 ],
+									"text" : "print /serial.1_input"
+								}
+
+							}
+, 							{
+								"box" : 								{
+									"color" : [ 0.4, 0.4, 0.8, 1.0 ],
+									"fontname" : "Arial",
+									"fontsize" : 9.0,
+									"id" : "obj-6",
+									"maxclass" : "newobj",
+									"numinlets" : 1,
+									"numoutlets" : 1,
+									"outlettype" : [ "" ],
+									"patching_rect" : [ 285.916687, 207.746796, 95.0, 17.0 ],
+									"text" : "udpreceive 12000"
+								}
+
+							}
+, 							{
+								"box" : 								{
 									"color" : [ 0.154413, 0.605405, 0.052319, 1.0 ],
 									"fontname" : "Arial",
 									"fontsize" : 14.0,
@@ -1562,8 +1642,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 920.0, 45.0, 696.0, 745.0 ],
@@ -1613,7 +1693,6 @@
 									}
 ,
 									"patching_rect" : [ 1.0, 347.0, 183.0, 22.0 ],
-									"presentation_rect" : [ 242.75, 31.595764, 0.0, 0.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -1643,7 +1722,6 @@
 									"numinlets" : 1,
 									"numoutlets" : 0,
 									"patching_rect" : [ 134.75, 131.730865, 231.0, 51.0 ],
-									"presentation_rect" : [ 135.916687, 140.88147, 0.0, 0.0 ],
 									"text" : "this don(t have to be a time based queue. New action must be (re)send until the completion is done"
 								}
 
@@ -1704,8 +1782,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 213.0, 365.0 ],
@@ -2000,8 +2078,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 905.0, 295.0, 172.0, 188.0 ],
@@ -2049,7 +2127,7 @@
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 16.0, 89.948059, 97.0, 20.0 ],
 													"saved_object_attributes" : 													{
-														"filename" : "decimal2hexa.js",
+														"filename" : "decimal2hexa",
 														"parameter_enable" : 0
 													}
 ,
@@ -2144,8 +2222,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 905.0, 295.0, 137.0, 156.0 ],
@@ -2207,7 +2285,7 @@
 													"outlettype" : [ "" ],
 													"patching_rect" : [ 11.0, 89.896179, 97.0, 20.0 ],
 													"saved_object_attributes" : 													{
-														"filename" : "hexa2decimal.js",
+														"filename" : "hexa2decimal",
 														"parameter_enable" : 0
 													}
 ,
@@ -2311,8 +2389,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 117.0, 222.0 ],
@@ -2349,8 +2427,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 25.0, 69.0, 177.0, 407.0 ],
@@ -2645,8 +2723,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 25.0, 69.0, 548.0, 545.0 ],
@@ -3434,8 +3512,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 920.0, 45.0, 696.0, 745.0 ],
@@ -3469,7 +3547,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 502.4375, 172.0, 151.0, 33.0 ],
-													"presentation_rect" : [ 502.4375, 190.285706, 0.0, 0.0 ],
 													"text" : "• if the value is a symbol, this is a key of a sub-dict."
 												}
 
@@ -3486,7 +3563,6 @@
 													"numinlets" : 1,
 													"numoutlets" : 0,
 													"patching_rect" : [ 502.4375, 121.285706, 159.0, 47.0 ],
-													"presentation_rect" : [ 230.625, 211.0, 0.0, 0.0 ],
 													"text" : "• if the value is a float or an int, send ithis value will be the value known as \"p\"."
 												}
 
@@ -3688,8 +3764,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 50.0, 94.0, 176.0, 145.0 ],
@@ -4311,7 +4387,7 @@
 													"destination" : [ "obj-29", 0 ],
 													"disabled" : 0,
 													"hidden" : 0,
-													"midpoints" : [ 261.583328, 382.285706, 343.020813, 382.285706, 343.020813, 267.285706, 213.125, 267.285706 ],
+													"midpoints" : [ 261.583313, 382.285706, 343.020813, 382.285706, 343.020813, 267.285706, 213.125, 267.285706 ],
 													"source" : [ "obj-28", 0 ]
 												}
 
@@ -4516,8 +4592,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 1202.0, 334.0, 243.0, 141.0 ],
@@ -4581,8 +4657,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 220.0, 146.0, 597.0, 388.0 ],
@@ -4908,8 +4984,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 1066.0, 63.0, 495.0, 598.0 ],
@@ -5920,8 +5996,8 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 3,
-															"architecture" : "x64"
+															"revision" : 4,
+															"architecture" : "x86"
 														}
 ,
 														"rect" : [ 89.0, 617.0, 417.0, 442.0 ],
@@ -5972,8 +6048,8 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 3,
-																			"architecture" : "x64"
+																			"revision" : 4,
+																			"architecture" : "x86"
 																		}
 ,
 																		"rect" : [ 25.0, 69.0, 912.0, 348.0 ],
@@ -6837,8 +6913,8 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 3,
-																			"architecture" : "x64"
+																			"revision" : 4,
+																			"architecture" : "x86"
 																		}
 ,
 																		"rect" : [ 25.0, 69.0, 640.0, 480.0 ],
@@ -7391,7 +7467,7 @@
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
 									"patching_rect" : [ 13.75, 7.88147, 95.0, 17.0 ],
-									"text" : "udpreceive 14000"
+									"text" : "udpreceive 10000"
 								}
 
 							}
@@ -7425,8 +7501,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 837.0, 145.0, 292.0, 623.0 ],
@@ -7449,6 +7525,17 @@
 										"digest" : "",
 										"tags" : "",
 										"boxes" : [ 											{
+												"box" : 												{
+													"id" : "obj-35",
+													"maxclass" : "button",
+													"numinlets" : 1,
+													"numoutlets" : 1,
+													"outlettype" : [ "bang" ],
+													"patching_rect" : [ 66.0, 530.0, 20.0, 20.0 ]
+												}
+
+											}
+, 											{
 												"box" : 												{
 													"color" : [ 0.4, 0.4, 0.8, 1.0 ],
 													"fontname" : "Arial",
@@ -7482,8 +7569,8 @@
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 144.5, 477.0, 68.0, 18.0 ],
-													"text" : "print /serial.1"
+													"patching_rect" : [ 144.5, 477.0, 99.0, 18.0 ],
+													"text" : "print /serial.1_output"
 												}
 
 											}
@@ -8181,6 +8268,15 @@
 											}
 , 											{
 												"patchline" : 												{
+													"destination" : [ "obj-35", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-4", 0 ]
+												}
+
+											}
+, 											{
+												"patchline" : 												{
 													"destination" : [ "obj-24", 0 ],
 													"disabled" : 0,
 													"hidden" : 0,
@@ -8270,11 +8366,11 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
-										"rect" : [ 25.0, 69.0, 549.0, 445.0 ],
+										"rect" : [ 661.0, 125.0, 549.0, 445.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -8708,8 +8804,8 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 3,
-											"architecture" : "x64"
+											"revision" : 4,
+											"architecture" : "x86"
 										}
 ,
 										"rect" : [ 25.0, 69.0, 115.0, 365.0 ],
@@ -9105,6 +9201,15 @@
 									"disabled" : 0,
 									"hidden" : 0,
 									"source" : [ "obj-49", 0 ]
+								}
+
+							}
+, 							{
+								"patchline" : 								{
+									"destination" : [ "obj-7", 0 ],
+									"disabled" : 0,
+									"hidden" : 0,
+									"source" : [ "obj-6", 0 ]
 								}
 
 							}
@@ -9745,7 +9850,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-32",
-					"items" : [ "Bluetooth-PDA-Sync", ",", "Bluetooth-Modem" ],
+					"items" : [ "Bluetooth-Serial-1", ",", "Bluetooth-Serial-2", ",", "Bluetooth-Modem", ",", "Bluetooth-PDA-Sync", ",", "usbserial-A400fQc8" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -10028,6 +10133,24 @@
 					"destination" : [ "obj-1", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
+					"source" : [ "obj-19", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-2", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-26", 1 ],
+					"disabled" : 0,
+					"hidden" : 0,
 					"source" : [ "obj-2", 0 ]
 				}
 
@@ -10065,6 +10188,15 @@
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-23", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-24", 0 ]
 				}
 
 			}
