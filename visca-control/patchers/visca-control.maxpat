@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 36.0, 71.0, 400.0, 526.0 ],
+		"rect" : [ 179.0, 118.0, 400.0, 526.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -29,24 +29,6 @@
 		"digest" : "",
 		"tags" : "",
 		"boxes" : [ 			{
-				"box" : 				{
-					"fontname" : "Arial",
-					"fontsize" : 13.0,
-					"id" : "obj-26",
-					"linecount" : 3,
-					"maxclass" : "message",
-					"numinlets" : 2,
-					"numoutlets" : 1,
-					"outlettype" : [ "" ],
-					"patching_rect" : [ 276.291626, 88.541412, 93.0, 48.0 ],
-					"presentation" : 1,
-					"presentation_linecount" : 3,
-					"presentation_rect" : [ 278.291626, 88.332825, 93.0, 48.0 ],
-					"text" : "/visca.1/WB sodium lamp auto"
-				}
-
-			}
-, 			{
 				"box" : 				{
 					"fontname" : "Arial",
 					"fontsize" : 13.0,
@@ -1429,21 +1411,7 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 199.291626, 456.886597, 155.0, 16.0 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 162.5, 89.0, 226.0, 16.0 ]
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"border" : 1,
-					"id" : "obj-8",
-					"maxclass" : "panel",
-					"numinlets" : 1,
-					"numoutlets" : 0,
-					"patching_rect" : [ 1.0, 398.138062, 247.75, 111.0 ],
-					"presentation" : 1,
-					"presentation_rect" : [ 135.0, 70.0, 256.0, 62.0 ]
+					"presentation_rect" : [ 165.0, 89.0, 226.0, 16.0 ]
 				}
 
 			}
@@ -9973,6 +9941,20 @@
 				}
 
 			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"border" : 1,
+					"id" : "obj-8",
+					"maxclass" : "panel",
+					"numinlets" : 1,
+					"numoutlets" : 0,
+					"patching_rect" : [ 1.0, 398.138062, 247.75, 111.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 135.0, 70.0, 256.0, 62.0 ]
+				}
+
+			}
  ],
 		"lines" : [ 			{
 				"patchline" : 				{
@@ -10140,15 +10122,6 @@
 , 			{
 				"patchline" : 				{
 					"destination" : [ "obj-1", 0 ],
-					"disabled" : 0,
-					"hidden" : 0,
-					"source" : [ "obj-2", 0 ]
-				}
-
-			}
-, 			{
-				"patchline" : 				{
-					"destination" : [ "obj-26", 1 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-2", 0 ]

@@ -24,6 +24,8 @@ uint8_t ViscaLongMsg[9] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF            };
 uint8_t ViscaMemMsg[7] = {  
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF            };
+int TiltSpeed = 3;
+int PanSpeed = 3;
 void setup()
 {
   /************* Launch ethernet server  ****************/
@@ -60,21 +62,15 @@ void setup()
   server.addCallback("/visca.1/iris/value",&ViscaIris);
   server.addCallback("/visca.1/gain/value",&ViscaGain);
   server.addCallback("/visca.1/IR",&ViscaIR);
-  server.addCallback("/visca.1/backlight",&ViscaBackLight);
-  server.addCallback("/visca.1/reverse",&ViscaReverse);
-  server.addCallback("/visca.1/flip",&ViscaFlip);
-  server.addCallback("/visca.1/fx",&ViscaFX);
-  server.addCallback("/visca.1/freeze",&ViscaFreeze);
-  server.addCallback("/visca.1/stabilizer",&ViscaStab);
-  server.addCallback("/visca.1/hs",&ViscaHS);
-  server.addCallback("/visca.1/hr",&ViscaHR);
-  server.addCallback("/visca.1/nr",&ViscaNR);
-  server.addCallback("/visca.1/wd",&ViscaWD);
+  server.addCallback("/visca.1/IR/correction",&ViscaIRCorrection);
   server.addCallback("/visca.1/gamma",&ViscaGamma);
-  server.addCallback("/visca.1/aperture",&ViscaAperture);
   server.addCallback("/visca.1/WD",&ViscaWD);
   server.addCallback("/visca.1/chromasupress",&ViscaChromaSuppress);
+  server.addCallback("/visca.1/speed",&ViscaHome);  
   server.addCallback("/visca.1/home",&ViscaHome);  
+  server.addCallback("/visca.1/reset",&ViscaReset);  
+  server.addCallback("/visca.1/pan/speed",&ViscaPanSpeed);  
+  server.addCallback("/visca.1/tilt/speed",&ViscaTiltSpeed);  
   server.addCallback("/visca.1/left",&ViscaLeft);  
   server.addCallback("/visca.1/upleft",&ViscaUpLeft);  
   server.addCallback("/visca.1/up",&ViscaUp);  
@@ -132,7 +128,7 @@ void ViscaCancel(OSCMessage *_mes) {
 }
 /************* Power ****************/
 void ViscaSw(OSCMessage *_mes) {
-  
+      ViscaMsg[3] =  0x00;
   int strSize=_mes->getArgStringSize(0);
   char value[strSize]; //string memory allocation
   _mes->getArgString(0,value);
@@ -191,6 +187,7 @@ void ViscaZoom(OSCMessage *_mes) {
   int valueb = valuebZ & 15  ; 
   int valuec = valuecZ & 15 ; 
   int valued = valuedZ & 15 ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x47;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -247,6 +244,7 @@ void ViscaFocus(OSCMessage *_mes) {
   int valueb = valuebZ & 15  ; 
   int valuec = valuecZ & 15 ; 
   int valued = valuedZ & 15 ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x48;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -290,6 +288,7 @@ void ViscaFocusNearLimit(OSCMessage *_mes) {
   int valueb = valuebZ & 15  ; 
   int valuec = valuecZ & 15 ; 
   int valued = valuedZ & 15 ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x28;
   ViscaLongMsg[4] =  valued;
   ViscaLongMsg[5] =  valuec;
@@ -332,7 +331,6 @@ void ViscaFocusAFZoomTrigger(OSCMessage *_mes) {
   ViscaMsg[4] =  0x02;
   mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Infra-Red Correction ****************/
 /************* Zoom Focus ****************/
 void ViscaZoomFocus(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
@@ -454,6 +452,7 @@ void ViscaShutter(OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4A;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -467,6 +466,7 @@ void ViscaAutoResponse(OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x5D;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -480,6 +480,7 @@ void ViscaIris (OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4B;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -493,6 +494,7 @@ void ViscaGain(OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4C;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -518,6 +520,7 @@ void ViscaExpCompDirect(OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4E;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -555,6 +558,7 @@ void ViscaAperture(OSCMessage *_mes) {
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x42;
   ViscaLongMsg[4] =  0x00;
   ViscaLongMsg[5] =  0x00;
@@ -655,24 +659,35 @@ void ViscaFlip(OSCMessage *_mes) {
 }
 /************* Infra-Red ****************/
 void ViscaIR(OSCMessage *_mes) {
-    ViscaMsg[3] =  0x11;
-  int value = _mes->getArgInt32(0);
-  if ( value == 1 ) {
-  ViscaMsg[4] =  0x01;
-  } 
-  else { 
-  ViscaMsg[4] =  0x00;
-  } 
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   ViscaMsg[3] =  0x01;
-  if ( value == 1 ) {
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);
+  if ( memcmp(value,"on",2) == 0) {
   ViscaMsg[4] =  0x02;
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+
   } 
   else { 
   ViscaMsg[4] =  0x03;
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
+} 
+/************* Infra-Red Correction ****************/
+void ViscaIRCorrection(OSCMessage *_mes) {
+  ViscaMsg[3] =  0x11;
+  int strSize=_mes->getArgStringSize(0);
+  char value[strSize]; //string memory allocation
+  _mes->getArgString(0,value);
+  if ( memcmp(value,"on",2) == 0) {
+  ViscaMsg[4] =  0x01;
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
   } 
-    mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
+  else { 
+  ViscaMsg[4] =  0x00;
+  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
+}   
 /************* Stabilizer****************/
 void ViscaStab(OSCMessage *_mes) {
   ViscaMsg[3] =  0x34;
@@ -717,7 +732,7 @@ void ViscaChromaSuppress(OSCMessage *_mes) {
   mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 /************* Home (pan-tilt) ****************/
-void ViscaHomeOSCMessage *_mes) {
+void ViscaHome(OSCMessage *_mes) {
   mySerial.write(0x81);
   mySerial.write(0x01);
   mySerial.write(0x06);
@@ -725,15 +740,108 @@ void ViscaHomeOSCMessage *_mes) {
   mySerial.write(0xFF); 
   }
   /************* Reset (pan-tilt) ****************/
-void ViscaResetOSCMessage *_mes) {
+void ViscaReset(OSCMessage *_mes) {
   mySerial.write(0x81);
   mySerial.write(0x01);
   mySerial.write(0x06);
   mySerial.write(0x05);
   mySerial.write(0xFF); 
   }
-void ViscaHomeOSCMessage *_mes) {
-  ViscaMsg[3] =  0x08;
-  ViscaMsg[4] =  0x00;
-  mySerial.write( ViscaMsg, sizeof(ViscaMsg) );
+/************* PanSpeed (pan-tilt) ****************/
+void ViscaPanSpeed (OSCMessage *_mes) {
+  PanSpeed = _mes->getArgInt32(0);
+  }
+/************* TiltSpeed (pan-tilt) ****************/
+void ViscaTiltSpeed (OSCMessage *_mes) {
+  TiltSpeed = _mes->getArgInt32(0);
+  }
+/************* Up (pan-tilt) ****************/
+  void ViscaUp(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x03;
+  ViscaLongMsg[7] =  0x01;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* Down (pan-tilt) ****************/
+  void ViscaDown(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x03;
+  ViscaLongMsg[7] =  0x02;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* Left (pan-tilt) ****************/
+  void ViscaLeft(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x01;
+  ViscaLongMsg[7] =  0x03;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* Right (pan-tilt) ****************/
+  void ViscaRight(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x02;
+  ViscaLongMsg[7] =  0x03;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* UpLeft (pan-tilt) ****************/
+  void ViscaUpLeft(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x01;
+  ViscaLongMsg[7] =  0x01;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* UpRight (pan-tilt) ****************/
+  void ViscaUpRight(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x02;
+  ViscaLongMsg[7] =  0x01;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* DownLeft (pan-tilt) ****************/
+  void ViscaDownLeft(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x01;
+  ViscaLongMsg[7] =  0x02;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* DownRight (pan-tilt) ****************/
+  void ViscaDownRight(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x02;
+  ViscaLongMsg[7] =  0x02;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+/************* Stop (pan-tilt) ****************/
+  void ViscaStop(OSCMessage *_mes) {
+  ViscaLongMsg[2] =  0x06;
+  ViscaLongMsg[3] =  0x01;
+  ViscaLongMsg[4] =  PanSpeed;
+  ViscaLongMsg[5] =  TiltSpeed;
+  ViscaLongMsg[6] =  0x03;
+  ViscaLongMsg[7] =  0x03;
+  mySerial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
