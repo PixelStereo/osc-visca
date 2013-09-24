@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 179.0, 118.0, 400.0, 526.0 ],
+		"rect" : [ 7.0, 52.0, 400.0, 526.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -1566,7 +1566,6 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
-						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.154413, 0.605405, 0.052319, 1.0 ],
@@ -2763,7 +2762,6 @@
 									}
 ,
 									"patching_rect" : [ 165.0, 356.769135, 90.0, 22.0 ],
-									"presentation_rect" : [ 26.0, 495.0, 0.0, 0.0 ],
 									"saved_object_attributes" : 									{
 										"default_fontface" : 0,
 										"default_fontname" : "Arial",
@@ -3951,7 +3949,6 @@
 										"description" : "",
 										"digest" : "",
 										"tags" : "",
-										"visible" : 1,
 										"boxes" : [ 											{
 												"box" : 												{
 													"fontname" : "Arial",
@@ -4344,7 +4341,6 @@
 														"description" : "",
 														"digest" : "",
 														"tags" : "",
-														"visible" : 1,
 														"boxes" : [ 															{
 																"box" : 																{
 																	"fontname" : "Arial",
@@ -4355,8 +4351,7 @@
 																	"numoutlets" : 2,
 																	"outlettype" : [ "int", "bang" ],
 																	"parameter_enable" : 0,
-																	"patching_rect" : [ 396.0, 184.748535, 50.0, 20.0 ],
-																	"presentation_rect" : [ 400.0, 187.0, 0.0, 0.0 ]
+																	"patching_rect" : [ 396.0, 184.748535, 50.0, 20.0 ]
 																}
 
 															}
@@ -9184,7 +9179,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-32",
-					"items" : [ "Bluetooth-Serial-1", ",", "Bluetooth-Serial-2", ",", "Bluetooth-Modem", ",", "Bluetooth-PDA-Sync", ",", "usbserial-A400fQc8", ",", "usbmodemfa131" ],
+					"items" : [ "Bluetooth-Serial-1", ",", "Bluetooth-Serial-2", ",", "Bluetooth-Modem", ",", "Bluetooth-PDA-Sync" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -9706,43 +9701,22 @@
 		"dependency_cache" : [ 			{
 				"name" : "var.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
-				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
+				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "visca.edit.maxpat",
-				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/patchers",
+				"bootpath" : "/Volumes/data/RENAUD/GITs/now/osc-visca/visca-control/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
-				"name" : "viscaFormat.js",
-				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
 				"name" : "timebasedqueue.maxpat",
-				"bootpath" : "/Users/reno/Documents/GITs/span/span-package/clippings/span.misc",
-				"patcherrelativepath" : "../../../span/span-package/clippings/span.misc",
+				"bootpath" : "/Volumes/data/RENAUD/GITs/now/span/clippings/span.misc",
+				"patcherrelativepath" : "../../../span/clippings/span.misc",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "hexa2decimal.js",
-				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "decimal2hexa.js",
-				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
-				"patcherrelativepath" : "../javascript",
-				"type" : "TEXT",
 				"implicit" : 1
 			}
  ]
