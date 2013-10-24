@@ -2,7 +2,7 @@ outlets : 1;
 
 function position() {
 var pos = arrayfromargs(arguments);
-outlet(0,81, 01, 06, 02,5,5,  pos[2],pos[3],pos[4],pos[5],pos[6],pos[7],pos[8],pos>[9],'ff')
+outlet(0,81, 01, 06, 02,1,1,  pos[2],pos[3],pos[4],pos[5],pos[6],pos[7],pos[8],pos>[9],'ff')
 }
 function shutter() {
 var shut = arrayfromargs(arguments);
