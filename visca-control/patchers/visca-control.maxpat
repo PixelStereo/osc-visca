@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 4,
+			"revision" : 6,
 			"architecture" : "x86"
 		}
 ,
@@ -258,7 +258,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 4,
+							"revision" : 6,
 							"architecture" : "x86"
 						}
 ,
@@ -309,7 +309,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -1543,7 +1543,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 4,
+							"revision" : 6,
 							"architecture" : "x86"
 						}
 ,
@@ -1580,11 +1580,11 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
-										"rect" : [ 920.0, 45.0, 696.0, 745.0 ],
+										"rect" : [ 1221.0, 284.0, 316.0, 195.0 ],
 										"bglocked" : 0,
 										"openinpresentation" : 0,
 										"default_fontsize" : 12.0,
@@ -1612,7 +1612,7 @@
 													"maxclass" : "newobj",
 													"numinlets" : 1,
 													"numoutlets" : 0,
-													"patching_rect" : [ 65.0, 240.714294, 107.0, 20.0 ],
+													"patching_rect" : [ 30.0, 138.714294, 107.0, 20.0 ],
 													"text" : "s /visca/command"
 												}
 
@@ -1626,7 +1626,7 @@
 													"numinlets" : 2,
 													"numoutlets" : 2,
 													"outlettype" : [ "", "" ],
-													"patching_rect" : [ 65.0, 211.609741, 183.0, 20.0 ],
+													"patching_rect" : [ 30.0, 109.609741, 183.0, 20.0 ],
 													"text" : "substitute 8x 81"
 												}
 
@@ -1640,7 +1640,7 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 229.0, 174.714294, 96.0, 20.0 ],
+													"patching_rect" : [ 194.0, 72.714294, 96.0, 20.0 ],
 													"text" : "sprintf 8x 8%ld"
 												}
 
@@ -1660,7 +1660,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 4,
+															"revision" : 6,
 															"architecture" : "x86"
 														}
 ,
@@ -1912,7 +1912,7 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 4,
+																			"revision" : 6,
 																			"architecture" : "x86"
 																		}
 ,
@@ -2679,7 +2679,7 @@
  ]
 													}
 ,
-													"patching_rect" : [ 65.0, 141.714294, 183.0, 22.0 ],
+													"patching_rect" : [ 30.0, 39.714294, 183.0, 22.0 ],
 													"saved_object_attributes" : 													{
 														"default_fontface" : 0,
 														"default_fontname" : "Arial",
@@ -2707,13 +2707,22 @@
 													"numinlets" : 1,
 													"numoutlets" : 1,
 													"outlettype" : [ "" ],
-													"patching_rect" : [ 65.0, 115.0, 95.0, 17.0 ],
+													"patching_rect" : [ 30.0, 13.0, 95.0, 17.0 ],
 													"text" : "udpreceive 10000"
 												}
 
 											}
  ],
 										"lines" : [ 											{
+												"patchline" : 												{
+													"destination" : [ "obj-11", 0 ],
+													"disabled" : 0,
+													"hidden" : 0,
+													"source" : [ "obj-13", 1 ]
+												}
+
+											}
+, 											{
 												"patchline" : 												{
 													"destination" : [ "obj-11", 0 ],
 													"disabled" : 0,
@@ -2838,7 +2847,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -3120,7 +3129,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -3264,7 +3273,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -3431,7 +3440,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -3483,7 +3492,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 4,
+															"revision" : 6,
 															"architecture" : "x86"
 														}
 ,
@@ -3926,7 +3935,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -3991,7 +4000,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 4,
+															"revision" : 6,
 															"architecture" : "x86"
 														}
 ,
@@ -4318,7 +4327,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 4,
+															"revision" : 6,
 															"architecture" : "x86"
 														}
 ,
@@ -5414,7 +5423,7 @@
 														"appversion" : 														{
 															"major" : 6,
 															"minor" : 1,
-															"revision" : 4,
+															"revision" : 6,
 															"architecture" : "x86"
 														}
 ,
@@ -5466,7 +5475,7 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 4,
+																			"revision" : 6,
 																			"architecture" : "x86"
 																		}
 ,
@@ -6331,7 +6340,7 @@
 																		"appversion" : 																		{
 																			"major" : 6,
 																			"minor" : 1,
-																			"revision" : 4,
+																			"revision" : 6,
 																			"architecture" : "x86"
 																		}
 ,
@@ -6904,7 +6913,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -7749,7 +7758,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -8187,7 +8196,7 @@
 										"appversion" : 										{
 											"major" : 6,
 											"minor" : 1,
-											"revision" : 4,
+											"revision" : 6,
 											"architecture" : "x86"
 										}
 ,
@@ -9179,7 +9188,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-32",
-					"items" : [ "Bluetooth-Serial-1", ",", "Bluetooth-Serial-2", ",", "Bluetooth-Modem", ",", "Bluetooth-PDA-Sync" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-FTFNNBFM" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -9701,22 +9710,43 @@
 		"dependency_cache" : [ 			{
 				"name" : "var.maxpat",
 				"bootpath" : "/Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
-				"patcherrelativepath" : "../../../../../../../../Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
+				"patcherrelativepath" : "../../../../../../../Applications/Max 6.1/examples/max-tricks/send-receive-tricks/lib",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "visca.edit.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/now/osc-visca/visca-control/patchers",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
+				"name" : "viscaFormat.js",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
 				"name" : "timebasedqueue.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/now/span/clippings/span.misc",
-				"patcherrelativepath" : "../../../span/clippings/span.misc",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/patchers",
+				"patcherrelativepath" : ".",
 				"type" : "JSON",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "hexa2decimal.js",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
+				"implicit" : 1
+			}
+, 			{
+				"name" : "decimal2hexa.js",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
+				"patcherrelativepath" : "../javascript",
+				"type" : "TEXT",
 				"implicit" : 1
 			}
  ]
