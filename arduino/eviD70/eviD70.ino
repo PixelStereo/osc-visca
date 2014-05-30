@@ -404,22 +404,36 @@ void loop(){
               bundleIN.route("/focus", focus);
               bundleIN.route("/pos", pos);
               bundleIN.route("/ir", IR);
-   }
-              
+   }        
   /************* // Check Serial messages for loopback ****************/
-  if (Serial.available() > 0) {
+    int i=0;
+    char outbound[80];
+  while (Serial.available() > 0) {
     // read the incoming byte:
     incomingByte = Serial.read();
-
-  /************* // Traduce it to a normal language ****************/
-   int size = sizeof(incomingByte);
+    if (incomingByte == 0xFF) break; // escape character is 255
+    if ((incomingByte < '0x00') or (incomingByte > '0xFF')) break; // discard non-numerics
+    outbound[i]=incomingByte; //copy the serial byte to the array
+    i++; // increase the array index
+  }
+  
+  if (i !=0) bundleOUT.add("/YES").add(outbound); 
+        sendOSC();
+  
+ /************* // Traduce it to a normal language ****************/
+/*   int size = sizeof(incomingByte)/sizeof(uint8_t);
+        bundleOUT.add("/YES").add(size); 
+        sendOSC();
    if (size == 3) {
+        bundleOUT.add("/YES").add("OUI OUAIS"); 
+        sendOSC();
       uint8_t Ack[3] = {0x90, 0x41, 0xFF};
+      if ('incomingByte[0]' == '0x90' ) {
+
+      }
    }
+   */
   /************* // Send Serial messages to OSC ****************/
-        bundleOUT.add("/visca/from").add(incomingByte); 
-       sendOSC(); 
-  }            
 }
 void sendOSC(){ 
 
