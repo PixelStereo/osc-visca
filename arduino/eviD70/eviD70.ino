@@ -110,11 +110,13 @@ void pos(OSCMessage &msg, int addrOffset ){
 /*********************************************************************************/    
 void IR(OSCMessage &msg, int addrOffset ){
     int Matched;
+        ViscaMsg[1] =  0x01;
+        ViscaMsg[2] =  0x04;
+        ViscaMsg[3] =  0x01;
      Matched = msg.match("/active", addrOffset);
     if(Matched == 7){  
         ViscaMsg[3] =  0x01;
         if(msg.isInt(0)){
-            ViscaMsg[3] =  0x07;
             value = msg.getInt(0); 
         }
         if ( value == 1 ) {
@@ -201,14 +203,13 @@ void zoom(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
       }
 }
-
-
-
 /*********************************************************************************/    
 /************************** FOCUS*****************************/  
 /*********************************************************************************/  
 void focus(OSCMessage &msg, int addrOffset ){
 int Matched;
+        ViscaMsg[1] =  0x01;
+        ViscaMsg[2] =  0x04;
 /************* Focus Stop ****************/
 Matched = msg.match("/stop", addrOffset);
     if(Matched == 5){   
@@ -369,9 +370,6 @@ Matched = msg.match("/stop", addrOffset);
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
-  
-  
-  
 void setup() {
 /************* Launch ethernet server  ****************/
   Ethernet.begin(mac,ip);
@@ -379,7 +377,6 @@ void setup() {
 /************* Launch Serial Communication for visca commands ****************/
   Serial.begin(9600);
 }
-  
 void loop(){ 
     OSCMessage bundleIN;
    int size;
