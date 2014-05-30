@@ -112,7 +112,6 @@ void IR(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaMsg[1] =  0x01;
         ViscaMsg[2] =  0x04;
-        ViscaMsg[3] =  0x01;
      Matched = msg.match("/active", addrOffset);
     if(Matched == 7){  
         ViscaMsg[3] =  0x01;
@@ -124,6 +123,20 @@ void IR(OSCMessage &msg, int addrOffset ){
         } 
         else { 
             ViscaMsg[4] =  0x03;
+        } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
+    }
+     Matched = msg.match("/focuscorrection", addrOffset);
+    if(Matched == 16){  
+        ViscaMsg[3] =  0x11;
+        if(msg.isInt(0)){
+            value = msg.getInt(0); 
+        }
+        if ( value == 1 ) {
+            ViscaMsg[4] =  0x01;
+        } 
+        else { 
+            ViscaMsg[4] =  0x00;
         } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
     }
