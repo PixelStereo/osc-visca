@@ -14,10 +14,71 @@ uint8_t ViscaShortMsg[5] = {0x81, 0x01, 0x06, 0x04, 0xFF};
 uint8_t ViscaMsg[6] = {0x81, 0x01, 0x04, 0x00, 0x00, 0xFF};
 uint8_t ViscaLongMsg[9] = {0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF};
 uint8_t ViscaMemMsg[7] = {0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
-int incomingByte = 0;   // for incoming serial data
+char answer[999];   // for incoming serial data
 int value;
 
-/************* Power ****************/
+
+/******************************************************************/
+/*************************SET*UP***********************************/
+/******************************************************************/
+void setup() {
+/************* Launch ethernet server  ****************/
+  Ethernet.begin(mac,ip);
+  Udp.begin(inPort);
+/******** Launch Serial Communication for visca commands **********/
+  Serial.begin(9600);
+}
+
+
+/******************************************************************/
+/*************************THE****LOOP******************************/
+/******************************************************************/
+void loop(){ 
+/******************************************************************/
+/************* // UDP MESSAGES COMING OVER OSC**** ****************/
+/******************************************************************/
+   OSCMessage MessageIN;
+   int size;
+   if( (size = Udp.parsePacket())>0)
+   {
+         while(size--)
+           MessageIN.fill(Udp.read());
+        if(!MessageIN.hasError())
+           MessageIN.route("/zoom", zoom);
+           MessageIN.route("/power", power);
+           MessageIN.route("/focus", focus);
+           MessageIN.route("/pos", pos);
+           MessageIN.route("/ir", IR);
+   }        
+/******************************************************************/
+/****************Check Serial FEEDBACK FROM CAMERA******************/
+/******************************************************************/
+  while (Serial.available() == 3) {
+      int bytesRead;
+      if (Serial.available()) {  // when the serial port is available
+               bytesRead = Serial.readBytesUntil(255,answer,999);
+               bundleOUT.add("/visca").add(answer); 
+               sendOSC();
+      }
+  }  
+}
+
+
+/******************************************************************/
+/*************************SEND****OSC******************************/
+/******************************************************************/
+void sendOSC(){ 
+        Udp.beginPacket(OutIp, outPort); 
+        bundleOUT.send(Udp);
+        Udp.endPacket();
+        bundleOUT.empty();
+}
+
+
+
+/******************************************************************/
+/*************************POWER************************************/
+/******************************************************************/
 void power(OSCMessage &msg, int addrOffset ){
       if (msg.isInt(0)){        
         value = msg.getInt(0);
@@ -33,7 +94,10 @@ void power(OSCMessage &msg, int addrOffset ){
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* POSItiON ****************/
+
+/******************************************************************/
+/*************************POSITION*********************************/
+/******************************************************************/
 void pos(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaLongMsg[2] =  0x06;
@@ -105,9 +169,10 @@ void pos(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
     }
 }
-/*********************************************************************************/    
-/************* Infra-Red ****************/
-/*********************************************************************************/    
+
+/******************************************************************/
+/*************************INFRA-RED********************************/
+/******************************************************************/
 void IR(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaMsg[1] =  0x01;
@@ -141,9 +206,10 @@ void IR(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
     }
   }
-/*********************************************************************************/    
-/************************** ZOOM *****************************/  
-/*********************************************************************************/  
+
+/******************************************************************/
+/*************************ZOOM*************************************/
+/******************************************************************/
 void zoom(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaMsg[1] =  0x01;
@@ -216,9 +282,12 @@ void zoom(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
       }
 }
-/*********************************************************************************/    
-/************************** FOCUS*****************************/  
-/*********************************************************************************/  
+
+
+
+/******************************************************************/
+/*************************FOCUS************************************/
+/******************************************************************/
 void focus(OSCMessage &msg, int addrOffset ){
 int Matched;
         ViscaMsg[1] =  0x01;
@@ -382,64 +451,4 @@ Matched = msg.match("/stop", addrOffset);
   ViscaMsg[4] =  0x02;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
-}
-void setup() {
-/************* Launch ethernet server  ****************/
-  Ethernet.begin(mac,ip);
-  Udp.begin(inPort);
-/************* Launch Serial Communication for visca commands ****************/
-  Serial.begin(9600);
-}
-void loop(){ 
-    OSCMessage bundleIN;
-   int size;
- 
-   if( (size = Udp.parsePacket())>0)
-   {
-         while(size--)
-           bundleIN.fill(Udp.read());
-        if(!bundleIN.hasError())
-              bundleIN.route("/zoom", zoom);
-              bundleIN.route("/power", power);
-              bundleIN.route("/focus", focus);
-              bundleIN.route("/pos", pos);
-              bundleIN.route("/ir", IR);
-   }        
-  /************* // Check Serial messages for loopback ****************/
-    int i=0;
-    char outbound[80];
-  while (Serial.available() > 0) {
-    // read the incoming byte:
-    incomingByte = Serial.read();
-    if (incomingByte == 0xFF) break; // escape character is 255
-    if ((incomingByte < '0x00') or (incomingByte > '0xFF')) break; // discard non-numerics
-    outbound[i]=incomingByte; //copy the serial byte to the array
-    i++; // increase the array index
-  }
-  
-  if (i !=0) bundleOUT.add("/YES").add(outbound); 
-        sendOSC();
-  
- /************* // Traduce it to a normal language ****************/
-/*   int size = sizeof(incomingByte)/sizeof(uint8_t);
-        bundleOUT.add("/YES").add(size); 
-        sendOSC();
-   if (size == 3) {
-        bundleOUT.add("/YES").add("OUI OUAIS"); 
-        sendOSC();
-      uint8_t Ack[3] = {0x90, 0x41, 0xFF};
-      if ('incomingByte[0]' == '0x90' ) {
-
-      }
-   }
-   */
-  /************* // Send Serial messages to OSC ****************/
-}
-void sendOSC(){ 
-
-  // send the response bundle back to where the request came from
-        Udp.beginPacket(OutIp, outPort); 
-        bundleOUT.send(Udp);
-        Udp.endPacket();
-        bundleOUT.empty(); // empty the bundle ready to use for new messages
 }
