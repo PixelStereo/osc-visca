@@ -106,10 +106,33 @@ void pos(OSCMessage &msg, int addrOffset ){
     }
 }
 /*********************************************************************************/    
+/************* Infra-Red ****************/
+/*********************************************************************************/    
+void IR(OSCMessage &msg, int addrOffset ){
+    int Matched;
+     Matched = msg.match("/active", addrOffset);
+    if(Matched == 7){  
+        ViscaMsg[3] =  0x01;
+        if(msg.isInt(0)){
+            ViscaMsg[3] =  0x07;
+            value = msg.getInt(0); 
+        }
+        if ( value == 1 ) {
+            ViscaMsg[4] =  0x02;
+        } 
+        else { 
+            ViscaMsg[4] =  0x03;
+        } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
+    }
+  }
+/*********************************************************************************/    
 /************************** ZOOM *****************************/  
 /*********************************************************************************/  
 void zoom(OSCMessage &msg, int addrOffset ){
     int Matched;
+        ViscaMsg[1] =  0x01;
+        ViscaMsg[2] =  0x04;
 /************* ZOOM STOP  ****************/  
     Matched = msg.match("/stop", addrOffset);
     if(Matched == 5){   
@@ -370,6 +393,7 @@ void loop(){
               bundleIN.route("/power", power);
               bundleIN.route("/focus", focus);
               bundleIN.route("/pos", pos);
+              bundleIN.route("/ir", IR);
    }
               
   /************* // Check Serial messages for loopback ****************/
