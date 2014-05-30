@@ -53,7 +53,7 @@ void loop(){
 /******************************************************************/
 /****************Check Serial FEEDBACK FROM CAMERA******************/
 /******************************************************************/
-  while (Serial.available() == 3) {
+  if (Serial.available() > 0) {
       int bytesRead;
       if (Serial.available()) {  // when the serial port is available
                bytesRead = Serial.readBytesUntil(255,answer,999);
