@@ -12,9 +12,11 @@ The OSC-Visca project is available :
 
 ## Change Log : 
 
+### Version 0.2: 
+* *v0.2 is based on the CNMAT library - mid 2014*
+
 ### Version 0.1: 
-* *v0.2 based on the CNMAT library - mid 2014*
-* *v0.1 based on ARDOSC library - later 2013*
+* *v0.1 is based on ARDOSC library - later 2013*
 
 # Licence
 ## Credits : 
