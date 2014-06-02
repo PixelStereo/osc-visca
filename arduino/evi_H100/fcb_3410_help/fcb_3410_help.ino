@@ -6,7 +6,6 @@ void setup()
   server.addCallback("/visca/cancel",&ViscaCancel);
   server.addCallback("/visca.1/init/internal",&ViscaInit);
   server.addCallback("/visca.1/whitebalance",&ViscaWB);
-  server.addCallback("/visca.1/mode",&ViscaExposure);
   server.addCallback("/visca.1/auto/response",&ViscaAutoResponse);
   server.addCallback("/visca.1/compensation/sw",&ViscaExpComp);
   server.addCallback("/visca.1/compensation/level",&ViscaExpCompDirect);
@@ -139,29 +138,7 @@ void ViscaWB(OSCMessage *_mes) {
   }
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* AE Exposure Mode ****************/
-void ViscaExposure(OSCMessage *_mes) {
-    ViscaMsg[3] =  0x39;
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);
-  if ( memcmp(value,"auto",4) == 0) {
-    ViscaMsg[4] =  0x00;
-  }
-  if ( memcmp(value,"manual",6) == 0) {
-    ViscaMsg[4] =  0x03;
-  }
-  if ( memcmp(value,"shutter",7) == 0) {
-    ViscaMsg[4] =  0x0A;
-  }
-  if ( memcmp(value,"iris",4) == 0) {
-    ViscaMsg[4] =  0x0B;
-  }
-  if ( memcmp(value,"bright",6) == 0) {
-    ViscaMsg[4] =  0x0D;
-  }
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
+
 /************* Slow Shutter ****************/
 void ViscaSlowShutter(OSCMessage *_mes) {
   ViscaMsg[3] =  0x5A;
@@ -176,19 +153,7 @@ void ViscaSlowShutter(OSCMessage *_mes) {
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Shutter ****************/
-void ViscaShutter(OSCMessage *_mes) {
-  int value = _mes->getArgInt32(0);
-  int valuea = value & 15; 
-  int valuebZ = value >> 4; 
-  int valueb = valuebZ & 15  ; 
-  ViscaLongMsg[3] =  0x4A;
-  ViscaLongMsg[4] =  0x00;
-  ViscaLongMsg[5] =  0x00;
-  ViscaLongMsg[6] =  valueb;
-  ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-}
+
 /************* Auto Response ****************/
 void ViscaAutoResponse(OSCMessage *_mes) {
   int value = _mes->getArgInt32(0);
@@ -202,32 +167,7 @@ void ViscaAutoResponse(OSCMessage *_mes) {
   ViscaLongMsg[7] =  valuea;
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
-/************* IRIS ****************/
-void ViscaIris (OSCMessage *_mes) {
-  int value = _mes->getArgInt32(0);
-  int valuea = value & 15; 
-  int valuebZ = value >> 4; 
-  int valueb = valuebZ & 15  ; 
-  ViscaLongMsg[3] =  0x4B;
-  ViscaLongMsg[4] =  0x00;
-  ViscaLongMsg[5] =  0x00;
-  ViscaLongMsg[6] =  valueb;
-  ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-}
-/************* Gain ****************/
-void ViscaGain(OSCMessage *_mes) {
-  int value = _mes->getArgInt32(0);
-  int valuea = value & 15; 
-  int valuebZ = value >> 4; 
-  int valueb = valuebZ & 15  ; 
-  ViscaLongMsg[3] =  0x4C;
-  ViscaLongMsg[4] =  0x00;
-  ViscaLongMsg[5] =  0x00;
-  ViscaLongMsg[6] =  valueb;
-  ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-}
+
 /************* Exposition Compensation ****************/
 void ViscaExpComp(OSCMessage *_mes) {
   ViscaMsg[3] =  0x3E;
