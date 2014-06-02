@@ -500,9 +500,9 @@ void mode(OSCMessage &msg, int addrOffset ){
 /* **************** SHUTTER IRIS GAIN ***************************** */
 /* **************************************************************** */
 void shutter(OSCMessage &msg, int addrOffset ){
-  ViscaMsg[1] =  0x01;
-  ViscaMsg[2] =  0x04;
-  ViscaMsg[3] =  0x4A;
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x4A;
   int value  = msg.getInt(0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
@@ -514,9 +514,9 @@ void shutter(OSCMessage &msg, int addrOffset ){
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 void iris(OSCMessage &msg, int addrOffset ){
-  ViscaMsg[1] =  0x01;
-  ViscaMsg[2] =  0x04;
-  ViscaMsg[3] =  0x4B;
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x4B;
   int value  = msg.getInt(0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
@@ -528,9 +528,9 @@ void iris(OSCMessage &msg, int addrOffset ){
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 void gain(OSCMessage &msg, int addrOffset ){
-  ViscaMsg[1] =  0x01;
-  ViscaMsg[2] =  0x04;
-  ViscaMsg[3] =  0x4C;
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x4C;
   int value  = msg.getInt(0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
