@@ -18,11 +18,11 @@ char answer[999];   // for incoming serial data
 int value;
 
 
-/******************************************************************/
-/*************************SET*UP***********************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************SET*UP********************************** */
+/* **************************************************************** */
 void setup() {
-/************* Launch ethernet server  ****************/
+/* ************ Launch ethernet server  *************************** */
   Ethernet.begin(mac,ip);
   Udp.begin(inPort);
 /******** Launch Serial Communication for visca commands **********/
@@ -30,13 +30,13 @@ void setup() {
 }
 
 
-/******************************************************************/
-/*************************THE****LOOP******************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************THE****LOOP***************************** */
+/* **************************************************************** */
 void loop(){ 
-/******************************************************************/
-/************* // UDP MESSAGES COMING OVER OSC**** ****************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************ // UDP MESSAGES COMING OVER OSC**** *************** */
+/* **************************************************************** */
    OSCMessage MessageIN;
    int size;
    if( (size = Udp.parsePacket())>0)
@@ -50,13 +50,13 @@ void loop(){
            MessageIN.route("/pos", pos);
            MessageIN.route("/ir", IR);
    }        
-/******************************************************************/
-/****************Check Serial FEEDBACK FROM CAMERA******************/
-/******************************************************************/
+/* **************************************************************** */
+/* ***************Check Serial FEEDBACK FROM CAMERA***************** */
+/* **************************************************************** */
   if (Serial.available() > 0) {
       int bytesRead;
       if (Serial.available()) {  // when the serial port is available
-               bytesRead = Serial.readBytesUntil(255,answer,999);
+               bytesRead = Serial.readBytesUntil(255,answer,1024);
                bundleOUT.add("/visca").add(answer); 
                sendOSC();
       }
@@ -64,9 +64,9 @@ void loop(){
 }
 
 
-/******************************************************************/
-/*************************SEND****OSC******************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************SEND****OSC***************************** */
+/* **************************************************************** */
 void sendOSC(){ 
         Udp.beginPacket(OutIp, outPort); 
         bundleOUT.send(Udp);
@@ -76,9 +76,9 @@ void sendOSC(){
 
 
 
-/******************************************************************/
-/*************************POWER************************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************POWER*********************************** */
+/* **************************************************************** */
 void power(OSCMessage &msg, int addrOffset ){
       if (msg.isInt(0)){        
         value = msg.getInt(0);
@@ -95,9 +95,9 @@ void power(OSCMessage &msg, int addrOffset ){
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
-/******************************************************************/
-/*************************POSITION*********************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************POSITION******************************** */
+/* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaLongMsg[2] =  0x06;
@@ -170,9 +170,9 @@ void pos(OSCMessage &msg, int addrOffset ){
     }
 }
 
-/******************************************************************/
-/*************************INFRA-RED********************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************INFRA-RED******************************* */
+/* **************************************************************** */
 void IR(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaMsg[1] =  0x01;
@@ -207,21 +207,21 @@ void IR(OSCMessage &msg, int addrOffset ){
     }
   }
 
-/******************************************************************/
-/*************************ZOOM*************************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************ZOOM************************************ */
+/* **************************************************************** */
 void zoom(OSCMessage &msg, int addrOffset ){
     int Matched;
         ViscaMsg[1] =  0x01;
         ViscaMsg[2] =  0x04;
-/************* ZOOM STOP  ****************/  
+/* ************************ ZOOM STOP ***************************** */  
     Matched = msg.match("/stop", addrOffset);
     if(Matched == 5){   
         ViscaMsg[3] =  0x07;
         ViscaMsg[4] = ((uint8_t) 0);
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );    
          }
-/************* ZOOM STANDARD *****************/     
+/* ************ ZOOM STANDARD ************************************* */    
     Matched = msg.match("/standard", addrOffset);
     if(Matched == 9){   
         if(msg.isString(0)){
@@ -239,7 +239,7 @@ void zoom(OSCMessage &msg, int addrOffset ){
         }
         
      }
-/************* ZOOM VARIABLE WIDE *****************/     
+/* ************ ZOOM VARIABLE WIDE ************************************ */    
     Matched = msg.match("/variable/wide", addrOffset);
     if(Matched == 14){   
         if(msg.isInt(0)){
@@ -251,7 +251,7 @@ void zoom(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
         }
      }
-/************* ZOOM VARIABLE TELE *****************/     
+/* ************ ZOOM VARIABLE TELE ************************************ */    
     Matched = msg.match("/variable/tele", addrOffset);
     if(Matched == 14){   
         if(msg.isInt(0)){
@@ -263,7 +263,7 @@ void zoom(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
         }
      }
-/************* Zoom Direct ****************/
+/* ************ Zoom Direct ************************************ */    
     Matched = msg.match("/direct", addrOffset);
     if(Matched == 7){   
         int value  = msg.getInt(0);
@@ -285,21 +285,21 @@ void zoom(OSCMessage &msg, int addrOffset ){
 
 
 
-/******************************************************************/
-/*************************FOCUS************************************/
-/******************************************************************/
+/* **************************************************************** */
+/* ************************FOCUS*********************************** */
+/* **************************************************************** */
 void focus(OSCMessage &msg, int addrOffset ){
 int Matched;
         ViscaMsg[1] =  0x01;
         ViscaMsg[2] =  0x04;
-/************* Focus Stop ****************/
+/* ************ Focus Stop *********************************** */    
 Matched = msg.match("/stop", addrOffset);
     if(Matched == 5){   
       ViscaMsg[3] =  0x08;
       ViscaMsg[4] =  0x00;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }       
-/************* Focus Standard ****************/
+/* ************ Focus Standard ************************************ */    
     Matched = msg.match("/standard", addrOffset);
     if(Matched == 9){   
         if(msg.isString(0)){
@@ -316,7 +316,7 @@ Matched = msg.match("/stop", addrOffset);
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
         }
      }   
-/************* Focus Variable Near ****************/
+/* ************ Focus Variable Near ************************************ */    
     Matched = msg.match("/variable/near", addrOffset);
     if(Matched == 14){   
         if(msg.isInt(0)){
@@ -328,7 +328,7 @@ Matched = msg.match("/stop", addrOffset);
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
         }
      }
-/************* Focus Variable Far ****************/
+/* ************ Focus Variable Far ************************************* */    
     Matched = msg.match("/variable/far", addrOffset);
     if(Matched == 13){   
         if(msg.isInt(0)){
@@ -341,7 +341,7 @@ Matched = msg.match("/stop", addrOffset);
         }
      }
 
-/************* Focus Direct ****************/
+/* ************ Focus Direct ************************************ */    
     Matched = msg.match("/direct", addrOffset);
     if(Matched == 7){   
         int value  = msg.getInt(0);
@@ -359,7 +359,7 @@ Matched = msg.match("/stop", addrOffset);
         ViscaLongMsg[7] =  valuea;
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
   }
-/************* Focus Auto ****************/
+/* ************ Focus Auto ************************************ */    
     Matched = msg.match("/mode", addrOffset);
     if(Matched == 5){   
         if(msg.isString(0)){
@@ -376,21 +376,21 @@ Matched = msg.match("/stop", addrOffset);
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
         }
      }   
-/************* Focus Trigger ****************/
+/* ************ Focus Trigger ************************************ */    
   Matched = msg.match("/auto/trigger", addrOffset);
   if(Matched == 13){  
   ViscaMsg[3] =  0x18;
   ViscaMsg[4] =  0x01;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Focus Infinity ****************/
+/* ************ Focus Infinity ************************************ */    
   Matched = msg.match("/infinity", addrOffset);
   if(Matched == 9){  
   ViscaMsg[3] =  0x18;
   ViscaMsg[4] =  0x02;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Focus Near Limit ****************/
+/* ************ Focus Near Limit ************************************* */    
   Matched = msg.match("/nearlimit", addrOffset);
   if(Matched == 10){   
   int value  = msg.getInt(0);  
@@ -408,7 +408,7 @@ Matched = msg.match("/stop", addrOffset);
   ViscaLongMsg[7] =  valuea;
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
-/************* Focus Sensitivity ****************/
+/* ************ Focus Sensitivity ************************************ */    
   Matched = msg.match("/auto/sensitvity", addrOffset);
   if(Matched == 16){ 
   ViscaMsg[3] =  0x58;
@@ -426,7 +426,7 @@ Matched = msg.match("/stop", addrOffset);
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
-/************* Focus Auto Mode ****************/
+/* ************ Focus Auto Mode ************************************ */    
   Matched = msg.match("/auto/mode", addrOffset);
   if(Matched == 10){   
   ViscaMsg[3] =  0x57;
@@ -444,7 +444,7 @@ Matched = msg.match("/stop", addrOffset);
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
   }
-/************* Focus Zoom Trigger ****************/
+/* *********** Focus Zoom Trigger ************************************ */    
   Matched = msg.match("/auto/zoomtrigger", addrOffset);
   if(Matched == 17){  
     ViscaMsg[3] =  0x57;
