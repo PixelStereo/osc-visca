@@ -60,6 +60,8 @@ void loop(){
       MessageIN.route("/gain", gain);
       MessageIN.route("/wb", wb);
       MessageIN.route("/fx", fx);
+      MessageIN.route("/memory", memory);
+      MessageIN.route("/chromasupress", chromasupress);
     }
   }        
   /* **************************************************************** */
@@ -116,6 +118,7 @@ void power(OSCMessage &msg, int addrOffset ){
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
+
 
 /* **************************************************************** */
 /* ************************POSITION******************************** */
@@ -187,9 +190,10 @@ void pos(OSCMessage &msg, int addrOffset ){
     if ((strcmp("reset", str)==0)) {
       ViscaShortMsg[3] =  0x05;
       Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
+    }
   }
 }
-}
+
 
 /* **************************************************************** */
 /* ************************INFRA-RED******************************* */
@@ -222,6 +226,7 @@ void ir(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
   }
 }
+
 
 /* **************************************************************** */
 /* ************************ZOOM************************************ */
@@ -291,7 +296,6 @@ void zoom(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
   }
 }
-
 
 
 /* **************************************************************** */
@@ -460,7 +464,6 @@ void focus(OSCMessage &msg, int addrOffset ){
 }
 
 
-
 /* **************************************************************** */
 /* **************** MODE : AUTO EXPOSURE / AE ********************* */
 /* **************************************************************** */
@@ -491,6 +494,8 @@ void mode(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
    }
 }
+
+
 /* **************************************************************** */
 /* **************** SHUTTER IRIS GAIN ***************************** */
 /* **************************************************************** */
@@ -588,7 +593,6 @@ void wb(OSCMessage &msg, int addrOffset ){
 }
 
 
-
 /* **************************************************************** */
 /* ****************IMAGE EFFECTS FX ******************************* */
 /* **************************************************************** */
@@ -609,4 +613,61 @@ void fx(OSCMessage &msg, int addrOffset ){
           }
           Serial.write( ViscaMsg, sizeof(ViscaMsg) );
       } 
+}
+
+
+/* **************************************************************** */
+/* ****************MEMORY SET/RECALL/RESET ************************ */
+/* **************************************************************** */
+void memory(OSCMessage &msg, int addrOffset ){
+    ViscaMsg[1] =  0x01;
+    ViscaMsg[2] =  0x04;
+    ViscaMsg[3] =  0x3F;
+    getValue(msg,0);
+    Matched = msg.match("/reset", addrOffset);
+    if(Matched == 7){ 
+        ViscaMsg[4] = (uint8_t) 0x00;
+        ViscaMemMsg[5] =  value;
+        Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
+    }
+    Matched = msg.match("/set", addrOffset);
+    if(Matched == 4){ 
+        ViscaMsg[4] =  0x01;
+        ViscaMemMsg[5] =  value;
+        Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
+    }
+    Matched = msg.match("/recall", addrOffset);
+    if(Matched == 7){ 
+        ViscaMsg[4] =  0x02;
+        ViscaMemMsg[5] =  value;
+        Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
+    }
+}
+
+
+/* **************************************************************** */
+/* ************************ CHROMA SUPRESS ************************ */
+/* **************************************************************** */
+void chromasupress(OSCMessage &msg, int addrOffset ){
+    ViscaMsg[1] =  0x01;
+    ViscaMsg[2] =  0x04;
+    ViscaMsg[3] =  0x5F;
+    if(msg.isString(0)){
+        int length=msg.getDataLength(0);
+        char str[length];
+        value = msg.getString(0,str,length);
+        if ((strcmp("normal", str)==0)) {  
+              ViscaMsg[4] = ((uint8_t) 0);
+        }
+        if ((strcmp("light", str)==0)) {  
+            ViscaMsg[4] =  0x01;
+        }
+        if ((strcmp("medium", str)==0)) {  
+            ViscaMsg[4] =  0x02;
+        }
+        if ((strcmp("hard", str)==0)) {  
+            ViscaMsg[4] =  0x03;
+        }
+        Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    }
 }

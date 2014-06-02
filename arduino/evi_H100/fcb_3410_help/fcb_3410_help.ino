@@ -274,34 +274,4 @@ void ViscaStab(OSCMessage *_mes) {
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Memory Reset ****************/
-void ViscaMemReset(OSCMessage *_mes) {
-uint8_t ViscaMemMsg[7] = {  
-  0x81, 0x01, 0x04, 0x3F, 0x00, 0x00, 0xFF      };
-  int value = _mes->getArgInt32(0);
-  ViscaMemMsg[5] =  value;
-  Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
-}
-/************* Memory Set ****************/
-void ViscaMemSet(OSCMessage *_mes) {
-uint8_t ViscaMemMsg[7] = {  
-  0x81, 0x01, 0x04, 0x3F, 0x01, 0x00, 0xFF      };
-  int value = _mes->getArgInt32(0);
-  ViscaMemMsg[5] =  value;
-  Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
-}
-/************* Memory Recall  ****************/
-void ViscaMemRecall(OSCMessage *_mes) {
-uint8_t ViscaMemMsg[7] = {  
-  0x81, 0x01, 0x04, 0x3F, 0x02, 0x00, 0xFF      };
-  int value = _mes->getArgInt32(0);
-  ViscaMemMsg[5] =  value;
-  Serial.write (ViscaMemMsg, sizeof(ViscaMemMsg) );
-}
-/************* Chroma Supress  ****************/
-void ViscaChromaSuppress(OSCMessage *_mes) {
-  ViscaMsg[3] =  0x5F;
-  int value = _mes->getArgInt32(0);
-  ViscaMsg[4] =  value;
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
+
