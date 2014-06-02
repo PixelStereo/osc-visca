@@ -12,7 +12,6 @@ void setup()
   server.addCallback("/visca.1/backlight",&ViscaBackLight);
   server.addCallback("/visca.1/reverse",&ViscaReverse);
   server.addCallback("/visca.1/flip",&ViscaFlip);
-  server.addCallback("/visca.1/fx",&ViscaFX);
   server.addCallback("/visca.1/freeze",&ViscaFreeze);
   server.addCallback("/visca.1/stabilizer",&ViscaStab);
   server.addCallback("/visca.1/hs",&ViscaHS);
@@ -249,23 +248,7 @@ void ViscaFreeze(OSCMessage *_mes) {
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
-/************* Image effects ****************/
-void ViscaFX(OSCMessage *_mes) {
-  ViscaMsg[3] =  0x63;
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);
-  if ( memcmp(value,"off",3) == 0) {
-  ViscaMsg[4] = ((uint8_t) 0);
-  } 
-  if ( memcmp(value,"neg art",7) == 0) {
-  ViscaMsg[4] =  0x02;
-  } 
-  if ( memcmp(value,"bw",2) == 0) {
-  ViscaMsg[4] =  0x04;
-  } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
+
 /************* Vertical Flip****************/
 void ViscaFlip(OSCMessage *_mes) {
   ViscaMsg[3] =  0x66;

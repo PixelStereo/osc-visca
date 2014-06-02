@@ -58,6 +58,8 @@ void loop(){
       MessageIN.route("/shutter", shutter);
       MessageIN.route("/iris", iris);
       MessageIN.route("/gain", gain);
+      MessageIN.route("/wb", wb);
+      MessageIN.route("/fx", fx);
     }
   }        
   /* **************************************************************** */
@@ -540,44 +542,71 @@ void gain(OSCMessage &msg, int addrOffset ){
 /* *************¨¨¨¨*** WHITE BALANCE ***************************** */
 /* **************************************************************** */
 void wb(OSCMessage &msg, int addrOffset ){
-   ViscaMsg[3] =  0x35;
-  Matched = msg.match("/trigger", addrOffset);
-  if(Matched == 8){ 
-    ViscaMsg[3] =  0x10;
-    ViscaMsg[4] =  0x05;
-  }
-   if(msg.isString(0)){
-      int length=msg.getDataLength(0);
-      char str[length];
-      value = msg.getString(0,str,length);
-      if ((strcmp("auto", str)==0)) {
-        ViscaMsg[4] =  0x00;
-      }
-      if ((strcmp("indoor", str)==0)) {
-        ViscaMsg[4] =  0x01;
-      }
-      if ((strcmp("outdoor", str)==0)) {
-        ViscaMsg[4] =  0x02;
-      }
-      if ((strcmp("one push", str)==0)) {
-        ViscaMsg[4] =  0x03;
-      }
-      if ((strcmp("ATW", str)==0)) {
-        ViscaMsg[4] =  0x04;
-      }
-      if ((strcmp("manual", str)==0)) {
+    ViscaMsg[1] =  0x01;
+    ViscaMsg[2] =  0x04;
+    ViscaMsg[3] =  0x35;
+    Matched = msg.match("/trigger", addrOffset);
+    if(Matched == 8){ 
+        ViscaMsg[3] =  0x10;
         ViscaMsg[4] =  0x05;
-      }
-      if ((strcmp("outdoor auto", str)==0)) {
-        ViscaMsg[4] =  0x06;
-      }
-      if ((strcmp("sodium lamp auto", str)==0)) {
-        ViscaMsg[4] =  0x07;
-      }
-      if ((strcmp("sodium lamp", str)==0)) {
-        ViscaMsg[4] =  0x08;
-      }
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
     }
+    else {
+        if(msg.isString(0)){
+            int length=msg.getDataLength(0);
+            char str[length];
+            value = msg.getString(0,str,length);
+            if ((strcmp("auto", str)==0)) {
+                ViscaMsg[4] =  0x00;
+            }
+            if ((strcmp("indoor", str)==0)) {
+                ViscaMsg[4] =  0x01;
+            }
+            if ((strcmp("outdoor", str)==0)) {
+                ViscaMsg[4] =  0x02;
+            }
+            if ((strcmp("one push", str)==0)) {
+                ViscaMsg[4] =  0x03;
+            }
+            if ((strcmp("ATW", str)==0)) {
+                ViscaMsg[4] =  0x04;
+            }
+            if ((strcmp("manual", str)==0)) {
+                ViscaMsg[4] =  0x05;
+            }
+            if ((strcmp("outdoor auto", str)==0)) {
+                ViscaMsg[4] =  0x06;
+            }
+            if ((strcmp("sodium lamp auto", str)==0)) {
+                ViscaMsg[4] =  0x07;
+            }
+            if ((strcmp("sodium lamp", str)==0)) {
+                ViscaMsg[4] =  0x08;
+            }
+        }
+    }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
+
+
+/* **************************************************************** */
+/* ****************IMAGE EFFECTS FX ******************************* */
+/* **************************************************************** */
+void fx(OSCMessage &msg, int addrOffset ){
+      ViscaMsg[3] =  0x63;
+      if(msg.isString(0)){
+          int length=msg.getDataLength(0);
+          char str[length];
+          value = msg.getString(0,str,length);
+          if ((strcmp("off", str)==0)) {  
+              ViscaMsg[4] = ((uint8_t) 0);
+          } 
+          if ((strcmp("neg art", str)==0)) {  
+              ViscaMsg[4] = (0x02);
+          } 
+          if ((strcmp("bw", str)==0)) {  
+              ViscaMsg[4] = (0x04);
+          }
+          Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+      } 
+}
