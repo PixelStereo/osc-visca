@@ -94,6 +94,7 @@ void loop(){
       MessageIN.route("/hue", blue);
       MessageIN.route("/signal", signal);
       MessageIN.route("/receiveIR", receiveIR);
+      MessageIN.route("/display", ViscaDisplay);
     }
   }        
   /* **************************************************************** */
@@ -1114,6 +1115,24 @@ void receiveIR(OSCMessage &msg, int addrOffset ){
   else { 
       ViscaMsg[4] =  0x03;
   } 
-  Serial.write( ViscaSignalMsg, sizeof(ViscaSignalMsg) );
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
+
+/* **************************************************************** */
+/* **************************** DISPLAY *************************** */
+/* **************************************************************** */
+void ViscaDisplay(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x7E;
+  ViscaMsg[3] =  0x01;
+  ViscaMsg[3] =  0x18;
+  getValue(msg,0);
+  if ( value == 1 ) {
+      ViscaMsg[4] =  0x02;
+  } 
+  else { 
+      ViscaMsg[4] =  0x03;
+  } 
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
