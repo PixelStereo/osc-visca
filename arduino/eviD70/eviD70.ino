@@ -21,7 +21,7 @@ uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
 byte answer[1024];   // for incoming serial data
 int value;
-
+int Matched;
 
 /* **************************************************************** */
 /* ************************SET*UP********************************** */
@@ -119,7 +119,6 @@ void power(OSCMessage &msg, int addrOffset ){
 /* ************************POSITION******************************** */
 /* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
-  int Matched;
   Matched = msg.match("/speed", addrOffset);
   if(Matched == 6){  
   getValue (msg, 0);
@@ -194,7 +193,6 @@ void pos(OSCMessage &msg, int addrOffset ){
 /* ************************INFRA-RED******************************* */
 /* **************************************************************** */
 void ir(OSCMessage &msg, int addrOffset ){
-  int Matched;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
   Matched = msg.match("/active", addrOffset);
@@ -227,7 +225,6 @@ void ir(OSCMessage &msg, int addrOffset ){
 /* ************************ZOOM************************************ */
 /* **************************************************************** */
 void zoom(OSCMessage &msg, int addrOffset ){
-  int Matched;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
   ViscaMsg[3] =  0x07;
@@ -299,7 +296,6 @@ void zoom(OSCMessage &msg, int addrOffset ){
 /* ************************FOCUS*********************************** */
 /* **************************************************************** */
 void focus(OSCMessage &msg, int addrOffset ){
-  int Matched;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
   /* ************ Focus Stop *********************************** */
@@ -467,7 +463,6 @@ void focus(OSCMessage &msg, int addrOffset ){
 /* **************** MODE : AUTO EXPOSURE / AE ********************* */
 /* **************************************************************** */
 void mode(OSCMessage &msg, int addrOffset ){
-  int Matched;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
   ViscaMsg[3] =  0x39;
@@ -540,4 +535,49 @@ void gain(OSCMessage &msg, int addrOffset ){
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
 }
 
+
+/* **************************************************************** */
+/* *************¨¨¨¨*** WHITE BALANCE ***************************** */
+/* **************************************************************** */
+void wb(OSCMessage &msg, int addrOffset ){
+   ViscaMsg[3] =  0x35;
+  Matched = msg.match("/trigger", addrOffset);
+  if(Matched == 8){ 
+    ViscaMsg[3] =  0x10;
+    ViscaMsg[4] =  0x05;
+  }
+   if(msg.isString(0)){
+      int length=msg.getDataLength(0);
+      char str[length];
+      value = msg.getString(0,str,length);
+      if ((strcmp("auto", str)==0)) {
+        ViscaMsg[4] =  0x00;
+      }
+      if ((strcmp("indoor", str)==0)) {
+        ViscaMsg[4] =  0x01;
+      }
+      if ((strcmp("outdoor", str)==0)) {
+        ViscaMsg[4] =  0x02;
+      }
+      if ((strcmp("one push", str)==0)) {
+        ViscaMsg[4] =  0x03;
+      }
+      if ((strcmp("ATW", str)==0)) {
+        ViscaMsg[4] =  0x04;
+      }
+      if ((strcmp("manual", str)==0)) {
+        ViscaMsg[4] =  0x05;
+      }
+      if ((strcmp("outdoor auto", str)==0)) {
+        ViscaMsg[4] =  0x06;
+      }
+      if ((strcmp("sodium lamp auto", str)==0)) {
+        ViscaMsg[4] =  0x07;
+      }
+      if ((strcmp("sodium lamp", str)==0)) {
+        ViscaMsg[4] =  0x08;
+      }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+    }
+}
 

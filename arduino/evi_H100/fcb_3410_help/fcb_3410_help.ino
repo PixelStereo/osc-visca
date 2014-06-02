@@ -5,14 +5,10 @@ void setup()
   server.addCallback("/visca/ifclear",&ViscaIfClear);
   server.addCallback("/visca/cancel",&ViscaCancel);
   server.addCallback("/visca.1/init/internal",&ViscaInit);
-  server.addCallback("/visca.1/whitebalance",&ViscaWB);
   server.addCallback("/visca.1/auto/response",&ViscaAutoResponse);
   server.addCallback("/visca.1/compensation/sw",&ViscaExpComp);
   server.addCallback("/visca.1/compensation/level",&ViscaExpCompDirect);
   server.addCallback("/visca.1/slowshutter",&ViscaSlowShutter);
-  server.addCallback("/visca.1/shutter",&ViscaShutter);
-  server.addCallback("/visca.1/iris",&ViscaIris);
-  server.addCallback("/visca.1/gain",&ViscaGain);
   server.addCallback("/visca.1/backlight",&ViscaBackLight);
   server.addCallback("/visca.1/reverse",&ViscaReverse);
   server.addCallback("/visca.1/flip",&ViscaFlip);
@@ -99,45 +95,6 @@ void ViscaInit(OSCMessage *_mes) {
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }  
-/************* White Balance ****************/
-void ViscaWB(OSCMessage *_mes) {
-    ViscaMsg[3] =  0x35;
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);  
-  if ( memcmp(value,"auto",4) == 0) {
-    ViscaMsg[4] =  0x00;
-  }
-  if ( memcmp(value,"indoor",6) == 0) {
-    ViscaMsg[4] =  0x01;
-  }
-  if ( memcmp(value,"outdoor",7) == 0) {
-    ViscaMsg[4] =  0x02;
-  }
-  if ( memcmp(value,"one push",8) == 0) {
-    ViscaMsg[4] =  0x03;
-  }
-  if ( memcmp(value,"ATW",3) == 0) {
-    ViscaMsg[4] =  0x04;
-  }
-  if ( memcmp(value,"manual",6) == 0) {
-    ViscaMsg[4] =  0x05;
-  }
-  if ( memcmp(value,"one push trigger",16) == 0) {
-    ViscaMsg[3] =  0x10;
-    ViscaMsg[4] =  0x05;
-  }
-  if ( memcmp(value,"outdoor auto",12) == 0) {
-    ViscaMsg[4] =  0x06;
-  }
-  if ( memcmp(value,"sodium lamp auto",16) == 0) {
-    ViscaMsg[4] =  0x07;
-  }
-  if ( memcmp(value,"sodium lamp",11) == 0) {
-    ViscaMsg[4] =  0x08;
-  }
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
 
 /************* Slow Shutter ****************/
 void ViscaSlowShutter(OSCMessage *_mes) {
