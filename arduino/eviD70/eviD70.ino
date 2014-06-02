@@ -16,7 +16,7 @@ uint8_t ViscaShortMsg[5] = {
 uint8_t ViscaMsg[6] = {
   0x81, 0x01, 0x04, 0x00, 0x00, 0xFF};
 uint8_t ViscaLongMsg[9] = {
-  0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF};
+  0x81, 0x01, 0x04, 0x47, 0x05, 0x05, 0x00, 0x00, 0xFF};
 uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
 byte answer[1024];   // for incoming serial data
@@ -112,6 +112,7 @@ void power(OSCMessage &msg, int addrOffset ){
 /* ************************POSITION******************************** */
 /* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
+  int Matched;
   Matched = msg.match("/speed", addrOffset);
   if(Matched == 6){  
   value = msg.getInt(0); 
@@ -120,8 +121,6 @@ void pos(OSCMessage &msg, int addrOffset ){
   }
   ViscaLongMsg[2] =  0x06;
   ViscaLongMsg[3] =  0x01;
-  ViscaLongMsg[4] =  0x05;
-  ViscaLongMsg[5] =  0x05;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x06;
   if(msg.isString(0)){
@@ -133,7 +132,7 @@ void pos(OSCMessage &msg, int addrOffset ){
       ViscaLongMsg[7] =  0x03;
       Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
     }
-    if ((strcmp("uo", str)==0)) {
+    if ((strcmp("up", str)==0)) {
       ViscaLongMsg[6] =  0x03;
       ViscaLongMsg[7] =  0x01;
       Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
