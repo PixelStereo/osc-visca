@@ -90,7 +90,10 @@ void sendOSC(){
 /* ************************POWER*********************************** */
 /* **************************************************************** */
 void power(OSCMessage &msg, int addrOffset ){
-  if (msg.isInt(0)){        
+  if (msg.isInt(0)){      
+    ViscaMsg[1] =  0x01;
+    ViscaMsg[2] =  0x04;
+    ViscaMsg[3] =  0x00;  
     value = msg.getInt(0);
   } 
   else if(msg.isFloat(0)){
@@ -109,75 +112,70 @@ void power(OSCMessage &msg, int addrOffset ){
 /* ************************POSITION******************************** */
 /* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
-  int Matched;
   ViscaLongMsg[2] =  0x06;
   ViscaLongMsg[3] =  0x01;
   ViscaLongMsg[4] =  0x05;
   ViscaLongMsg[5] =  0x05;
-  Matched = msg.match("/stop", addrOffset);
-  if(Matched == 5){   
-    ViscaLongMsg[6] =  0x03;
-    ViscaLongMsg[7] =  0x03;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x06;
+  if(msg.isString(0)){
+    int length=msg.getDataLength(0);
+    char str[length];
+    value = msg.getString(0,str,length);
+    if ((strcmp("stop", str)==0)) {
+      ViscaLongMsg[6] =  0x03;
+      ViscaLongMsg[7] =  0x03;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("uo", str)==0)) {
+      ViscaLongMsg[6] =  0x03;
+      ViscaLongMsg[7] =  0x01;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("down", str)==0)) {
+      ViscaLongMsg[6] =  0x03;
+      ViscaLongMsg[7] =  0x02;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("left", str)==0)) {
+      ViscaLongMsg[6] =  0x01;
+      ViscaLongMsg[7] =  0x03;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("right", str)==0)) {
+      ViscaLongMsg[6] =  0x02;
+      ViscaLongMsg[7] =  0x03;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("upleft", str)==0)) {
+      ViscaLongMsg[6] =  0x01;
+      ViscaLongMsg[7] =  0x01;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("upright", str)==0)) {
+      ViscaLongMsg[6] =  0x02;
+      ViscaLongMsg[7] =  0x01;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("downleft", str)==0)) {
+      ViscaLongMsg[6] =  0x01;
+      ViscaLongMsg[7] =  0x02;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("downright", str)==0)) {
+      ViscaLongMsg[6] =  0x02;
+      ViscaLongMsg[7] =  0x02;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+    }
+    if ((strcmp("home", str)==0)) {
+       ViscaShortMsg[3] =  0x04;
+      Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
+    }
+    if ((strcmp("reset", str)==0)) {
+      ViscaShortMsg[3] =  0x05;
+      Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
   }
-  Matched = msg.match("/up", addrOffset);
-  if(Matched == 3){   
-    ViscaLongMsg[6] =  0x03;
-    ViscaLongMsg[7] =  0x01;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/down", addrOffset);
-  if(Matched == 5){   
-    ViscaLongMsg[6] =  0x03;
-    ViscaLongMsg[7] =  0x02;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/left", addrOffset);
-  if(Matched == 5){   
-    ViscaLongMsg[6] =  0x01;
-    ViscaLongMsg[7] =  0x03;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/right", addrOffset);
-  if(Matched == 6){   
-    ViscaLongMsg[6] =  0x02;
-    ViscaLongMsg[7] =  0x03;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/upleft", addrOffset);
-  if(Matched == 7){   
-    ViscaLongMsg[6] =  0x01;
-    ViscaLongMsg[7] =  0x01;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/upright", addrOffset);
-  if(Matched == 8){   
-    ViscaLongMsg[6] =  0x02;
-    ViscaLongMsg[7] =  0x01;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/downleft", addrOffset);
-  if(Matched == 9){   
-    ViscaLongMsg[6] =  0x01;
-    ViscaLongMsg[7] =  0x02;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/downright", addrOffset);
-  if(Matched == 10){   
-    ViscaLongMsg[6] =  0x02;
-    ViscaLongMsg[7] =  0x02;
-    Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
-  }
-  Matched = msg.match("/home", addrOffset);
-  if(Matched == 5){   
-    ViscaShortMsg[3] =  0x04;
-    Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
-  }
-  Matched = msg.match("/reset", addrOffset);
-  if(Matched == 6){   
-    ViscaShortMsg[3] =  0x05;
-    Serial.write( ViscaShortMsg, sizeof(ViscaShortMsg) );
-  }
+}
 }
 
 /* **************************************************************** */
@@ -201,7 +199,7 @@ void ir(OSCMessage &msg, int addrOffset ){
     } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) ); 
   }
-  Matched = msg.match("/focuscorrection", addrOffset);
+  Matched = msg.match("/correction", addrOffset);
   if(Matched == 16){  
     ViscaMsg[3] =  0x11;
     if(msg.isInt(0)){
