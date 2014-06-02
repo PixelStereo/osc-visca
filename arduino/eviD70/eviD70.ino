@@ -193,7 +193,7 @@ void slowshutter(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ************************POSITION******************************** */
+/* *********************** POSITION ******************************* */
 /* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
   Matched = msg.match("/speed", addrOffset);
@@ -301,19 +301,32 @@ void ir(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ************************ZOOM************************************ */
+/* *********************** ZOOM *********************************** */
 /* **************************************************************** */
 void zoom(OSCMessage &msg, int addrOffset ){
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x06;
+/* ************************ DIGITAL ******************************* */
+  Matched = msg.match("/digital", addrOffset);
+  if(Matched == 8){   
+      if ( value == 1 ) {
+        ViscaMsg[4] =  0x02;
+      } 
+      else {
+        ViscaMsg[4] =  0x03;
+      } 
+      Serial.write( ViscaMsg, sizeof(ViscaMsg) );    
+  }
+  else {
   ViscaMsg[3] =  0x07;
-  /* ************************ ZOOM STOP ***************************** */
+/* ************************ ZOOM STOP ***************************** */
   Matched = msg.match("/stop", addrOffset);
   if(Matched == 5){   
     ViscaMsg[4] = ((uint8_t) 0);
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );    
   }
-  /* ************ ZOOM STANDARD ************************************* */
+/* ************ ZOOM STANDARD ************************************* */
   Matched = msg.match("/standard", addrOffset);
   if(Matched == 9){   
     if(msg.isString(0)){
@@ -367,6 +380,7 @@ void zoom(OSCMessage &msg, int addrOffset ){
     ViscaLongMsg[7] =  valuea;
     Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
   }
+}
 }
 
 
