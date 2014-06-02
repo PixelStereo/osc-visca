@@ -11,6 +11,12 @@ const unsigned int outPort = 9999;
 byte mac[] = {
   0x90, 0xA2, 0xDA, 0x0D, 0x94, 0x73};
 OSCBundle bundleOUT;
+uint8_t CancelMsg[3] = {
+  0x81, 0x21, 0xFF}; 
+uint8_t SetAddressMsg[4] = {
+  0x88, 0x30, 0x01, 0xFF}; 
+uint8_t IfClearMsg[5] = {
+  0x81, 0x01, 0x06, 0x04, 0xFF};
 uint8_t ViscaShortMsg[5] = {
   0x81, 0x01, 0x06, 0x04, 0xFF};
 uint8_t ViscaMsg[6] = {
@@ -19,29 +25,31 @@ uint8_t ViscaLongMsg[9] = {
   0x81, 0x01, 0x04, 0x47, 0x05, 0x05, 0x00, 0x00, 0xFF};
 uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
+uint8_t ViscaZoomFocusMsg[13] = {
+  0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  0xFF};
 byte answer[1024];   // for incoming serial data
 int value;
 int Matched;
 
 /* **************************************************************** */
-/* ************************SET*UP********************************** */
+/* ************************ SET UP ******************************** */
 /* **************************************************************** */
 void setup() {
-  /* ************ Launch ethernet server  *************************** */
+/* ************ Launch ethernet server  *************************** */
   Ethernet.begin(mac,ip);
   Udp.begin(inPort);
-  /******** Launch Serial Communication for visca commands **********/
+/********** Launch Serial Communication for visca commands ******** */
   Serial.begin(9600);
 }
 
 
 /* **************************************************************** */
-/* ************************THE****LOOP***************************** */
+/* *********************** THE LOOP ******************************* */
 /* **************************************************************** */
 void loop(){ 
-  /* **************************************************************** */
-  /* ************ // UDP MESSAGES COMING OVER OSC**** *************** */
-  /* **************************************************************** */
+/* **************************************************************** */
+/* *************** UDP MESSAGES COMING OVER OSC******************** */
+/* **************************************************************** */
   OSCMessage MessageIN;
   int size;
   if( (size = Udp.parsePacket())>0)
@@ -51,6 +59,9 @@ void loop(){
     if(!MessageIN.hasError()) {
       MessageIN.route("/zoom", zoom);
       MessageIN.route("/power", power);
+      MessageIN.route("/setaddress", setaddress);
+      MessageIN.route("/ifclear", ifclear);
+      MessageIN.route("/cancel", cancel);
       MessageIN.route("/focus", focus);
       MessageIN.route("/pos", pos);
       MessageIN.route("/ir", ir);
@@ -73,12 +84,12 @@ void loop(){
       MessageIN.route("/hr", hr);
       MessageIN.route("/gamma", gamma);
       MessageIN.route("/hs", hs);
-      MessageIN.route("/AEcompensation", AEcompensation);
+      MessageIN.route("/compensation", AEcompensation);
       MessageIN.route("/backlight", backlight);
     }
   }        
   /* **************************************************************** */
-  /* ***************Check Serial FEEDBACK FROM CAMERA***************** */
+  /* ************** CHECK SERIAL FEEDBACK FROM CAMERA *************** */
   /* **************************************************************** */
 //  if (Serial.available() > 0) {
 //    int bytesRead;
@@ -92,7 +103,7 @@ void loop(){
 
 
 /* **************************************************************** */
-/* ************************SEND****OSC***************************** */
+/* *********************** SEND OSC ******************************* */
 /* **************************************************************** */
 void sendOSC(){ 
   Udp.beginPacket(OutIp, outPort); 
@@ -114,6 +125,7 @@ void getValue(OSCMessage &msg, int addrOffset){
   }
 }
 
+
 /* **************************************************************** */
 /* ************************POWER*********************************** */
 /* **************************************************************** */
@@ -131,7 +143,33 @@ void power(OSCMessage &msg, int addrOffset ){
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
-
+      
+/* **************************************************************** */
+/* ************************ SET ADDRESS *************************** */
+/* **************************************************************** */
+void setaddress(OSCMessage &msg, int addrOffset ){
+    Serial.write( SetAddressMsg, sizeof(SetAddressMsg) );
+    }
+    
+    
+/* **************************************************************** */
+/* ************************ IF CLEAR ****************************** */
+/* **************************************************************** */
+void ifclear(OSCMessage &msg, int addrOffset ){
+    Serial.write( IfClearMsg, sizeof(IfClearMsg) );
+    }
+      
+      
+/* **************************************************************** */
+/* ****************************** CANCEL ************************** */
+/* **************************************************************** */
+void cancel(OSCMessage &msg, int addrOffset ){
+    getValue (msg, 0);
+    ViscaMsg[1] =  20 | value;
+    Serial.write( CancelMsg, sizeof(CancelMsg) );
+}
+      
+      
 /* **************************************************************** */
 /* ************************ Slow Shutter ************************** */
 /* **************************************************************** */
@@ -333,7 +371,7 @@ void zoom(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ************************FOCUS*********************************** */
+/* ************************ FOCUS ********************************* */
 /* **************************************************************** */
 void focus(OSCMessage &msg, int addrOffset ){
   ViscaMsg[1] =  0x01;
@@ -578,7 +616,7 @@ void gain(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* *************¨¨¨¨*** WHITE BALANCE ***************************** */
+/* ******************** WHITE BALANCE ***************************** */
 /* **************************************************************** */
 void wb(OSCMessage &msg, int addrOffset ){
     ViscaMsg[1] =  0x01;
@@ -628,7 +666,7 @@ void wb(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ****************IMAGE EFFECTS FX ******************************* */
+/* **************** IMAGE EFFECTS FX ****************************** */
 /* **************************************************************** */
 void fx(OSCMessage &msg, int addrOffset ){
       ViscaMsg[3] =  0x63;
@@ -651,7 +689,7 @@ void fx(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ****************MEMORY SET/RECALL/RESET ************************ */
+/* **************** MEMORY SET/RECALL/RESET *********************** */
 /* **************************************************************** */
 void memory(OSCMessage &msg, int addrOffset ){
     ViscaMsg[1] =  0x01;
@@ -877,19 +915,37 @@ void hs(OSCMessage &msg, int addrOffset ){
 
 
 /* **************************************************************** */
-/* ******************** EXPOSITION COMPENSATION *************************** */
+/* ******************** EXPOSITION COMPENSATION ******************* */
 /* **************************************************************** */
+/* *************************** LEVEL ********************************/
 void AEcompensation(OSCMessage &msg, int addrOffset ){
-  getValue(msg,0);
-  int valuea = value & 15; 
-  int valuebZ = value >> 4; 
-  int valueb = valuebZ & 15  ; 
-  ViscaLongMsg[3] =  0x4E;
-  ViscaLongMsg[4] =  0x00;
-  ViscaLongMsg[5] =  0x00;
-  ViscaLongMsg[6] =  valueb;
-  ViscaLongMsg[7] =  valuea;
-  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  Matched = msg.match("/level", addrOffset);
+  if(Matched == 6){ 
+      getValue(msg,0);
+      int valuea = value & 15; 
+      int valuebZ = value >> 4; 
+      int valueb = valuebZ & 15  ; 
+      ViscaLongMsg[3] =  0x4E;
+      ViscaLongMsg[4] =  0x00;
+      ViscaLongMsg[5] =  0x00;
+      ViscaLongMsg[6] =  valueb;
+      ViscaLongMsg[7] =  valuea;
+      Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+  }
+  else {
+/* *************************** ACTIVE *******************************/
+      ViscaMsg[1] =  0x01;
+      ViscaMsg[2] =  0x04;
+      ViscaMsg[3] =  0x3E;
+      getValue(msg,0);
+      if ( value == 1 ) {
+          ViscaMsg[4] =  0x02;
+      } 
+      else { 
+          ViscaMsg[4] =  0x03;
+      } 
+        Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
 }
 
 
@@ -909,4 +965,37 @@ void backlight(OSCMessage &msg, int addrOffset ){
   } 
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
+
+
+/* **************************************************************** */
+/* *********************** ZOOM / FOCUS *************************** */
+/* **************************************************************** */
+void zoomfocus(OSCMessage &msg, int addrOffset ){
+  getValue(msg,0);
+  int ZFZooma = value & 15 ; 
+  int ZFZoomb = value >> 4 & 15  ; 
+  int ZFZoomc = value >> 8 & 15 ; 
+  int ZFZoomd = value >> 12 & 15 ; 
+  getValue(msg,1);
+  int ZFFocusa = value & 15 ; 
+  int ZFFocusb = value >> 4 & 15  ; 
+  int ZFFocusc = value >> 8 & 15 ; 
+  int ZFFocusd = value >> 12 & 15 ; 
+  Serial.write(0x81);
+  Serial.write(0x01);
+  Serial.write(0x04);
+  Serial.write(0x47);
+  Serial.write((byte)ZFZoomd);
+  Serial.write((byte)ZFZoomc);
+  Serial.write((byte)ZFZoomb);
+  Serial.write((byte)ZFZooma);
+  Serial.write((byte)ZFFocusd);
+  Serial.write((byte)ZFFocusc);
+  Serial.write((byte)ZFFocusb);
+  Serial.write((byte)ZFFocusa);
+  Serial.write((byte)0xFF);
+}
+
+
+
 
