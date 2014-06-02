@@ -21,10 +21,10 @@ uint8_t ViscaShortMsg[5] = {
   0x81, 0x01, 0x06, 0x04, 0xFF};
 uint8_t ViscaMsg[6] = {
   0x81, 0x01, 0x04, 0x00, 0x00, 0xFF};
-uint8_t ViscaLongMsg[9] = {
-  0x81, 0x01, 0x04, 0x47, 0x05, 0x05, 0x00, 0x00, 0xFF};
 uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
+uint8_t ViscaLongMsg[9] = {
+  0x81, 0x01, 0x04, 0x47, 0x05, 0x05, 0x00, 0x00, 0xFF};
 uint8_t ViscaZoomFocusMsg[13] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,  0xFF};
 byte answer[1024];   // for incoming serial data
@@ -86,6 +86,8 @@ void loop(){
       MessageIN.route("/hs", hs);
       MessageIN.route("/compensation", AEcompensation);
       MessageIN.route("/backlight", backlight);
+      MessageIN.route("/red", red);
+      MessageIN.route("/blue", blue);
     }
   }        
   /* **************************************************************** */
@@ -1011,5 +1013,39 @@ void zoomfocus(OSCMessage &msg, int addrOffset ){
 }
 
 
+/* **************************************************************** */
+/* ************************* RED GAIN ***************************** */
+/* **************************************************************** */
+void red(OSCMessage &msg, int addrOffset ){
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x43;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  getValue (msg, 0);
+  int valuea = value & 15; 
+  int valuebZ = value >> 4; 
+  int valueb = valuebZ & 15; 
+  ViscaLongMsg[6] =  valueb;
+  ViscaLongMsg[7] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
 
 
+/* **************************************************************** */
+/* ************************* BLUE GAIN **************************** */
+/* **************************************************************** */
+void blue(OSCMessage &msg, int addrOffset ){
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x44;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  getValue (msg, 0);
+  int valuea = value & 15; 
+  int valuebZ = value >> 4; 
+  int valueb = valuebZ & 15; 
+  ViscaLongMsg[6] =  valueb;
+  ViscaLongMsg[7] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
