@@ -80,35 +80,6 @@ void ViscaZoomFocus(OSCMessage *_mes) {
   Serial.write((byte)ZFFocusb);
   Serial.write((byte)ZFFocusa);
 }
-/************* Init ****************/
-void ViscaInit(OSCMessage *_mes) {
-  ViscaMsg[3] =  0x19;
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);
-  if ( memcmp(value,"lens",4) == 0) {
-  ViscaMsg[4] =  0x01;
-  } 
-  if ( memcmp(value,"camera",6) == 0) {
-  ViscaMsg[4] =  0x03;
-  } 
-  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}  
-
-/************* Slow Shutter ****************/
-void ViscaSlowShutter(OSCMessage *_mes) {
-  ViscaMsg[3] =  0x5A;
-  int strSize=_mes->getArgStringSize(0);
-  char value[strSize]; //string memory allocation
-  _mes->getArgString(0,value);
-  if ( memcmp(value,"auto",4) == 0) {
-  ViscaMsg[4] =  0x02;
-  } 
-  if ( memcmp(value,"manual",6) == 0) {
-  ViscaMsg[4] =  0x03;
-  } 
-    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-}
 
 /************* Auto Response ****************/
 void ViscaAutoResponse(OSCMessage *_mes) {

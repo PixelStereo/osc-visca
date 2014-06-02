@@ -62,6 +62,7 @@ void loop(){
       MessageIN.route("/fx", fx);
       MessageIN.route("/memory", memory);
       MessageIN.route("/chromasupress", chromasupress);
+      MessageIN.route("/slowshutter", slowshutter);
     }
   }        
   /* **************************************************************** */
@@ -90,7 +91,7 @@ void sendOSC(){
 
 
 /* **************************************************************** */
-/* ******************* FLOAT ** OR ** INT ************************* */
+/* ******************* GETVALUE (FLOAT OR INT ********************* */
 /* **************************************************************** */
 void getValue(OSCMessage &msg, int addrOffset){ 
   if (msg.isInt(0)){      
@@ -100,7 +101,6 @@ void getValue(OSCMessage &msg, int addrOffset){
     value = msg.getFloat(0);
   }
 }
-
 
 /* **************************************************************** */
 /* ************************POWER*********************************** */
@@ -118,6 +118,28 @@ void power(OSCMessage &msg, int addrOffset ){
   } 
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
+
+
+/* **************************************************************** */
+/* ************************ Slow Shutter ************************** */
+/* **************************************************************** */
+void slowshutter(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x5A;
+  if(msg.isString(0)){
+      int length=msg.getDataLength(0);
+      char str[length];
+      value = msg.getString(0,str,length);
+      if ((strcmp("auto", str)==0)) {
+      ViscaMsg[4] =  0x02;
+      } 
+      if ((strcmp("manual", str)==0)) {
+      ViscaMsg[4] =  0x03;
+      } 
+      Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+  }
+}  
 
 
 /* **************************************************************** */
