@@ -59,11 +59,13 @@ void loop(){
   /* **************************************************************** */
   /* ***************Check Serial FEEDBACK FROM CAMERA***************** */
   /* **************************************************************** */
-  if (Serial.available() > 3) {
+  if (Serial.available()) {
     int bytesRead;
-    bytesRead = Serial.readBytesUntil(255,answer,1024);
-//    bundleOUT.add("/visca").add(answer); 
-//    sendOSC();
+    if (!bytesRead == 0) {
+        bytesRead = Serial.readBytesUntil(255,answer,1024);
+        bundleOUT.add("/visca").add(answer); 
+        sendOSC();
+    }
   }
 }
 
@@ -297,15 +299,15 @@ void focus(OSCMessage &msg, int addrOffset ){
   /* ************ Focus Stop *********************************** */
   Matched = msg.match("/stop", addrOffset);
   if(Matched == 5){   
-    ViscaMsg[3] =  0x08;
+    ViscaMsg[3] =  0x08;  
     ViscaMsg[4] =  0x00;
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }       
   /* ************ Focus Standard ************************************ */
   Matched = msg.match("/standard", addrOffset);
   if(Matched == 9){   
+  ViscaMsg[3] =  0x08;  
     if(msg.isString(0)){
-      ViscaMsg[3] =  0x08;
       int length=msg.getDataLength(0);
       char str[length];
       value = msg.getString(0,str,length);
@@ -321,8 +323,8 @@ void focus(OSCMessage &msg, int addrOffset ){
   /* ************ Focus Variable Near ************************************ */
   Matched = msg.match("/variable/near", addrOffset);
   if(Matched == 14){   
+  ViscaMsg[3] =  0x08;  
     if(msg.isInt(0)){
-      ViscaMsg[3] =  0x08;
       value = msg.getInt(0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x20 | value;
@@ -332,9 +334,9 @@ void focus(OSCMessage &msg, int addrOffset ){
   }
   /* ************ Focus Variable Far ************************************* */
   Matched = msg.match("/variable/far", addrOffset);
-  if(Matched == 13){   
+  if(Matched == 13){ 
+  ViscaMsg[3] =  0x08;  
     if(msg.isInt(0)){
-      ViscaMsg[3] =  0x08;
       value = msg.getInt(0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x30 | value;
@@ -365,8 +367,8 @@ void focus(OSCMessage &msg, int addrOffset ){
   /* ************ Focus Auto ************************************ */
   Matched = msg.match("/mode", addrOffset);
   if(Matched == 5){   
+  ViscaMsg[3] =  0x38;
     if(msg.isString(0)){
-      ViscaMsg[3] =  0x38;
       int length=msg.getDataLength(0);
       char str[length];
       value = msg.getString(0,str,length);
@@ -396,6 +398,7 @@ void focus(OSCMessage &msg, int addrOffset ){
   /* ************ Focus Near Limit ************************************* */
   Matched = msg.match("/nearlimit", addrOffset);
   if(Matched == 10){   
+    ViscaLongMsg[2] =  0x04;
     int value  = msg.getInt(0);  
     int valuea = value & 15; 
     int valuebZ = value >> 4; 
