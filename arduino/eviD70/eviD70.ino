@@ -85,20 +85,27 @@ void sendOSC(){
 }
 
 
-
 /* **************************************************************** */
-/* ************************POWER*********************************** */
+/* ******************* FLOAT ** OR ** INT ************************* */
 /* **************************************************************** */
-void power(OSCMessage &msg, int addrOffset ){
+void getValue(OSCMessage &msg, int addrOffset){ 
   if (msg.isInt(0)){      
-    ViscaMsg[1] =  0x01;
-    ViscaMsg[2] =  0x04;
-    ViscaMsg[3] =  0x00;  
     value = msg.getInt(0);
   } 
   else if(msg.isFloat(0)){
     value = msg.getFloat(0);
   }
+}
+
+
+/* **************************************************************** */
+/* ************************POWER*********************************** */
+/* **************************************************************** */
+void power(OSCMessage &msg, int addrOffset ){
+    getValue (msg, 0);
+    ViscaMsg[1] =  0x01;
+    ViscaMsg[2] =  0x04;
+    ViscaMsg[3] =  0x00;  
   if ( value == 1 ) {
     ViscaMsg[4] =  0x02;
   } 
@@ -115,7 +122,7 @@ void pos(OSCMessage &msg, int addrOffset ){
   int Matched;
   Matched = msg.match("/speed", addrOffset);
   if(Matched == 6){  
-  value = msg.getInt(0); 
+  getValue (msg, 0);
   ViscaLongMsg[4] =  value;
   ViscaLongMsg[5] =  value;    
   }
@@ -193,9 +200,7 @@ void ir(OSCMessage &msg, int addrOffset ){
   Matched = msg.match("/active", addrOffset);
   if(Matched == 7){  
     ViscaMsg[3] =  0x01;
-    if(msg.isInt(0)){
-      value = msg.getInt(0); 
-    }
+    getValue (msg, 0);
     if ( value == 1 ) {
       ViscaMsg[4] =  0x02;
     } 
@@ -207,9 +212,7 @@ void ir(OSCMessage &msg, int addrOffset ){
   Matched = msg.match("/correction", addrOffset);
   if(Matched == 16){  
     ViscaMsg[3] =  0x11;
-    if(msg.isInt(0)){
-      value = msg.getInt(0); 
-    }
+    getValue (msg, 0);
     if ( value == 1 ) {
       ViscaMsg[4] =  0x01;
     } 
@@ -254,30 +257,26 @@ void zoom(OSCMessage &msg, int addrOffset ){
   /* ************ ZOOM VARIABLE WIDE ************************************ */
   Matched = msg.match("/variable/wide", addrOffset);
   if(Matched == 14){   
-    if(msg.isInt(0)){
-      value = msg.getInt(0);
+    getValue (msg, 0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x30 | value;
       }
       Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-    }
   }
   /* ************ ZOOM VARIABLE TELE ************************************ */
   Matched = msg.match("/variable/tele", addrOffset);
   if(Matched == 14){   
-    if(msg.isInt(0)){
-      value = msg.getInt(0);
+    getValue (msg, 0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x20 | value;
       }
       Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-    }
   }
   /* ************ Zoom Direct ************************************ */
   Matched = msg.match("/direct", addrOffset);
   if(Matched == 7){   
     ViscaLongMsg[2] =  0x04;
-    int value  = msg.getInt(0);
+    getValue (msg, 0);
     int valuea = value & 15; 
     int valuebZ = value >> 4; 
     int valuecZ = value >> 8; 
@@ -331,32 +330,28 @@ void focus(OSCMessage &msg, int addrOffset ){
   Matched = msg.match("/variable/near", addrOffset);
   if(Matched == 14){   
   ViscaMsg[3] =  0x08;  
-    if(msg.isInt(0)){
-      value = msg.getInt(0);
+      getValue (msg, 0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x20 | value;
       }
       Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-    }
   }
   /* ************ Focus Variable Far ************************************* */
   Matched = msg.match("/variable/far", addrOffset);
   if(Matched == 13){ 
   ViscaMsg[3] =  0x08;  
-    if(msg.isInt(0)){
-      value = msg.getInt(0);
+      getValue (msg, 0);
       if (value >= 0 && value <= 7) {
         ViscaMsg[4] =  0x30 | value;
       }
       Serial.write( ViscaMsg, sizeof(ViscaMsg) );
-    }
   }
 
   /* ************ Focus Direct ************************************ */
   Matched = msg.match("/direct", addrOffset);
   if(Matched == 7){   
     ViscaLongMsg[2] =  0x04;
-    int value  = msg.getInt(0);
+    getValue (msg, 0);
     int valuea = value & 15; 
     int valuebZ = value >> 4; 
     int valuecZ = value >> 8; 
@@ -406,7 +401,7 @@ void focus(OSCMessage &msg, int addrOffset ){
   Matched = msg.match("/nearlimit", addrOffset);
   if(Matched == 10){   
     ViscaLongMsg[2] =  0x04;
-    int value  = msg.getInt(0);  
+    getValue (msg, 0);
     int valuea = value & 15; 
     int valuebZ = value >> 4; 
     int valuecZ = value >> 8; 
@@ -506,7 +501,7 @@ void shutter(OSCMessage &msg, int addrOffset ){
   ViscaLongMsg[1] =  0x01;
   ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4A;
-  int value  = msg.getInt(0);
+  getValue (msg, 0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
@@ -520,7 +515,7 @@ void iris(OSCMessage &msg, int addrOffset ){
   ViscaLongMsg[1] =  0x01;
   ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4B;
-  int value  = msg.getInt(0);
+  getValue (msg, 0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
@@ -534,7 +529,7 @@ void gain(OSCMessage &msg, int addrOffset ){
   ViscaLongMsg[1] =  0x01;
   ViscaLongMsg[2] =  0x04;
   ViscaLongMsg[3] =  0x4C;
-  int value  = msg.getInt(0);
+  getValue (msg, 0);
   int valuea = value & 15; 
   int valuebZ = value >> 4; 
   int valueb = valuebZ & 15  ; 
