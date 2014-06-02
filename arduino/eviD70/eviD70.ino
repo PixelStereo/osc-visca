@@ -19,7 +19,7 @@ uint8_t ViscaLongMsg[9] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0x00, 0x00, 0xFF};
 uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
-char answer[1024];   // for incoming serial data
+byte answer[1024];   // for incoming serial data
 int value;
 
 
@@ -59,14 +59,14 @@ void loop(){
   /* **************************************************************** */
   /* ***************Check Serial FEEDBACK FROM CAMERA***************** */
   /* **************************************************************** */
-  if (Serial.available()) {
-    int bytesRead;
-    if (!bytesRead == 0) {
-        bytesRead = Serial.readBytesUntil(255,answer,1024);
-        bundleOUT.add("/visca").add(answer); 
-        sendOSC();
-    }
-  }
+//  if (Serial.available() > 0) {
+//    int bytesRead;
+//    bytesRead = Serial.readBytesUntil(255,(char *)answer,1024);
+//    if (!bytesRead == 0) {
+//        bundleOUT.add("/visca").add(answer);     
+//        sendOSC();
+//    }
+//  }
 }
 
 
