@@ -21,6 +21,8 @@ uint8_t ViscaShortMsg[5] = {
   0x81, 0x01, 0x06, 0x04, 0xFF};
 uint8_t ViscaMsg[6] = {
   0x81, 0x01, 0x04, 0x00, 0x00, 0xFF};
+uint8_t ViscaSignalMsg[7] = {
+  0x81, 0x01, 0x06, 0x35, 0x00, 0x09, 0xFF};
 uint8_t ViscaMemMsg[7] = {
   0x81, 0x01, 0x04, 0x47, 0x00, 0x00, 0xFF};
 uint8_t ViscaLongMsg[9] = {
@@ -88,6 +90,9 @@ void loop(){
       MessageIN.route("/backlight", backlight);
       MessageIN.route("/red", red);
       MessageIN.route("/blue", blue);
+      MessageIN.route("/color", red);
+      MessageIN.route("/hue", blue);
+      MessageIN.route("/signal", signal);
     }
   }        
   /* **************************************************************** */
@@ -1048,4 +1053,46 @@ void blue(OSCMessage &msg, int addrOffset ){
   ViscaLongMsg[6] =  valueb;
   ViscaLongMsg[7] =  valuea;
   Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************* COLOR GAIN *************************** */
+/* **************************************************************** */
+void color(OSCMessage &msg, int addrOffset ){
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x49;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  ViscaLongMsg[6] =  0x00;
+  getValue (msg, 0);
+  ViscaLongMsg[7] =  value;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************* COLOR HUE **************************** */
+/* **************************************************************** */
+void hue(OSCMessage &msg, int addrOffset ){
+  ViscaLongMsg[1] =  0x01;
+  ViscaLongMsg[2] =  0x04;
+  ViscaLongMsg[3] =  0x4F;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  ViscaLongMsg[6] =  0x00;
+  getValue (msg, 0);
+  ViscaLongMsg[7] =  value;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************* VIDEO SYSTEM ************************* */
+/* **************************************************************** */
+void signal(OSCMessage &msg, int addrOffset ){
+  getValue (msg, 0);
+  ViscaSignalMsg[5] =  value;
+  Serial.write( ViscaSignalMsg, sizeof(ViscaSignalMsg) );
 }
