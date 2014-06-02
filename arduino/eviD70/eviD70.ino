@@ -66,6 +66,15 @@ void loop(){
       MessageIN.route("/reverse", reverse);
       MessageIN.route("/freeze", freeze);
       MessageIN.route("/flip", flip);
+      MessageIN.route("/stabilizer", stabilizer);
+      MessageIN.route("/wd", wd);
+      MessageIN.route("/aperture", aperture);
+      MessageIN.route("/nr", nr);
+      MessageIN.route("/hr", hr);
+      MessageIN.route("/gamma", gamma);
+      MessageIN.route("/hs", hs);
+      MessageIN.route("/AEcompensation", AEcompensation);
+      MessageIN.route("/backlight", backlight);
     }
   }        
   /* **************************************************************** */
@@ -751,4 +760,153 @@ void flip(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
+
+/* **************************************************************** */
+/* ************************** STABILIZER  ************************* */
+/* **************************************************************** */
+void stabilizer(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x34;
+  getValue(msg,0);
+  if ( value == 1 ) {
+  ViscaMsg[4] =  0x02;
+  } 
+  else { 
+  ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************** Wide Dynamic  ************************* */
+/* **************************************************************** */
+void wd(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x3D;
+  getValue(msg,0);
+  if ( value == 1 ) {
+  ViscaMsg[4] =  0x02;
+  } 
+  else { 
+  ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************** APERTURE **************************** */
+/* **************************************************************** */
+void aperture(OSCMessage &msg, int addrOffset ){
+  getValue(msg,0);
+  int valuea = value & 15; 
+  int valuebZ = value >> 4; 
+  int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[3] =  0x42;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  ViscaLongMsg[6] =  valueb;
+  ViscaLongMsg[7] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+
+
+/* **************************************************************** */
+/* ******************** NOIS REDUCTION **************************** */
+/* **************************************************************** */
+void nr(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x53;
+  getValue(msg,0);
+  ViscaMsg[4] =  value;
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ******************** HIGH RESOLUTION *************************** */
+/* **************************************************************** */
+void hr(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x52;
+  getValue(msg,0);
+  if ( value == 1 ) {
+  ViscaMsg[4] =  0x02;
+  } 
+  else { 
+  ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************* GAMMA ******************************** */
+/* **************************************************************** */
+void gamma(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x5B;
+  getValue(msg,0);
+  ViscaMsg[4] =  value;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ******************** HIGH SENSITIVITY ************************** */
+/* **************************************************************** */
+void hs(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x5E;
+  getValue(msg,0);
+  if ( value == 1 ) {
+  ViscaMsg[4] =  0x02;
+  } 
+  else { 
+  ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* ******************** EXPOSITION COMPENSATION *************************** */
+/* **************************************************************** */
+void AEcompensation(OSCMessage &msg, int addrOffset ){
+  getValue(msg,0);
+  int valuea = value & 15; 
+  int valuebZ = value >> 4; 
+  int valueb = valuebZ & 15  ; 
+  ViscaLongMsg[3] =  0x4E;
+  ViscaLongMsg[4] =  0x00;
+  ViscaLongMsg[5] =  0x00;
+  ViscaLongMsg[6] =  valueb;
+  ViscaLongMsg[7] =  valuea;
+  Serial.write( ViscaLongMsg, sizeof(ViscaLongMsg) );
+}
+
+
+/* **************************************************************** */
+/* ************************** BACKLIGHT *************************** */
+/* **************************************************************** */
+void backlight(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x33;
+  getValue(msg,0);
+  if ( value == 1 ) {
+  ViscaMsg[4] =  0x02;
+  } 
+  else { 
+  ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
 
