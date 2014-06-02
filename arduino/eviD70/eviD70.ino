@@ -112,6 +112,12 @@ void power(OSCMessage &msg, int addrOffset ){
 /* ************************POSITION******************************** */
 /* **************************************************************** */
 void pos(OSCMessage &msg, int addrOffset ){
+  Matched = msg.match("/speed", addrOffset);
+  if(Matched == 6){  
+  value = msg.getInt(0); 
+  ViscaLongMsg[4] =  value;
+  ViscaLongMsg[5] =  value;    
+  }
   ViscaLongMsg[2] =  0x06;
   ViscaLongMsg[3] =  0x01;
   ViscaLongMsg[4] =  0x05;
