@@ -53,7 +53,8 @@ void loop(){
       MessageIN.route("/power", power);
       MessageIN.route("/focus", focus);
       MessageIN.route("/pos", pos);
-      MessageIN.route("/ir", IR);
+      MessageIN.route("/ir", ir);
+      MessageIN.route("/mode", mode);
     }
   }        
   /* **************************************************************** */
@@ -64,7 +65,7 @@ void loop(){
 //    bytesRead = Serial.readBytesUntil(255,(char *)answer,1024);
 //    if (!bytesRead == 0) {
 //        bundleOUT.add("/visca").add(answer);     
-//        sendOSC();
+//       sendOSC();
 //    }
 //  }
 }
@@ -179,7 +180,7 @@ void pos(OSCMessage &msg, int addrOffset ){
 /* **************************************************************** */
 /* ************************INFRA-RED******************************* */
 /* **************************************************************** */
-void IR(OSCMessage &msg, int addrOffset ){
+void ir(OSCMessage &msg, int addrOffset ){
   int Matched;
   ViscaMsg[1] =  0x01;
   ViscaMsg[2] =  0x04;
@@ -458,4 +459,40 @@ void focus(OSCMessage &msg, int addrOffset ){
     Serial.write( ViscaMsg, sizeof(ViscaMsg) );
   }
 }
+
+
+
+/* **************************************************************** */
+/* **************** MODE : AUTO EXPOSURE / AE ********************* */
+/* **************************************************************** */
+void mode(OSCMessage &msg, int addrOffset ){
+  int Matched;
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x39;
+/* *********************** AE Exposure Mode *********************** */
+    if(msg.isString(0)){
+      int length=msg.getDataLength(0);
+      char str[length];
+      value = msg.getString(0,str,length);
+      if ((strcmp("auto", str)==0)) {
+        ViscaMsg[4] =  0x00;
+      }
+      if ((strcmp("manual", str)==0)) {
+        ViscaMsg[4] =  0x03;
+      }
+      if ((strcmp("shutter", str)==0)) {
+        ViscaMsg[4] =  0x0A;
+      }
+      if ((strcmp("iris", str)==0)) {
+        ViscaMsg[4] =  0x0B;
+      }
+      if ((strcmp("bright", str)==0)) {
+        ViscaMsg[4] =  0x0D;
+      }
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+   }
+}
+
+
 
