@@ -63,6 +63,9 @@ void loop(){
       MessageIN.route("/memory", memory);
       MessageIN.route("/chromasupress", chromasupress);
       MessageIN.route("/slowshutter", slowshutter);
+      MessageIN.route("/reverse", reverse);
+      MessageIN.route("/freeze", freeze);
+      MessageIN.route("/flip", flip);
     }
   }        
   /* **************************************************************** */
@@ -693,3 +696,59 @@ void chromasupress(OSCMessage &msg, int addrOffset ){
         Serial.write( ViscaMsg, sizeof(ViscaMsg) );
     }
 }
+
+
+/* **************************************************************** */
+/* **************** HORIZONTAL REVRERSESUPRESS ******************** */
+/* **************************************************************** */
+void reverse(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x61;
+  getValue(msg,0);
+  if ( value == 1 ) {
+      ViscaMsg[4] =  0x02;
+  } 
+  else { 
+      ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* **************************** FREEZE **************************** */
+/* **************************************************************** */
+void freeze(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x62;
+  getValue(msg,0);
+  if ( value == 1 ) {
+      ViscaMsg[4] =  0x02;
+  } 
+  else { 
+      ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
+/* **************************************************************** */
+/* *********************** VERTICAL FLEEP ************************* */
+/* **************************************************************** */
+void flip(OSCMessage &msg, int addrOffset ){
+  ViscaMsg[1] =  0x01;
+  ViscaMsg[2] =  0x04;
+  ViscaMsg[3] =  0x66;
+  getValue(msg,0);
+  if ( value == 1 ) {
+      ViscaMsg[4] =  0x02;
+  } 
+  else { 
+      ViscaMsg[4] =  0x03;
+  } 
+    Serial.write( ViscaMsg, sizeof(ViscaMsg) );
+}
+
+
