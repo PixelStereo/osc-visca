@@ -28,4 +28,4 @@ You can send data from :
 # Licence
 ## Credits : 
 * *Written by Renaud Rubiano - 2012-2014*
-* *Produced by didascalie.net*
+* *Produced by Studio Mirio*
