@@ -60,7 +60,7 @@ void loop(){
       MessageIN.fill(Udp.read());
     if(!MessageIN.hasError()) {
       MessageIN.route("/zoom", zoom);
-      MessageIN.route("/power", power);
+      MessageIN.route("/active", power);
       MessageIN.route("/setaddress", setaddress);
       MessageIN.route("/ifclear", ifclear);
       MessageIN.route("/cancel", cancel);
