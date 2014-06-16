@@ -4,8 +4,8 @@
 #include <OSCBundle.h>
 #include <OSCBoards.h>
 EthernetUDP Udp;
-IPAddress ip(192, 168, 0, 111);
-IPAddress OutIp(192, 168, 0, 4);
+IPAddress ip(10, 0, 0, 111);
+IPAddress OutIp(10, 0, 0, 4);
 const unsigned int inPort = 8888;
 const unsigned int outPort = 9999;
 byte mac[] = {
