@@ -5,8 +5,8 @@
 #include <OSCBundle.h>
 #include <OSCBoards.h>
 EthernetUDP Udp;
-IPAddress ip(10, 0, 0, 111);
-IPAddress OutIp(10, 0, 0, 4);
+IPAddress ip(192, 168, 0, 111);
+IPAddress OutIp(192, 168, 0, 29);
 const unsigned int inPort = 8888;
 const unsigned int outPort = 9999;
 byte mac[] = {
@@ -43,6 +43,10 @@ void setup() {
   Udp.begin(inPort);
   /********** Launch Serial Communication for visca commands ******** */
   Serial.begin(9600);
+  MessageOUT.add("/alive !!");     
+  sendOSC();
+  ViscaMsg[4] =  0x02;
+  Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
 
@@ -151,7 +155,7 @@ void power(OSCMessage &msg, int addrOffset ){
   else {
     ViscaMsg[4] =  0x03;
   } 
-  MessageOUT.add("/feedback").add(value);     
+  MessageOUT.add("/power").add(value);     
   sendOSC();
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
