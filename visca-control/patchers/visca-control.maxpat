@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 7.0, 52.0, 401.0, 386.0 ],
+		"rect" : [ 7.0, 52.0, 569.0, 408.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -38,7 +38,7 @@
 					"numinlets" : 1,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 215.291626, 94.417175, 133.0, 22.0 ],
+					"patching_rect" : [ 244.291626, 94.417175, 133.0, 22.0 ],
 					"text" : "visca.model visca.1"
 				}
 
@@ -1496,7 +1496,7 @@
 					"maxclass" : "newobj",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 165.416626, 58.082825, 145.0, 20.0 ],
+					"patching_rect" : [ 311.291626, 194.75, 145.0, 20.0 ],
 					"text" : "udpsend localhost 10000"
 				}
 
@@ -8724,7 +8724,7 @@
 , 			{
 				"box" : 				{
 					"annotation" : "none",
-					"args" : [ "/visca.1" ],
+					"args" : [ "visca.1" ],
 					"bgmode" : 2,
 					"id" : "obj-2",
 					"maxclass" : "bpatcher",
@@ -8733,7 +8733,7 @@
 					"numoutlets" : 0,
 					"patching_rect" : [ 165.416626, 17.832825, 126.0, 31.5 ],
 					"presentation" : 1,
-					"presentation_rect" : [ 11.5, 138.0, 379.5, 244.0 ]
+					"presentation_rect" : [ 11.5, 138.0, 546.5, 249.0 ]
 				}
 
 			}
@@ -9234,7 +9234,7 @@
 					"fontname" : "Helvetica Light Oblique",
 					"fontsize" : 10.0,
 					"id" : "obj-32",
-					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem" ],
+					"items" : [ "Bluetooth-Incoming-Port", ",", "Bluetooth-Modem", ",", "usbserial-FTFNNBFM" ],
 					"maxclass" : "umenu",
 					"numinlets" : 1,
 					"numoutlets" : 3,
@@ -9582,6 +9582,15 @@
 			}
 , 			{
 				"patchline" : 				{
+					"destination" : [ "obj-1", 0 ],
+					"disabled" : 0,
+					"hidden" : 0,
+					"source" : [ "obj-26", 0 ]
+				}
+
+			}
+, 			{
+				"patchline" : 				{
 					"destination" : [ "obj-27", 0 ],
 					"disabled" : 0,
 					"hidden" : 0,
@@ -9753,49 +9762,49 @@
 			}
 , 			{
 				"name" : "visca.view.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/RTVI/max-package/patchers",
+				"bootpath" : "/Users/reno/Documents/GITs/RTVI/max-package/patchers",
 				"patcherrelativepath" : "../../../RTVI/max-package/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "header.poly.view.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/RTVI/max-package/patchers",
+				"bootpath" : "/Users/reno/Documents/GITs/RTVI/max-package/patchers",
 				"patcherrelativepath" : "../../../RTVI/max-package/patchers",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "viscaFormat.js",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/osc-visca/visca-control/javascript",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "timebasedqueue.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/osc-visca/visca-control/patchers",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/patchers",
 				"patcherrelativepath" : ".",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "hexa2decimal.js",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/osc-visca/visca-control/javascript",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "decimal2hexa.js",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/osc-visca/visca-control/javascript",
+				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/visca-control/javascript",
 				"patcherrelativepath" : "../javascript",
 				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "visca.model.maxpat",
-				"bootpath" : "/Volumes/data/RENAUD/GITs/RTVI/max-package/patchers",
+				"bootpath" : "/Users/reno/Documents/GITs/RTVI/max-package/patchers",
 				"patcherrelativepath" : "../../../RTVI/max-package/patchers",
 				"type" : "JSON",
 				"implicit" : 1

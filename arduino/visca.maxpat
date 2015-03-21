@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 4.0, 44.0, 506.0, 463.0 ],
+		"rect" : [ 4.0, 45.0, 506.0, 463.0 ],
 		"bgcolor" : [ 0.142748, 0.142748, 0.142748, 1.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 1,
@@ -114,6 +114,7 @@
 						"description" : "",
 						"digest" : "",
 						"tags" : "",
+						"visible" : 1,
 						"boxes" : [ 							{
 								"box" : 								{
 									"color" : [ 0.312014, 0.498933, 0.829883, 1.0 ],
@@ -1336,7 +1337,7 @@
 													"fontsize" : 12.0,
 													"id" : "obj-65",
 													"maxclass" : "newobj",
-													"numinlets" : 1,
+													"numinlets" : 0,
 													"numoutlets" : 0,
 													"patching_rect" : [ 25.0, 278.832825, 74.0, 20.0 ],
 													"text" : "createfolder"
@@ -1598,15 +1599,6 @@
 													"disabled" : 0,
 													"hidden" : 0,
 													"source" : [ "obj-75", 0 ]
-												}
-
-											}
-, 											{
-												"patchline" : 												{
-													"destination" : [ "obj-65", 0 ],
-													"disabled" : 0,
-													"hidden" : 0,
-													"source" : [ "obj-82", 0 ]
 												}
 
 											}
@@ -3421,7 +3413,7 @@
 		"dependency_cache" : [ 			{
 				"name" : "fcb3410.edit.maxpat",
 				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/fcb3410",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../fcb3410",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -3435,14 +3427,14 @@
 , 			{
 				"name" : "fcb3410.standalone.maxpat",
 				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/fcb3410",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../fcb3410",
 				"type" : "JSON",
 				"implicit" : 1
 			}
 , 			{
 				"name" : "rprepend.maxpat",
 				"bootpath" : "/Users/reno/Documents/GITs/osc-visca/fcb3410",
-				"patcherrelativepath" : ".",
+				"patcherrelativepath" : "../fcb3410",
 				"type" : "JSON",
 				"implicit" : 1
 			}
@@ -3451,13 +3443,6 @@
 				"bootpath" : "/Users/reno/Documents/GITs/span/max-package/clippings/span.file_folder",
 				"patcherrelativepath" : "../../span/max-package/clippings/span.file_folder",
 				"type" : "JSON",
-				"implicit" : 1
-			}
-, 			{
-				"name" : "jsgetrootpath.js",
-				"bootpath" : "/Users/reno/Documents/GITs/span/max-package/javascript",
-				"patcherrelativepath" : "../../span/max-package/javascript",
-				"type" : "TEXT",
 				"implicit" : 1
 			}
 , 			{
