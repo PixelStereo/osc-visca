@@ -4,7 +4,7 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 7,
+			"revision" : 9,
 			"architecture" : "x86"
 		}
 ,
@@ -991,6 +991,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 385.0, 621.714294, 37.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 197.625, 360.0, 37.0, 20.0 ],
 					"text" : "reset"
 				}
 
@@ -1005,6 +1007,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 281.0, 621.714294, 27.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 204.375, 321.714294, 27.0, 20.0 ],
 					"text" : "set"
 				}
 
@@ -1019,6 +1023,8 @@
 					"numinlets" : 1,
 					"numoutlets" : 0,
 					"patching_rect" : [ 176.0, 621.714294, 39.0, 20.0 ],
+					"presentation" : 1,
+					"presentation_rect" : [ 197.625, 340.0, 39.0, 20.0 ],
 					"text" : "recall"
 				}
 
@@ -2222,6 +2228,8 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 385.0, 641.714294, 68.0, 18.0 ],
 					"pattrmode" : 1,
+					"presentation" : 1,
+					"presentation_rect" : [ 238.625, 360.0, 68.0, 18.0 ],
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"textcolor2" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"togcolor" : [ 0.552941, 0.552941, 0.552941, 1.0 ],
@@ -2339,35 +2347,12 @@
 					"parameter_enable" : 0,
 					"patching_rect" : [ 281.0, 641.714294, 68.0, 18.0 ],
 					"pattrmode" : 1,
+					"presentation" : 1,
+					"presentation_rect" : [ 238.625, 321.714294, 68.0, 18.0 ],
 					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"textcolor2" : [ 1.0, 1.0, 1.0, 1.0 ],
 					"togcolor" : [ 0.552941, 0.552941, 0.552941, 1.0 ],
 					"varname" : "picEx[2]"
-				}
-
-			}
-, 			{
-				"box" : 				{
-					"bgcolor" : [ 0.258824, 0.258824, 0.258824, 1.0 ],
-					"bgcolor2" : [ 0.54902, 0.54902, 0.54902, 1.0 ],
-					"discolor" : [ 0.439216, 0.439216, 0.439216, 1.0 ],
-					"fontname" : "Arial",
-					"fontsize" : 10.0,
-					"framecolor" : [ 0.015686, 0.015686, 0.015686, 1.0 ],
-					"hltcolor" : [ 0.258824, 0.258824, 0.258824, 1.0 ],
-					"id" : "obj-12",
-					"items" : [ 0, ",", 1, ",", 2, ",", 3, ",", 4, ",", 5 ],
-					"maxclass" : "umenu",
-					"numinlets" : 1,
-					"numoutlets" : 3,
-					"outlettype" : [ "int", "", "" ],
-					"parameter_enable" : 0,
-					"patching_rect" : [ 176.0, 641.714294, 68.0, 18.0 ],
-					"pattrmode" : 1,
-					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"textcolor2" : [ 1.0, 1.0, 1.0, 1.0 ],
-					"togcolor" : [ 0.552941, 0.552941, 0.552941, 1.0 ],
-					"varname" : "picEx[1]"
 				}
 
 			}
@@ -2552,6 +2537,33 @@
 					"presentation" : 1,
 					"presentation_rect" : [ 190.125, 77.0, 184.125, 115.499985 ],
 					"rounded" : 22
+				}
+
+			}
+, 			{
+				"box" : 				{
+					"bgcolor" : [ 0.258824, 0.258824, 0.258824, 1.0 ],
+					"bgcolor2" : [ 0.54902, 0.54902, 0.54902, 1.0 ],
+					"discolor" : [ 0.439216, 0.439216, 0.439216, 1.0 ],
+					"fontname" : "Arial",
+					"fontsize" : 10.0,
+					"framecolor" : [ 0.015686, 0.015686, 0.015686, 1.0 ],
+					"hltcolor" : [ 0.258824, 0.258824, 0.258824, 1.0 ],
+					"id" : "obj-12",
+					"items" : [ 0, ",", 1, ",", 2, ",", 3, ",", 4, ",", 5 ],
+					"maxclass" : "umenu",
+					"numinlets" : 1,
+					"numoutlets" : 3,
+					"outlettype" : [ "int", "", "" ],
+					"parameter_enable" : 0,
+					"patching_rect" : [ 176.0, 641.714294, 68.0, 18.0 ],
+					"pattrmode" : 1,
+					"presentation" : 1,
+					"presentation_rect" : [ 238.625, 341.0, 68.0, 18.0 ],
+					"textcolor" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"textcolor2" : [ 1.0, 1.0, 1.0, 1.0 ],
+					"togcolor" : [ 0.552941, 0.552941, 0.552941, 1.0 ],
+					"varname" : "picEx[1]"
 				}
 
 			}
