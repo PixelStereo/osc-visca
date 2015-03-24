@@ -739,18 +739,24 @@ void memory(OSCMessage &msg, int addrOffset ) {
   getValue(msg, 0);
   Matched = msg.match("/reset", addrOffset);
   if (Matched == 7) {
+    MessageOUT.add("/memory/reset").add(value);
+    sendOSC();
     ViscaMemMsg[4] = (uint8_t) 0x00;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
   }
   Matched = msg.match("/set", addrOffset);
   if (Matched == 4) {
+    MessageOUT.add("/memory/set").add(value);
+    sendOSC();
     ViscaMemMsg[4] =  0x01;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
   }
   Matched = msg.match("/recall", addrOffset);
   if (Matched == 7) {
+    MessageOUT.add("/memory/recall").add(value);
+    sendOSC();
     ViscaMemMsg[4] =  0x02;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
