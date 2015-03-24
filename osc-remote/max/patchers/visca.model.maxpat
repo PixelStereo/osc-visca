@@ -48,13 +48,13 @@
 					"fontname" : "Arial",
 					"fontsize" : 14.0,
 					"id" : "obj-2",
-					"linecount" : 3,
+					"linecount" : 2,
 					"maxclass" : "newobj",
 					"numinlets" : 3,
 					"numoutlets" : 2,
 					"outlettype" : [ "", "" ],
-					"patching_rect" : [ 41.400146, 374.714294, 121.0, 53.0 ],
-					"text" : "combine / #1 ADDRESS @triggers 1"
+					"patching_rect" : [ 41.400146, 374.714294, 239.0, 38.0 ],
+					"text" : "combine / #1 ADDRESS @triggers 2"
 				}
 
 			}
@@ -715,7 +715,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 106.5, 174.0, 121.0, 22.0 ],
+									"patching_rect" : [ 106.5, 174.0, 121.0, 20.0 ],
 									"text" : "prepend memory/set"
 								}
 
@@ -729,7 +729,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 115.0, 131.0, 22.0 ],
+									"patching_rect" : [ 70.5, 115.0, 131.0, 20.0 ],
 									"text" : "prepend memory/reset"
 								}
 
@@ -743,7 +743,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.5, 47.0, 133.0, 22.0 ],
+									"patching_rect" : [ 31.5, 47.0, 133.0, 20.0 ],
 									"text" : "prepend memory/recall"
 								}
 
@@ -758,7 +758,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 106.5, 147.367126, 117.0, 22.0 ],
+									"patching_rect" : [ 106.5, 147.367126, 117.0, 20.0 ],
 									"text" : "receive /memory/set"
 								}
 
@@ -773,7 +773,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 89.0, 128.0, 22.0 ],
+									"patching_rect" : [ 70.5, 89.0, 128.0, 20.0 ],
 									"text" : "receive /memory/reset"
 								}
 
@@ -788,7 +788,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.5, 14.0, 130.0, 22.0 ],
+									"patching_rect" : [ 31.5, 14.0, 130.0, 20.0 ],
 									"text" : "receive /memory/recall"
 								}
 
@@ -2683,7 +2683,7 @@
 			}
 , 			{
 				"patchline" : 				{
-					"destination" : [ "obj-2", 1 ],
+					"destination" : [ "obj-2", 2 ],
 					"disabled" : 0,
 					"hidden" : 0,
 					"source" : [ "obj-33", 0 ]
