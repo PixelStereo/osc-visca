@@ -8,7 +8,7 @@
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 1139.0, 242.0, 549.0, 290.0 ],
+		"rect" : [ 73.0, 72.0, 555.0, 298.0 ],
 		"bgcolor" : [ 1.0, 1.0, 1.0, 0.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
@@ -142,7 +142,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 549.0, 264.0 ],
+						"rect" : [ 0.0, 26.0, 555.0, 272.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 0,
 						"default_fontsize" : 12.0,
@@ -1495,7 +1495,7 @@
 					"name" : "visca.view.maxpat",
 					"numinlets" : 0,
 					"numoutlets" : 0,
-					"patching_rect" : [ 0.5, 38.332825, 544.0, 220.5 ],
+					"patching_rect" : [ 0.5, 38.332825, 548.0, 229.5 ],
 					"presentation" : 1,
 					"presentation_rect" : [ 4.75, 38.0, 546.5, 222.0 ],
 					"varname" : "visca"
@@ -1520,7 +1520,7 @@
 							"architecture" : "x86"
 						}
 ,
-						"rect" : [ 0.0, 26.0, 549.0, 264.0 ],
+						"rect" : [ 0.0, 26.0, 555.0, 272.0 ],
 						"bglocked" : 0,
 						"openinpresentation" : 1,
 						"default_fontsize" : 12.0,
@@ -2980,7 +2980,7 @@
  ],
 		"dependency_cache" : [ 			{
 				"name" : "visca.model.maxpat",
-				"bootpath" : "/Volumes/data/GITs/osc-visca/osc-remote/max/patchers",
+				"bootpath" : "/Volumes/data/GITs/osc-visca/visca-control/max/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
@@ -3015,7 +3015,7 @@
 			}
 , 			{
 				"name" : "visca.view.maxpat",
-				"bootpath" : "/Volumes/data/GITs/osc-visca/osc-remote/max/patchers",
+				"bootpath" : "/Volumes/data/GITs/osc-visca/visca-control/max/patchers",
 				"patcherrelativepath" : "./patchers",
 				"type" : "JSON",
 				"implicit" : 1
