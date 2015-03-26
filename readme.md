@@ -40,4 +40,45 @@ http://www.gnu.org/licenses/gpl-3.0.en.html
 * *Written by Renaud Rubiano - 2012-2015*
 * *Produced by Pixel Stereo*
 
-
+| VISCA COMMAND | /osc/address | arguments |
+| ------------- | ------------- | ----------- |
+|CAM_Power |	/active | 0/1|
+|CAM_AutoPowerOFF |		| |
+|CAM_NightPowerOff		| | |
+|CAM_Zoom Stop	/zoom/stop		| | |
+|CAM_Zoom Tele(Standard)	| /zoom/tele	| 	-	| 
+|CAM_Zoom Wide(Standard)	| 	/zoom/wide	| 	-|
+|CAM_Zoom Tele(Variable)	| 	/zoom/tele/speed	| 	0-7|
+|CAM_Zoom Wide(Variable)	| 	/zoom/wide/speed		| 0-7|
+|CAM_Zoom Direct	| 	/zoom	| 	0-16384|
+|CAM_Dzoom On	| 	/zoom/digital	| 	|
+|CAM_Dzoom Off		| /zoom/digital	| 	0-1|
+|CAM_Dzoom Combine Mode	| 	| 		|
+|CAM_Dzoom Separate Mode	| 	| 		|
+|CAM_Dzoom Stop	| 	| 		|
+|CAM_Dzoom Tele(Variable)	| 	| 		|
+|CAM_Dzoom Wide(Variable)			| 	| |
+|CAM_Dzoom x1/Max		|	| 	| 
+|CAM_Dzoom Direct		|	| 	| 
+|CAM_Focus Stop		| /focus/stop	| 	-|
+|CAM_Focus Far(Standart)		| /focus/far	|	| 
+|CAM_Focus Near(Standart)		| /focus/near	|	| 
+|CAM_Focus Far(Variable)		| /focus/far/speed	|	| 
+|CAM_Focus Near(Variable)		| /focus/near/speed	|	| 
+|CAM_Focus Direct		| /focus	|	| 
+|CAM_Focus Auto Focus		| 	|	| 
+|CAM_Focus Manual Focus		|	| 	| 
+|CAM_Focus Auto/Manual	| 	/focus/mode	|	| 
+|CAM_Focus One Push Trigger	| 	/focus/trig	|	| 
+|CAM_Focus Infinity	| 	| 		|
+|CAM_Focus Near Limit		| /focus/nearlimit	|	| 
+|AF Sensitivity		| /focus/sensitivity		| Normal-low|
+|CAM_AFMode Normal	| 	| 		|
+|CAM_AFMode Interval		|	| 	| 
+|CAM_AFMode Zoom Trigger		|	| 	| 
+|CAM_AFMode Active/Interval Time		| 	| 	|
+|CAM_ZoomFocus		|	| 	| 
+|CAM_Initialize Lens		|	| 	| 
+|CAM_Initialize Comp Scan		|	| 	| 
+|CAM_WB Mode		| /WB/mode	| 	Auto-indoor-outdoor-onepush-ATW-manual|
+|CAM_WB One Push Trigger	| 	/WB/trig	|	| 
