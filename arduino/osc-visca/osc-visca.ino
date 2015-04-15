@@ -2,8 +2,6 @@
 #include <EthernetUdp.h>
 #include <SPI.h>
 #include <OSCMessage.h>
-#include <OSCBundle.h>
-#include <OSCBoards.h>
 EthernetUDP Udp;
 IPAddress ip(192, 168, 0, 111);
 IPAddress OutIp(192, 168, 0, 29);
@@ -12,7 +10,6 @@ const unsigned int outPort = 9999;
 byte mac[] = {
   0x90, 0xA2, 0xDA, 0x0D, 0x94, 0x73
 };
-OSCBundle MessageOUT;
 uint8_t CancelMsg[3] = {
   0x81, 0x21, 0xFF
 };
@@ -53,8 +50,6 @@ void setup() {
   Udp.begin(inPort);
   /********** Launch Serial Communication for visca commands ******** */
   Serial.begin(9600);
-  MessageOUT.add("/alive !!");
-  sendOSC();
   ViscaMsg[4] =  0x02;
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
@@ -112,28 +107,6 @@ void loop() {
       MessageIN.route("/display", ViscaDisplay);
     }
   }
-  /* **************************************************************** */
-  /* ************** CHECK SERIAL FEEDBACK FROM CAMERA *************** */
-  /* **************************************************************** */
-  //  if (Serial.available() > 0) {
-  //    int bytesRead;
-  //    bytesRead = Serial.readBytesUntil(255,(char *)answer,1024);
-  //    if (!bytesRead == 0) {
-  //        MessageOUT.add("/visca").add(answer);
-  //       sendOSC();
-  //    }
-  //  }
-}
-
-
-/* **************************************************************** */
-/* *********************** SEND OSC ******************************* */
-/* **************************************************************** */
-void sendOSC() {
-  Udp.beginPacket(OutIp, outPort);
-  MessageOUT.send(Udp);
-  Udp.endPacket();
-  MessageOUT.empty();
 }
 
 
@@ -165,8 +138,6 @@ void power(OSCMessage &msg, int addrOffset ) {
   else {
     ViscaMsg[4] =  0x03;
   }
-  MessageOUT.add("/power").add(value);
-  sendOSC();
   Serial.write( ViscaMsg, sizeof(ViscaMsg) );
 }
 
@@ -739,24 +710,18 @@ void memory(OSCMessage &msg, int addrOffset ) {
   getValue(msg, 0);
   Matched = msg.match("/reset", addrOffset);
   if (Matched == 7) {
-    MessageOUT.add("/memory/reset").add(value);
-    sendOSC();
     ViscaMemMsg[4] = (uint8_t) 0x00;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
   }
   Matched = msg.match("/set", addrOffset);
   if (Matched == 4) {
-    MessageOUT.add("/memory/set").add(value);
-    sendOSC();
     ViscaMemMsg[4] =  0x01;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
   }
   Matched = msg.match("/recall", addrOffset);
   if (Matched == 7) {
-    MessageOUT.add("/memory/recall").add(value);
-    sendOSC();
     ViscaMemMsg[4] =  0x02;
     ViscaMemMsg[5] =  value;
     Serial.write( ViscaMemMsg, sizeof(ViscaMemMsg) );
