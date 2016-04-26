@@ -4,11 +4,11 @@
 		"appversion" : 		{
 			"major" : 6,
 			"minor" : 1,
-			"revision" : 9,
+			"revision" : 10,
 			"architecture" : "x86"
 		}
 ,
-		"rect" : [ 394.0, 78.0, 404.0, 453.0 ],
+		"rect" : [ 394.0, 78.0, 390.0, 415.0 ],
 		"bglocked" : 0,
 		"openinpresentation" : 0,
 		"default_fontsize" : 12.0,
@@ -34,7 +34,7 @@
 					"maxclass" : "outlet",
 					"numinlets" : 1,
 					"numoutlets" : 0,
-					"patching_rect" : [ 111.400146, 404.714294, 25.0, 25.0 ]
+					"patching_rect" : [ 20.400146, 385.714294, 25.0, 25.0 ]
 				}
 
 			}
@@ -53,7 +53,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -641,7 +641,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -684,7 +684,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 106.5, 174.0, 121.0, 20.0 ],
+									"patching_rect" : [ 106.5, 174.0, 121.0, 22.0 ],
 									"text" : "prepend memory/set"
 								}
 
@@ -698,7 +698,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 115.0, 131.0, 20.0 ],
+									"patching_rect" : [ 70.5, 115.0, 131.0, 22.0 ],
 									"text" : "prepend memory/reset"
 								}
 
@@ -712,7 +712,7 @@
 									"numinlets" : 1,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.5, 47.0, 133.0, 20.0 ],
+									"patching_rect" : [ 31.5, 47.0, 133.0, 22.0 ],
 									"text" : "prepend memory/recall"
 								}
 
@@ -727,7 +727,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 106.5, 147.367126, 117.0, 20.0 ],
+									"patching_rect" : [ 106.5, 147.367126, 117.0, 22.0 ],
 									"text" : "receive /memory/set"
 								}
 
@@ -742,7 +742,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 70.5, 89.0, 128.0, 20.0 ],
+									"patching_rect" : [ 70.5, 89.0, 128.0, 22.0 ],
 									"text" : "receive /memory/reset"
 								}
 
@@ -757,7 +757,7 @@
 									"numinlets" : 0,
 									"numoutlets" : 1,
 									"outlettype" : [ "" ],
-									"patching_rect" : [ 31.5, 14.0, 130.0, 20.0 ],
+									"patching_rect" : [ 31.5, 14.0, 130.0, 22.0 ],
 									"text" : "receive /memory/recall"
 								}
 
@@ -853,7 +853,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -1018,7 +1018,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -1606,7 +1606,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -1799,7 +1799,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
@@ -2058,7 +2058,7 @@
 						"appversion" : 						{
 							"major" : 6,
 							"minor" : 1,
-							"revision" : 9,
+							"revision" : 10,
 							"architecture" : "x86"
 						}
 ,
